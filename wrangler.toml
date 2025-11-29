@@ -1,6 +1,0 @@
-# Cloudflare Pages configuration
-name = "thes33k3r"
-pages_build_output_dir = "dist"
-
-[build]
-command = "npm run build"
