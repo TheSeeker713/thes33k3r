@@ -1,24 +1,23 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 const CRTOverlay = () => {
   const [isOn, setIsOn] = useState(false);
   const videoRef = useRef(null);
 
-  const toggleTV = () => {
-    if (isOn) {
-      // Turn off
-      if (videoRef.current) {
+  // Play/pause video when isOn changes
+  useEffect(() => {
+    if (videoRef.current) {
+      if (isOn) {
+        videoRef.current.play().catch(e => console.log('Play error:', e));
+      } else {
         videoRef.current.pause();
         videoRef.current.currentTime = 0;
       }
-      setIsOn(false);
-    } else {
-      // Turn on
-      setIsOn(true);
-      if (videoRef.current) {
-        videoRef.current.play();
-      }
     }
+  }, [isOn]);
+
+  const toggleTV = () => {
+    setIsOn(!isOn);
   };
 
   return (
@@ -36,6 +35,17 @@ const CRTOverlay = () => {
           <div className="bg-stone-950 rounded-md p-2 md:p-4 border-8 border-stone-900 shadow-inner">
             {/* CRT Screen */}
             <div className="relative w-64 h-48 md:w-96 md:h-72 lg:w-[500px] lg:h-[375px] bg-stone-950 rounded-sm overflow-hidden">
+              {/* Video element - always rendered but hidden when off */}
+              <video
+                ref={videoRef}
+                loop
+                playsInline
+                className={`absolute inset-0 w-full h-full object-cover ${isOn ? 'opacity-100' : 'opacity-0'}`}
+              >
+                <source src="/crtvideo.webm" type="video/webm" />
+                <source src="/crtvideo.mp4" type="video/mp4" />
+              </video>
+              
               {/* TV Off State - Static/noise */}
               {!isOn && (
                 <div className="absolute inset-0 flex flex-col items-center justify-center scanlines">
@@ -59,24 +69,14 @@ const CRTOverlay = () => {
                 </div>
               )}
               
-              {/* TV On State - Video playing */}
+              {/* TV On State - CRT effects overlay */}
               {isOn && (
-                <div className="absolute inset-0 scanlines crt-flicker">
-                  <video
-                    ref={videoRef}
-                    loop
-                    playsInline
-                    className="absolute inset-0 w-full h-full object-cover"
-                  >
-                    <source src="/crtvideo.webm" type="video/webm" />
-                    <source src="/crtvideo.mp4" type="video/mp4" />
-                  </video>
-                  
+                <div className="absolute inset-0 scanlines crt-flicker pointer-events-none">
                   {/* CRT overlay effects */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-amber-900/5 via-transparent to-red-900/5 pointer-events-none"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-amber-900/5 via-transparent to-red-900/5"></div>
                   
                   {/* Scan line moving effect */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-amber-500/5 to-transparent h-8 animate-[scanline_4s_linear_infinite] pointer-events-none"></div>
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-amber-500/5 to-transparent h-8 animate-[scanline_4s_linear_infinite]"></div>
                 </div>
               )}
               
