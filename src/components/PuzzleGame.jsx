@@ -79,10 +79,10 @@ const PuzzleGame = () => {
   
   return (
     <div className="relative z-10 flex flex-col items-center px-4 py-8 md:py-12">
-      {/* Puzzle Container */}
-      <div className="bg-gray-900/80 border-2 border-green-500/50 rounded-lg p-4 md:p-6 backdrop-blur-sm">
-        <h3 className="text-green-400 font-mono text-center mb-4 text-lg md:text-xl">
-          ◈ DECODE THE TRANSMISSION ◈
+      {/* Puzzle Container - weathered wanted poster style */}
+      <div className="bg-stone-900/90 border-2 border-amber-800/50 rounded-lg p-4 md:p-6 backdrop-blur-sm" style={{boxShadow: '0 0 30px rgba(139, 69, 19, 0.2), inset 0 0 60px rgba(0,0,0,0.4)'}}>
+        <h3 className="text-amber-500 font-mono text-center mb-4 text-lg md:text-xl">
+          ✧ DECODE THE TRANSMISSION ✧
         </h3>
         
         {/* Puzzle Grid */}
@@ -98,10 +98,11 @@ const PuzzleGame = () => {
                 rounded-md
                 transition-all duration-150
                 ${tile === 0 
-                  ? 'bg-gray-950 border border-gray-800' 
-                  : 'bg-gradient-to-br from-gray-700 to-gray-800 border-2 border-green-500/30 hover:border-green-400 hover:from-gray-600 hover:to-gray-700 active:scale-95 cursor-pointer text-green-400 shadow-lg'
+                  ? 'bg-stone-950 border border-stone-800' 
+                  : 'bg-gradient-to-br from-stone-700 to-stone-800 border-2 border-amber-700/40 hover:border-amber-500 hover:from-stone-600 hover:to-stone-700 active:scale-95 cursor-pointer text-amber-500 shadow-lg'
                 }
               `}
+              style={tile !== 0 ? {boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.1), 0 2px 4px rgba(0,0,0,0.5)'} : {}}
               disabled={tile === 0 || isSolved}
             >
               {getTileDisplay(tile)}
@@ -111,21 +112,21 @@ const PuzzleGame = () => {
         
         {/* Game Stats */}
         <div className="mt-4 text-center font-mono">
-          <p className="text-gray-400 text-sm">
-            MOVES: <span className="text-green-400">{moves}</span>
+          <p className="text-stone-500 text-sm">
+            MOVES: <span className="text-amber-500">{moves}</span>
           </p>
         </div>
         
         {/* Solved State */}
         {isSolved && (
           <div className="mt-4 text-center animate-pulse">
-            <p className="text-green-400 font-mono text-lg mb-2">
-              ◈ TRANSMISSION DECODED ◈
+            <p className="text-amber-500 font-mono text-lg mb-2">
+              ✧ TRANSMISSION DECODED ✧
             </p>
-            <p className="text-yellow-400 font-mono text-xl font-bold">
+            <p className="text-orange-400 font-mono text-xl font-bold">
               THE REAL DATE: {secretDate}
             </p>
-            <p className="text-red-500 font-mono text-sm mt-2">
+            <p className="text-red-800 font-mono text-sm mt-2">
               REMEMBER: DO NOT TELL ANYONE
             </p>
           </div>
@@ -135,20 +136,20 @@ const PuzzleGame = () => {
         <div className="mt-4 text-center">
           <button
             onClick={shuffleTiles}
-            className="px-6 py-2 bg-gray-800 border border-green-500/50 rounded-md text-green-400 font-mono text-sm hover:bg-gray-700 hover:border-green-400 transition-all active:scale-95"
+            className="px-6 py-2 bg-stone-800 border border-amber-700/50 rounded-md text-amber-500 font-mono text-sm hover:bg-stone-700 hover:border-amber-500 transition-all active:scale-95"
           >
             ▶ RESET TRANSMISSION
           </button>
         </div>
         
         {/* Instructions */}
-        <p className="text-gray-500 text-xs font-mono text-center mt-4 max-w-xs">
+        <p className="text-stone-600 text-xs font-mono text-center mt-4 max-w-xs">
           [TAP OR CLICK TILES TO SLIDE THEM INTO ORDER]
         </p>
       </div>
       
       {/* Placeholder indicator */}
-      <p className="text-green-500/30 text-xs font-mono mt-4">
+      <p className="text-amber-800/30 text-xs font-mono mt-4">
         [PUZZLE GAME PLACEHOLDER - CUSTOMIZE AS NEEDED]
       </p>
     </div>
