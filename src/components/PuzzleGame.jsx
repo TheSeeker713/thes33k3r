@@ -23,9 +23,10 @@ const PuzzleGame = () => {
   }, [tiles]);
   
   const shuffleTiles = () => {
-    let shuffled = [...tiles];
-    // Perform random valid moves to ensure solvability
-    for (let i = 0; i < 100; i++) {
+    let shuffled = [...winState];
+    // Perform only 10-15 random moves for an easier puzzle
+    const shuffleCount = 10 + Math.floor(Math.random() * 6);
+    for (let i = 0; i < shuffleCount; i++) {
       const emptyIndex = shuffled.indexOf(0);
       const validMoves = getValidMoves(emptyIndex);
       const randomMove = validMoves[Math.floor(Math.random() * validMoves.length)];
