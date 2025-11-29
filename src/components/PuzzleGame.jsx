@@ -67,7 +67,7 @@ const PuzzleGame = () => {
   const revealSecret = () => {
     // Reveal the "secret date" when puzzle is solved
     setTimeout(() => {
-      setSecretDate('??? / ?? / ????'); // Placeholder - replace with actual secret date
+      setSecretDate('DECEMBER 12TH, 2025');
     }, 500);
   };
   
@@ -149,9 +149,6 @@ const PuzzleGame = () => {
       </div>
       
       {/* Placeholder indicator */}
-      <p className="text-amber-800/30 text-xs font-mono mt-4">
-        [PUZZLE GAME PLACEHOLDER - CUSTOMIZE AS NEEDED]
-      </p>
     </div>
   );
 };
