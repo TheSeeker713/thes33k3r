@@ -84,7 +84,7 @@ const SpecialMenu = () => {
       {/* Hidden menu trigger - top right corner */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed top-4 right-4 w-6 h-6 opacity-[0.08] hover:opacity-30 transition-opacity duration-300 cursor-default z-50"
+        className="fixed top-4 right-4 w-6 h-6 opacity-50 hover:opacity-100 transition-opacity duration-300 cursor-default z-50"
         style={{
           background: 'linear-gradient(135deg, rgba(139, 90, 43, 0.5), rgba(74, 14, 14, 0.4))',
         }}
