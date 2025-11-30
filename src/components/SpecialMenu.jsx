@@ -84,12 +84,15 @@ const SpecialMenu = () => {
       {/* Hidden menu trigger - top right corner */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed top-4 right-4 w-6 h-6 opacity-50 hover:opacity-100 transition-opacity duration-300 cursor-default z-50"
+        className="fixed top-4 right-4 text-2xl opacity-80 hover:opacity-100 transition-opacity duration-300 z-50 select-none"
         style={{
-          background: 'linear-gradient(135deg, rgba(139, 90, 43, 0.5), rgba(74, 14, 14, 0.4))',
+          filter: 'drop-shadow(0 0 4px rgba(0, 255, 255, 0.5))',
+          color: '#00ffff',
         }}
         aria-hidden="true"
-      />
+      >
+        🐰
+      </button>
       
       {/* Dropdown menu */}
       {isOpen && (
