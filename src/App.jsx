@@ -3,12 +3,18 @@ import CRTOverlay from './components/CRTOverlay'
 import Message from './components/Message'
 import PuzzleGame from './components/PuzzleGame'
 import Footer from './components/Footer'
+import FartBubble from './components/FartBubble'
+import SpecialMenu from './components/SpecialMenu'
 
 function App() {
   return (
     <div className="relative min-h-screen flex flex-col bg-[#0d0a08] text-stone-200 overflow-x-hidden">
       {/* Background Video Layer */}
       <VideoBackground />
+      
+      {/* Hidden Easter Eggs */}
+      <FartBubble />
+      <SpecialMenu />
       
       {/* Main Content Container */}
       <div className="relative z-10 flex flex-col min-h-screen">
