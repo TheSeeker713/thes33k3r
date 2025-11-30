@@ -55,10 +55,10 @@ const FartBubble = () => {
   return (
     <button
       onClick={playFart}
-      className="fixed bottom-20 left-4 w-8 h-8 rounded-full opacity-[0.03] hover:opacity-20 transition-opacity duration-300 cursor-default z-50"
+      className="fixed bottom-20 left-4 w-8 h-8 rounded-full opacity-[0.10] hover:opacity-35 transition-opacity duration-300 cursor-default z-50"
       style={{
-        background: 'radial-gradient(circle at 30% 30%, rgba(139, 90, 43, 0.4), rgba(74, 14, 14, 0.3))',
-        boxShadow: '0 0 10px rgba(139, 69, 19, 0.2)',
+        background: 'radial-gradient(circle at 30% 30%, rgba(139, 90, 43, 0.6), rgba(74, 14, 14, 0.5))',
+        boxShadow: '0 0 10px rgba(139, 69, 19, 0.3)',
       }}
       aria-hidden="true"
     />

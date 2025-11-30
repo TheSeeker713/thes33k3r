@@ -2,7 +2,9 @@ import React, { useRef, useState, useCallback } from 'react';
 
 const SpecialMenu = () => {
   const audioContextRef = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
+  const [messageText, setMessageText] = useState('');
 
   const playFart = useCallback(() => {
     // Create audio context on demand (required for mobile/autoplay policies)
@@ -53,29 +55,73 @@ const SpecialMenu = () => {
     source.stop(now + duration);
   }, []);
 
-  const handleClick = () => {
+  const showPopupMessage = (text, withFart = false) => {
+    setMessageText(text);
     setShowMessage(true);
-    // Small delay before fart for comedic timing
-    setTimeout(() => {
-      playFart();
-    }, 300);
-    // Hide message after a few seconds
+    setIsOpen(false);
+    
+    if (withFart) {
+      setTimeout(() => {
+        playFart();
+      }, 300);
+    }
+    
     setTimeout(() => {
       setShowMessage(false);
     }, 3000);
   };
 
+  const menuItems = [
+    { label: 'how special for you', action: () => showPopupMessage('how special for you', true) },
+    { label: 'secret coordinates', action: () => showPopupMessage('37.2431° N, 115.7930° W') },
+    { label: 'the truth', action: () => showPopupMessage('YOU ARE NOT READY') },
+    { label: 'hidden frequency', action: () => showPopupMessage('tune to 1134 kHz...') },
+    { label: '???', action: () => showPopupMessage('...') },
+  ];
+
   return (
     <>
-      {/* Hidden special menu button - top right corner */}
+      {/* Hidden menu trigger - top right corner */}
       <button
-        onClick={handleClick}
-        className="fixed top-4 right-4 w-6 h-6 opacity-[0.02] hover:opacity-15 transition-opacity duration-300 cursor-default z-50"
+        onClick={() => setIsOpen(!isOpen)}
+        className="fixed top-4 right-4 w-6 h-6 opacity-[0.08] hover:opacity-30 transition-opacity duration-300 cursor-default z-50"
         style={{
-          background: 'linear-gradient(135deg, rgba(139, 90, 43, 0.3), rgba(74, 14, 14, 0.2))',
+          background: 'linear-gradient(135deg, rgba(139, 90, 43, 0.5), rgba(74, 14, 14, 0.4))',
         }}
         aria-hidden="true"
       />
+      
+      {/* Dropdown menu */}
+      {isOpen && (
+        <div 
+          className="fixed top-12 right-4 z-[100] min-w-[200px]"
+        >
+          <div 
+            className="bg-stone-950/95 border border-amber-700/50 rounded-md shadow-2xl overflow-hidden"
+            style={{
+              boxShadow: '0 0 20px rgba(217, 119, 6, 0.2), inset 0 0 10px rgba(0,0,0,0.5)',
+            }}
+          >
+            {menuItems.map((item, index) => (
+              <button
+                key={index}
+                onClick={item.action}
+                className="w-full px-4 py-2 text-left text-amber-500/80 hover:bg-amber-900/30 hover:text-amber-400 transition-colors duration-200 font-mono text-sm tracking-wide border-b border-amber-900/20 last:border-b-0"
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {/* Click outside to close */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 z-[99]" 
+          onClick={() => setIsOpen(false)}
+        />
+      )}
       
       {/* Message popup */}
       {showMessage && (
@@ -89,7 +135,7 @@ const SpecialMenu = () => {
             }}
           >
             <p className="text-amber-500 text-2xl font-mono tracking-wider text-center text-glow">
-              how special for you
+              {messageText}
             </p>
           </div>
         </div>
