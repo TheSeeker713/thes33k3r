@@ -1,16 +1,74 @@
-# React + Vite
+# THE S33K3R TRANSMISSION
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> *"What happens on December 12th, 2025?"*
 
-Currently, two official plugins are available:
+A mysterious ARG (Alternate Reality Game) landing page featuring an interactive CRT television experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🎬 Features
 
-## React Compiler
+### CRT Television
+- **Power Knob** - Turn the TV on/off
+- **Channel Changer** - Switch between channels (more videos coming soon!)
+- **Volume Control** - Adjust the audio
+- **Brightness Control** - Adjust screen brightness
+- **Contrast Control** - Adjust screen contrast
+- **Static Effect** - Experience authentic channel-changing static
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Interactive Puzzle
+- 8-tile sliding puzzle that reveals a secret date when solved
+- Neo-western themed design
 
-## Expanding the ESLint configuration
+### Hidden Easter Eggs
+- 🐰 Look for the bunny...
+- 💫 There's a mysterious bubble somewhere...
+- 🔮 Secrets await those who seek
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+
+- **React** - UI Framework
+- **Vite** - Build Tool
+- **Tailwind CSS v4** - Styling
+- **Web Audio API** - Sound Effects
+
+## 🚀 Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+## 📺 Adding New Channels
+
+To add new video channels to the TV, update the `channels` array in `src/components/CRTOverlay.jsx`:
+
+```javascript
+const channels = [
+  { id: 0, name: 'S33K', src: '/crtvideo' },
+  { id: 1, name: 'CH02', src: '/newvideo' },  // Add your video here
+  // ...
+];
+```
+
+Place video files in the `public/` folder in both `.webm` and `.mp4` formats.
+
+## 🌐 Deployment
+
+Deployed on Cloudflare Pages at [thes33k3r.com](https://thes33k3r.com)
+
+## 📜 Credits
+
+- **digiartifact**
+- **mycelia interactive**
+- **THE S33K3R**
+
+---
+
+*November 29th was just the beginning...*
+
+*THE S33K3R is watching.*
