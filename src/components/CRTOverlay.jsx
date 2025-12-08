@@ -22,6 +22,7 @@ const CRTOverlay = () => {
   useEffect(() => {
     if (videoRef.current) {
       if (isOn && channels[currentChannel].src) {
+        videoRef.current.muted = false; // Unmute for playback
         videoRef.current.volume = volume / 100;
         videoRef.current.play().catch(e => console.log('Play error:', e));
       } else {
