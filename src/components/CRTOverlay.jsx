@@ -106,6 +106,7 @@ const CRTOverlay = () => {
                 ref={videoRef}
                 loop
                 playsInline
+                muted
                 className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${isOn && !isStaticChannel && !isChangingChannel ? 'opacity-100' : 'opacity-0'}`}
               >
                 <source src="/crtvideo.webm" type="video/webm" />
