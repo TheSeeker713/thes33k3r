@@ -1,17 +1,25 @@
-'use client'
+"use client"
 
-import React, { useState } from 'react';
+import React, { useState } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const menuItems = [
-    { label: 'HOME', href: '#', active: true },
-    { label: 'TRANSMISSIONS', href: '#transmissions' },
-    { label: 'THE PUZZLE', href: '#puzzle' },
-    { label: 'ABOUT', href: '#about' },
-    { label: 'CONTACT', href: '#contact' },
-  ];
+    { label: 'HOME', href: '/' },
+    { label: 'TRANSMISSIONS', href: '/#transmissions' },
+    { label: 'THE PUZZLE', href: '/#puzzle' },
+    { label: 'BROTHEL ROOM', href: '/brothel' },
+  ]
+
+  const isActive = (href) => {
+    // Anchor links: treat "#" segments as active when on home route
+    if (href.startsWith('/#')) return pathname === '/'
+    return pathname === href
+  }
 
   return (
     <nav className="relative z-50 bg-stone-950/80 backdrop-blur-sm border-b border-amber-900/30">
@@ -26,18 +34,18 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-6">
-            {menuItems.map((item, index) => (
-              <a
-                key={index}
+            {menuItems.map((item) => (
+              <Link
+                key={item.href}
                 href={item.href}
                 className={`font-mono text-xs tracking-wider transition-colors duration-200 ${
-                  item.active 
-                    ? 'text-amber-500' 
+                  isActive(item.href)
+                    ? 'text-amber-500'
                     : 'text-stone-400 hover:text-amber-400'
                 }`}
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -58,19 +66,19 @@ const Navbar = () => {
         {/* Mobile Menu Dropdown */}
         <div className={`md:hidden overflow-hidden transition-all duration-300 ${isMenuOpen ? 'max-h-64 pb-4' : 'max-h-0'}`}>
           <div className="flex flex-col space-y-2 pt-2 border-t border-amber-900/20">
-            {menuItems.map((item, index) => (
-              <a
-                key={index}
+            {menuItems.map((item) => (
+              <Link
+                key={item.href}
                 href={item.href}
                 onClick={() => setIsMenuOpen(false)}
                 className={`font-mono text-sm tracking-wider py-2 px-2 transition-colors duration-200 ${
-                  item.active 
-                    ? 'text-amber-500 bg-amber-900/20' 
+                  isActive(item.href)
+                    ? 'text-amber-500 bg-amber-900/20'
                     : 'text-stone-400 hover:text-amber-400 hover:bg-amber-900/10'
                 }`}
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
           </div>
         </div>

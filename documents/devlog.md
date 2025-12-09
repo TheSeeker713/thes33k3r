@@ -253,6 +253,19 @@ The game engine is operational. Players can now click, explore, and solve puzzle
 
 ---
 
+### December 9, 2025 - 12:30 PM
+**Commit:** Make header/footer sticky and wire room links
+
+Navigation got the polish pass it deserved:
+- Sticky header/footer on the home page to keep controls always visible
+- Hash-link targets added (`#transmissions`, `#puzzle`) for smooth jumps
+- Navbar switched to Next.js `Link` with active-state highlighting
+- Added room link to `/brothel` so players can enter the first playable space
+
+Result: the main transmission page now feels like a proper hub—users can jump between sections and enter rooms without losing orientation.
+
+---
+
 ## **REFLECTION**
 
 From a mysterious transmission on November 29th to a fully-featured ARG experience with hidden puzzles, easter eggs, and immersive audiovisual effects—this project has been a journey of creative iteration, problem-solving, and user experience refinement.

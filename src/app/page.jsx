@@ -33,13 +33,19 @@ export default function Home() {
         </header>
         
         {/* CRT TV Display */}
-        <CRTOverlay />
+        <section id="transmissions" className="scroll-mt-24">
+          <CRTOverlay />
+        </section>
         
         {/* Message Section */}
-        <Message />
+        <section className="scroll-mt-24">
+          <Message />
+        </section>
         
         {/* Puzzle Game */}
-        <PuzzleGame />
+        <section id="puzzle" className="scroll-mt-24">
+          <PuzzleGame />
+        </section>
         
         {/* Footer - Sticky at bottom */}
         <div className="sticky bottom-0 z-40 bg-[#0d0a08]/95 backdrop-blur-sm">
