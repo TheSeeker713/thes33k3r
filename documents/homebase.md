@@ -143,12 +143,56 @@ dist/
 
 **END TRANSMISSION**
 
-## FILES AFFECTED
-- `/src/App.jsx` - Main layout (needs section IDs)
-- `/src/components/Navbar.jsx` - Menu definition (working as intended)
+---
+
+## 📝 DEVLOG - DECEMBER 9, 2025
+
+### **Session: Sticky Header/Footer & Navigation Fixes**
+
+**Changes Implemented:**
+
+1. **Fixed Navigation & Layout Structure**
+   - Converted `Navbar.jsx` to fixed positioning (`fixed top-0 z-50`)
+   - Updated all menu items to use Next.js `Link` component with hash objects
+   - Implemented active state detection using `usePathname()`
+   - Menu items: HOME (/), TRANSMISSIONS (/#transmissions), THE PUZZLE (/#puzzle), BROTHEL ROOM (/brothel)
+
+2. **Sticky Header Implementation**
+   - Made page header sticky below navbar (`sticky top-16 md:top-20 z-40`)
+   - Added backdrop blur and semi-transparent background for visual depth
+   - Header: "THE S33K3R TRANSMISSION" with gradient underline
+
+3. **Fixed Footer Positioning**
+   - Converted footer to fixed bottom positioning (`fixed bottom-0 z-50`)
+   - Reformatted copyright info to single line with | separators
+   - Format: `© DIGIARTIFACT 2025 | © MYCELIA INTERACTIVE 2025 | © THE S33K3R 2025`
+
+4. **Added Scroll Anchor Sections**
+   - Added `id="transmissions"` to CRTOverlay section
+   - Added `id="puzzle"` to PuzzleGame section
+   - All sections have `scroll-mt-24` for proper offset when scrolling to anchors
+   - Main content padding adjusted: `pt-20 md:pt-24 pb-24`
+
+5. **Bug Fixes**
+   - Fixed React key error: Changed `key={item.href}` to `key={item.label}` in navbar menu maps
+   - Issue was caused by using object values as keys (hash objects rendered as `[object Object]`)
+   - Fixed both desktop and mobile menu implementations
+
+**Files Modified:**
+- `src/components/Navbar.jsx` - Fixed positioning, Link implementation, key error fix
+- `src/app/page.jsx` - Layout restructure, sticky header, anchor sections
+- `src/components/Footer.jsx` - Fixed positioning, single-line copyright format
+
+**Testing:**
+- ✅ Dev server running successfully (Next.js 16.0.8)
+- ✅ No React console errors
+- ✅ Navigation links functional with smooth scroll
+- ✅ Header/Footer remain visible during scroll
+- ✅ Responsive design maintained (mobile/desktop)
+
+**Status:** All navigation and layout issues resolved
 
 ---
 
-**Report Generated:** December 8, 2025  
-**Status:** Menu structure sound, but navigation targets missing  
-**Action Required:** Add IDs and missing page sections
+**Last Updated:** December 9, 2025  
+**Next Steps:** Monitor production deployment

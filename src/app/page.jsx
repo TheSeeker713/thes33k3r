@@ -17,15 +17,13 @@ export default function Home() {
       {/* Hidden Easter Egg */}
       <FartBubble />
       
+      {/* Navigation Bar - Fixed */}
+      <Navbar />
+
       {/* Main Content Container */}
-      <div className="relative z-10 flex flex-col min-h-screen">
-        {/* Navigation Bar - Sticky */}
-        <div className="sticky top-0 z-50">
-          <Navbar />
-        </div>
-        
+      <main className="relative z-10 flex flex-col min-h-screen pt-20 md:pt-24 pb-24">
         {/* Header - Sticky below navbar */}
-        <header className="sticky top-12 md:top-14 z-40 text-center py-4 md:py-6 bg-[#0d0a08]/95 backdrop-blur-sm">
+        <header className="sticky top-16 md:top-20 z-40 text-center py-4 md:py-6 bg-[#0d0a08]/95 backdrop-blur-sm">
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold font-mono text-amber-500 text-glow tracking-widest">
             THE S33K3R TRANSMISSION
           </h1>
@@ -46,11 +44,11 @@ export default function Home() {
         <section id="puzzle" className="scroll-mt-24">
           <PuzzleGame />
         </section>
-        
-        {/* Footer - Sticky at bottom */}
-        <div className="sticky bottom-0 z-40 bg-[#0d0a08]/95 backdrop-blur-sm">
-          <Footer />
-        </div>
+      </main>
+
+      {/* Footer - Fixed */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#0d0a08]/95 backdrop-blur-sm">
+        <Footer />
       </div>
     </div>
   )

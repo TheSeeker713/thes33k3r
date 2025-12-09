@@ -10,19 +10,19 @@ const Navbar = () => {
 
   const menuItems = [
     { label: 'HOME', href: '/' },
-    { label: 'TRANSMISSIONS', href: '/#transmissions' },
-    { label: 'THE PUZZLE', href: '/#puzzle' },
+    { label: 'TRANSMISSIONS', href: { pathname: '/', hash: 'transmissions' } },
+    { label: 'THE PUZZLE', href: { pathname: '/', hash: 'puzzle' } },
     { label: 'BROTHEL ROOM', href: '/brothel' },
   ]
 
   const isActive = (href) => {
-    // Anchor links: treat "#" segments as active when on home route
-    if (href.startsWith('/#')) return pathname === '/'
-    return pathname === href
+    const targetPath = typeof href === 'string' ? href : href?.pathname || '/'
+    if (targetPath === '/' && pathname === '/') return true
+    return pathname === targetPath
   }
 
   return (
-    <nav className="relative z-50 bg-stone-950/80 backdrop-blur-sm border-b border-amber-900/30">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-stone-950/90 backdrop-blur-sm border-b border-amber-900/30">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-12 md:h-14">
           {/* Logo/Brand */}
@@ -36,7 +36,7 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-6">
             {menuItems.map((item) => (
               <Link
-                key={item.href}
+                key={item.label}
                 href={item.href}
                 className={`font-mono text-xs tracking-wider transition-colors duration-200 ${
                   isActive(item.href)
@@ -68,7 +68,7 @@ const Navbar = () => {
           <div className="flex flex-col space-y-2 pt-2 border-t border-amber-900/20">
             {menuItems.map((item) => (
               <Link
-                key={item.href}
+                key={item.label}
                 href={item.href}
                 onClick={() => setIsMenuOpen(false)}
                 className={`font-mono text-sm tracking-wider py-2 px-2 transition-colors duration-200 ${

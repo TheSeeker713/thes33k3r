@@ -4,13 +4,15 @@ const Footer = () => {
   return (
     <footer className="relative z-10 w-full py-8 mt-auto">
       <div className="border-t border-amber-900/30 pt-6">
-        <div className="flex flex-col items-center space-y-2 text-stone-600 font-mono text-xs md:text-sm">
+        <div className="flex items-center justify-center text-stone-600 font-mono text-xs md:text-sm">
           <p className="hover:text-amber-500 transition-colors">
             © DIGIARTIFACT 2025
           </p>
+          <span className="mx-2 text-stone-700">|</span>
           <p className="hover:text-orange-500 transition-colors">
             © MYCELIA INTERACTIVE 2025
           </p>
+          <span className="mx-2 text-stone-700">|</span>
           <p className="hover:text-amber-400 transition-colors">
             © THE S33K3R 2025
           </p>
