@@ -1,12 +1,14 @@
-import VideoBackground from './components/VideoBackground'
-import CRTOverlay from './components/CRTOverlay'
-import Message from './components/Message'
-import PuzzleGame from './components/PuzzleGame'
-import Footer from './components/Footer'
-import FartBubble from './components/FartBubble'
-import Navbar from './components/Navbar'
+'use client'
 
-function App() {
+import VideoBackground from '@/components/VideoBackground'
+import CRTOverlay from '@/components/CRTOverlay'
+import Message from '@/components/Message'
+import PuzzleGame from '@/components/PuzzleGame'
+import Footer from '@/components/Footer'
+import FartBubble from '@/components/FartBubble'
+import Navbar from '@/components/Navbar'
+
+export default function Home() {
   return (
     <div className="relative min-h-screen flex flex-col bg-[#0d0a08] text-stone-200 overflow-x-hidden">
       {/* Background Video Layer */}
@@ -17,11 +19,13 @@ function App() {
       
       {/* Main Content Container */}
       <div className="relative z-10 flex flex-col min-h-screen">
-        {/* Navigation Bar */}
-        <Navbar />
+        {/* Navigation Bar - Sticky */}
+        <div className="sticky top-0 z-50">
+          <Navbar />
+        </div>
         
-        {/* Header */}
-        <header className="text-center py-4 md:py-6">
+        {/* Header - Sticky below navbar */}
+        <header className="sticky top-12 md:top-14 z-40 text-center py-4 md:py-6 bg-[#0d0a08]/95 backdrop-blur-sm">
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold font-mono text-amber-500 text-glow tracking-widest">
             THE S33K3R TRANSMISSION
           </h1>
@@ -37,11 +41,11 @@ function App() {
         {/* Puzzle Game */}
         <PuzzleGame />
         
-        {/* Footer */}
-        <Footer />
+        {/* Footer - Sticky at bottom */}
+        <div className="sticky bottom-0 z-40 bg-[#0d0a08]/95 backdrop-blur-sm">
+          <Footer />
+        </div>
       </div>
     </div>
   )
 }
-
-export default App
