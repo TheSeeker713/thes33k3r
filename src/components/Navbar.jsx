@@ -4,13 +4,14 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-const Navbar = ({ onNavigate, mainRooms }) => {
+const Navbar = () => {
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const menuItems = [
     { label: 'HOME', href: '/', type: 'link' },
-    { label: 'BROTHEL ROOM', href: '/brothel', type: 'link' },
+    { label: 'TRANSMISSIONS', href: { pathname: '/', hash: 'transmissions' }, type: 'link' },
+    { label: 'THE PUZZLE', href: { pathname: '/', hash: 'puzzle' }, type: 'link' },
   ]
 
   const isActive = (href) => {
@@ -45,6 +46,19 @@ const Navbar = ({ onNavigate, mainRooms }) => {
                 {item.label}
               </Link>
             ))}
+            
+            {/* Coming Soon Label */}
+            <span className="font-mono text-xs tracking-wider text-amber-500 animate-pulse pointer-events-none">
+              COMING SOON: DEC 12
+            </span>
+            
+            {/* Disabled Room Button */}
+            <button
+              disabled
+              className="font-mono text-xs tracking-wider px-3 py-1 rounded border border-red-500/50 text-red-400 bg-red-900/20 cursor-not-allowed opacity-60"
+            >
+              ROOM [LOCKED]
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -78,6 +92,17 @@ const Navbar = ({ onNavigate, mainRooms }) => {
                 {item.label}
               </Link>
             ))}
+            
+            {/* Mobile Coming Soon & Locked Room */}
+            <span className="font-mono text-xs tracking-wider py-2 px-2 text-amber-500 animate-pulse">
+              COMING SOON: DEC 12
+            </span>
+            <button
+              disabled
+              className="font-mono text-sm tracking-wider py-2 px-2 rounded border border-red-500/50 text-red-400 bg-red-900/20 cursor-not-allowed opacity-60 text-left"
+            >
+              ROOM [LOCKED]
+            </button>
           </div>
         </div>
       </div>

@@ -359,6 +359,46 @@ That's for the players to find out.
 
 ---
 
+### December 10, 2025 - Late Afternoon
+**Layout Restoration:** Return to Original Landing Page Experience
+
+After building the Cinematic Engine infrastructure, the strategic decision was made to restore the original landing page layout while preserving the new engine code for the December 12th unlock.
+
+**Changes Made:**
+- **Removed Cinematic Engine** from main page view (code preserved for later activation)
+- **Restored Original Puzzle Game**: 3x3 sliding tile puzzle now back below the CRT TV section
+- **Restored Message Component**: The cryptic "THEY SAY THE S33K3R TRANSMISSION..." section with puzzle instructions
+- **Fixed Navbar**:
+  - Removed "BROTHEL ROOM" link (deprecated point-and-click system)
+  - Added animated "COMING SOON: DEC 12" label (non-clickable)
+  - Added "ROOM [LOCKED]" disabled button with red styling
+  - Retained HOME, TRANSMISSIONS, THE PUZZLE navigation links
+- **Minimized Footer**: Reduced padding (`py-8` → `py-4`) and text sizes for cleaner bottom bar
+- **Layout Flow**: Removed sticky positioning from CRT/video background elements to restore natural scrolling
+
+**User Experience:**
+Players now land on the familiar puzzle-focused ARG experience. The Cinematic Engine is hidden but ready. December 12th will trigger the reveal—when the "ROOM [LOCKED]" button activates and players can enter the FMV narrative system.
+
+**Build Status:** Static export successful. All routes optimized for Cloudflare Pages.
+
+---
+
+## **REFLECTION**
+
+From a mysterious transmission on November 29th to a fully-featured ARG experience with hidden puzzles, easter eggs, immersive audiovisual effects, and now a **staged reveal strategy** for the Cinematic Narrative Engine—this project has been a journey of creative iteration, problem-solving, and user experience refinement.
+
+Each commit represented a decision, a fix, or a new feature. Some commits were moments of inspiration (the CRT TV, the easter eggs, the Cinematic Engine pivot). Others were technical pragmatism (video compression, autoplay fixes, TypeScript migration, feature locks, deployment optimization, layout restoration). Together, they built something that feels alive—a transmission from an alternate reality, waiting to be deciphered.
+
+The S33K3R TRANSMISSION is live. The puzzle is solvable. The secrets are hidden but discoverable. The Cinematic Narrative Engine is built and waiting in the shadows. And the countdown to December 12th has begun.
+
+**What happens on December 12th, 2025?**
+
+The rooms unlock. The choices become real. The narrative branches. The transmission evolves.
+
+That's for the players to find out.
+
+---
+
 **END TRANSMISSION**
 
 *Devlog written December 8-10, 2025*  
