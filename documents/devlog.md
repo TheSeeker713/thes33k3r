@@ -246,14 +246,14 @@ The S33K3R TRANSMISSION is no longer just a mystery to observe—it's a world to
 
 ---
 
-### December 9, 2025 - 00:00 AM
+### December 9, 2025 - 12:04 AM (00:04:53)
 **Commit:** Add InteractiveRoom component and TypeScript support
 
 The game engine is operational. Players can now click, explore, and solve puzzles in immersive neo-western environments. The foundation for a full point-and-click adventure is complete.
 
 ---
 
-### December 9, 2025 - 12:30 PM
+### December 9, 2025 - 2:16 PM (14:16:51)
 **Commit:** Make header/footer sticky and wire room links
 
 Navigation got the polish pass it deserved:
@@ -268,7 +268,7 @@ Result: the main transmission page now feels like a proper hub—users can jump 
 
 ## **PART VII: THE CINEMATIC PIVOT** 🎬
 
-### December 9, 2025 - Evening
+### December 10, 2025 - 10:08 AM (10:08:50)
 **Major Refactor:** Pivot from Point-and-Click to Cinematic Narrative Engine
 
 A fundamental architectural shift. The game moved from a traditional point-and-click adventure to an **FMV (Full Motion Video) style choose-your-own-adventure system**. This wasn't just a feature add—it was a complete reimagining of how players would experience THE S33K3R universe.
@@ -301,7 +301,7 @@ The experience transformed from clicking hotspots to making narrative choices th
 
 ---
 
-### December 10, 2025 - Morning
+### December 10, 2025 - 10:08 AM (10:08:50)
 **Feature Lock:** Implement "Coming Soon December 12th" Restriction
 
 With the Cinematic Engine built, the strategic decision was made to lock it behind a launch date. Players would see the system but couldn't interact until December 12th, 2025.
@@ -323,7 +323,7 @@ With the Cinematic Engine built, the strategic decision was made to lock it behi
 
 ---
 
-### December 10, 2025 - Afternoon
+### December 10, 2025 - 10:28 AM (10:28:56)
 **Deployment Config:** Enable Static Export for Cloudflare Pages
 
 With the Cinematic Engine locked and ready, deployment infrastructure needed optimization. Next.js configuration was updated to support static export for Cloudflare Pages deployment.
@@ -359,7 +359,7 @@ That's for the players to find out.
 
 ---
 
-### December 10, 2025 - Late Afternoon
+### December 10, 2025 - 10:48 AM (10:48:40)
 **Layout Restoration:** Return to Original Landing Page Experience
 
 After building the Cinematic Engine infrastructure, the strategic decision was made to restore the original landing page layout while preserving the new engine code for the December 12th unlock.
@@ -383,11 +383,33 @@ Players now land on the familiar puzzle-focused ARG experience. The Cinematic En
 
 ---
 
+### December 10, 2025 - 10:50 AM (10:50:00)
+**UI Polish & Cleanup:** Layout Refinements and Easter Egg Removal
+
+Final polish pass before the December 12th reveal, focusing on visual clarity and removing distracting elements.
+
+**Layout Improvements:**
+- **Header Transparency**: Made "THE S33K3R TRANSMISSION" header more transparent (`bg-opacity: 95% → 60%`) to better blend with background
+- **CRT TV Size Increase**: 
+  - Mobile: `w-64 h-48` → `w-80 h-60` (+25%)
+  - Tablet: `w-96 h-72` → `w-[480px] h-[360px]` (+25%)
+  - Desktop: `w-[500px] h-[375px]` → `w-[600px] h-[450px]` (+20%)
+  - TV now fills more screen real estate without overwhelming the layout
+- **Footer Message Visibility**: Changed hidden message from `text-stone-900` to `text-stone-600` and increased size from `text-[8px]` to `text-[10px]`—"THE TRUTH IS HIDDEN IN PLAIN SIGHT" is now actually readable
+
+**Easter Egg Removal:**
+- Removed FartBubble component entirely (kept the mystery menu, removed the juvenile distraction)
+- Cleaner, more focused landing experience
+
+**Rationale**: With December 12th approaching, the landing page needed to be refined and professional. The fart bubble was a fun experiment but detracted from the ARG's serious tone. The layout adjustments ensure the CRT TV is the focal point and the footer secret is discoverable.
+
+---
+
 ## **REFLECTION**
 
 From a mysterious transmission on November 29th to a fully-featured ARG experience with hidden puzzles, easter eggs, immersive audiovisual effects, and now a **staged reveal strategy** for the Cinematic Narrative Engine—this project has been a journey of creative iteration, problem-solving, and user experience refinement.
 
-Each commit represented a decision, a fix, or a new feature. Some commits were moments of inspiration (the CRT TV, the easter eggs, the Cinematic Engine pivot). Others were technical pragmatism (video compression, autoplay fixes, TypeScript migration, feature locks, deployment optimization, layout restoration). Together, they built something that feels alive—a transmission from an alternate reality, waiting to be deciphered.
+Each commit represented a decision, a fix, or a new feature. Some commits were moments of inspiration (the CRT TV, the easter eggs, the Cinematic Engine pivot). Others were technical pragmatism (video compression, autoplay fixes, TypeScript migration, feature locks, deployment optimization, layout restoration, UI polish). Together, they built something that feels alive—a transmission from an alternate reality, waiting to be deciphered.
 
 The S33K3R TRANSMISSION is live. The puzzle is solvable. The secrets are hidden but discoverable. The Cinematic Narrative Engine is built and waiting in the shadows. And the countdown to December 12th has begun.
 

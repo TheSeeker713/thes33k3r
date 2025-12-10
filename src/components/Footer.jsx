@@ -24,7 +24,7 @@ const Footer = () => {
         </div>
         
         {/* Hidden message */}
-        <p className="text-center text-stone-900 text-[8px] mt-1 select-none">
+        <p className="text-center text-stone-600 text-[10px] mt-1 select-none">
           THE TRUTH IS HIDDEN IN PLAIN SIGHT
         </p>
       </div>

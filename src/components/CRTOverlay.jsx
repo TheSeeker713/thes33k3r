@@ -99,7 +99,7 @@ const CRTOverlay = () => {
           <div className="bg-stone-950 rounded-md p-2 md:p-4 border-8 border-stone-900 shadow-inner">
             {/* CRT Screen */}
             <div 
-              className="relative w-64 h-48 md:w-96 md:h-72 lg:w-[500px] lg:h-[375px] bg-stone-950 rounded-sm overflow-hidden"
+              className="relative w-80 h-60 md:w-[480px] md:h-[360px] lg:w-[600px] lg:h-[450px] bg-stone-950 rounded-sm overflow-hidden"
               style={{
                 filter: isOn ? `brightness(${brightness}%) contrast(${contrast}%)` : 'none'
               }}

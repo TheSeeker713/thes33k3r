@@ -5,7 +5,6 @@ import CRTOverlay from '@/components/CRTOverlay'
 import Message from '@/components/Message'
 import PuzzleGame from '@/components/PuzzleGame'
 import Footer from '@/components/Footer'
-import FartBubble from '@/components/FartBubble'
 import Navbar from '@/components/Navbar'
 
 export default function Home() {
@@ -14,16 +13,13 @@ export default function Home() {
       {/* Background Video Layer */}
       <VideoBackground />
       
-      {/* Hidden Easter Egg */}
-      <FartBubble />
-      
       {/* Navigation Bar - Fixed */}
       <Navbar />
 
       {/* Main Content Container */}
       <main className="relative z-10 flex flex-col min-h-screen pt-20 md:pt-24 pb-24">
         {/* Header - Sticky below navbar */}
-        <header className="sticky top-16 md:top-20 z-40 text-center py-4 md:py-6 bg-[#0d0a08]/95 backdrop-blur-sm">
+        <header className="sticky top-16 md:top-20 z-40 text-center py-4 md:py-6 bg-[#0d0a08]/60 backdrop-blur-sm">
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold font-mono text-amber-500 text-glow tracking-widest">
             THE S33K3R TRANSMISSION
           </h1>
