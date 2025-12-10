@@ -4,15 +4,13 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-const Navbar = () => {
+const Navbar = ({ onNavigate, mainRooms }) => {
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const menuItems = [
-    { label: 'HOME', href: '/' },
-    { label: 'TRANSMISSIONS', href: { pathname: '/', hash: 'transmissions' } },
-    { label: 'THE PUZZLE', href: { pathname: '/', hash: 'puzzle' } },
-    { label: 'BROTHEL ROOM', href: '/brothel' },
+    { label: 'HOME', href: '/', type: 'link' },
+    { label: 'BROTHEL ROOM', href: '/brothel', type: 'link' },
   ]
 
   const isActive = (href) => {

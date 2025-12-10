@@ -266,15 +266,74 @@ Result: the main transmission page now feels like a proper hub—users can jump 
 
 ---
 
+## **PART VII: THE CINEMATIC PIVOT** 🎬
+
+### December 9, 2025 - Evening
+**Major Refactor:** Pivot from Point-and-Click to Cinematic Narrative Engine
+
+A fundamental architectural shift. The game moved from a traditional point-and-click adventure to an **FMV (Full Motion Video) style choose-your-own-adventure system**. This wasn't just a feature add—it was a complete reimagining of how players would experience THE S33K3R universe.
+
+**New Architecture:**
+- **Type System** (`src/types/game.ts`): Strict TypeScript definitions for `RoomNode`, `ChoiceCard`, and `WorldConfig`
+- **CinematicEngine Component** (`src/components/CinematicEngine.tsx`): Three-layer rendering system (background image → transition video → interactive cards)
+- **Seamless Transitions**: Videos with `preload="auto"` ensure instant playback when cards are clicked
+- **Frame-Perfect Magic**: Last frame of transition video matches destination room's static image (no visible cuts)
+
+**Sample World Created:**
+- 5 rooms configured: Bank, Bank Vault, Saloon, Sheriff's Office, Hotel
+- Each room has 3 choice cards with narrative descriptions
+- Nested navigation supported (Bank → Vault demonstrates sub-room access)
+- Header navigation for main rooms (hard-cut, no video)
+- Card choices trigger cinematic POV transitions
+
+**Visual Design:**
+- Weathered tarot/data-pad style cards with dark backgrounds
+- Amber borders with glow effects on hover
+- Corner decorations for retro-futuristic aesthetic
+- Smooth fade animations and scale transforms
+
+**Asset Pipeline Established:**
+- `/public/rooms/` directory structured with naming conventions
+- Comprehensive guide created (`ASSETS_README.md`) for video/image requirements
+- Critical alignment documented: first frame = source room, last frame = destination room
+
+The experience transformed from clicking hotspots to making narrative choices that trigger immersive first-person transitions. This is now a true **Cinematic Decision Engine**.
+
+---
+
+### December 10, 2025 - Morning
+**Feature Lock:** Implement "Coming Soon December 12th" Restriction
+
+With the Cinematic Engine built, the strategic decision was made to lock it behind a launch date. Players would see the system but couldn't interact until December 12th, 2025.
+
+**Implementation:**
+- **Header Replacement**: Room navigation buttons replaced with animated "COMING SOON: DECEMBER 12TH" message
+- **Error Indicator**: Red pulsing alert icon pointing to disabled "ROOMS [LOCKED]" button
+- **Full Lock Overlay**: Semi-transparent backdrop with centered lock icon, "ACCESS RESTRICTED" message, and unlock date
+- **Engine Preview**: Background visible at 30% opacity with blur effect—players can see what's coming but can't interact
+- **Disabled Prop**: `CinematicEngine` now accepts `disabled={true}` to prevent all card clicks and transitions
+
+**Visual Polish:**
+- Animated pulse effects on "Coming Soon" text and error icon
+- Red theme for locked state (vs amber for active state)
+- Large lock icon with amber accents maintaining S33K3R aesthetic
+- Clear unlock date display: "DECEMBER 12TH, 2025"
+
+**Purpose**: Build anticipation. Let players see the sophistication of what's coming, but hold back the full experience until the reveal date. The ARG continues—December 12th becomes a key date in the narrative.
+
+---
+
 ## **REFLECTION**
 
-From a mysterious transmission on November 29th to a fully-featured ARG experience with hidden puzzles, easter eggs, and immersive audiovisual effects—this project has been a journey of creative iteration, problem-solving, and user experience refinement.
+From a mysterious transmission on November 29th to a fully-featured ARG experience with hidden puzzles, easter eggs, immersive audiovisual effects, and now a **locked Cinematic Narrative Engine** awaiting its December 12th debut—this project has been a journey of creative iteration, problem-solving, and user experience refinement.
 
-Each commit represented a decision, a fix, or a new feature. Some commits were moments of inspiration (the CRT TV, the easter eggs, the interactive room system). Others were technical pragmatism (video compression, autoplay fixes, TypeScript migration). Together, they built something that feels alive—a transmission from an alternate reality, waiting to be deciphered.
+Each commit represented a decision, a fix, or a new feature. Some commits were moments of inspiration (the CRT TV, the easter eggs, the Cinematic Engine pivot). Others were technical pragmatism (video compression, autoplay fixes, TypeScript migration, feature locks). Together, they built something that feels alive—a transmission from an alternate reality, waiting to be deciphered.
 
-The S33K3R TRANSMISSION is live. The puzzle is solvable. The secrets are hidden but discoverable. And now, the world is explorable.
+The S33K3R TRANSMISSION is live. The puzzle is solvable. The secrets are hidden but discoverable. The Cinematic Narrative Engine is visible but locked. And the countdown to December 12th has begun.
 
 **What happens on December 12th, 2025?**
+
+The rooms unlock. The choices become real. The narrative branches.
 
 That's for the players to find out.
 
@@ -282,5 +341,5 @@ That's for the players to find out.
 
 **END TRANSMISSION**
 
-*Devlog written December 8-9, 2025*  
+*Devlog written December 8-10, 2025*  
 *Author: @theseeker713*
