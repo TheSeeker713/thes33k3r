@@ -405,19 +405,74 @@ Final polish pass before the December 12th reveal, focusing on visual clarity an
 
 ---
 
+### December 10, 2025 - 11:00 AM (11:00:00)
+**Live Event System:** Time-Triggered Cinema Screen Transformation
+
+Implemented a real-time event system that transforms the experience precisely at **December 12, 2025, 10:00 AM PST**. This is the core mechanism for the ARG's climactic reveal.
+
+**Time-Based State Management:**
+- **Target Timestamp**: `2025-12-12T10:00:00-08:00` (December 12, 2025, 10:00 AM PST)
+- **Client-Side Polling**: `useEffect` checks current time every second
+- **State Tracking**: Maintains `isAfterTargetTime` boolean and initialization flag
+- **Cross-Session Persistence**: Time check happens on every page load and continuously while page is open
+
+**Visual Transformation:**
+- **Before Target Time**: CRT TV (4:3 aspect ratio) displays retro transmission
+- **Live Transition**: If user is on the page when time crosses threshold:
+  - 3-second **glitch effect** overlay activates
+  - Red/cyan color shifting
+  - Static noise animation
+  - "SIGNAL SHIFT" message appears
+  - Screen transforms seamlessly from CRT to Movie Screen
+- **After Target Time**: Movie Screen (16:9 widescreen) replaces CRT permanently
+
+**MovieScreen Component** (`src/components/MovieScreen.jsx`):
+- **16:9 Cinematic Aspect Ratio**: Full widescreen theater experience
+- **Theater Curtains**: Dark red gradient curtains framing the screen (top, bottom, sides)
+- **Video Playback Ready**: Configured for `/video/transmission.mp4` and `.webm`
+- **Popcorn Button**: 🍿 Large animated button with play/pause functionality
+- **Placeholder State**: Shows "TRANSMISSION READY" message until video is uploaded
+- **Film Grain Effect**: Subtle texture overlay for cinematic feel
+- **Scanline Effect**: Maintains retro aesthetic even in movie mode
+
+**Video Directory Setup:**
+- Created `/public/video/` directory for transmission video files
+- Added comprehensive `README.md` with video specs:
+  - Recommended format: 1920x1080, H.264/VP9 codecs
+  - File naming: `transmission.mp4` and `transmission.webm`
+  - Bitrate/quality guidelines for web delivery
+- Video playback with sound enabled (unlike CRT which can be muted)
+
+**User Experience Flow:**
+1. **Before Dec 12**: Users solve puzzle, watch CRT TV, explore ARG
+2. **At 10:00 AM PST**: If users are online, they see the **live transformation** with glitch effect
+3. **After Dec 12**: New visitors see Movie Screen immediately, no CRT
+4. **Video Interaction**: Click 🍿 popcorn button to play transmission video
+
+**Technical Implementation:**
+- No server-side logic required (static export compatible)
+- Time checks use browser's local time converted to PST
+- Glitch animation uses existing CSS keyframes
+- Conditional rendering: `{isAfterTargetTime ? <MovieScreen /> : <CRTOverlay />}`
+
+**Why This Matters:**
+This creates a **live ARG event**. Players who are online at the exact moment witness the transformation happen in real-time. Those who visit later see the new state. The countdown in the Navbar now has tangible meaning—December 12th isn't just a date, it's when the transmission fundamentally changes.
+
+---
+
 ## **REFLECTION**
 
-From a mysterious transmission on November 29th to a fully-featured ARG experience with hidden puzzles, easter eggs, immersive audiovisual effects, and now a **staged reveal strategy** for the Cinematic Narrative Engine—this project has been a journey of creative iteration, problem-solving, and user experience refinement.
+From a mysterious transmission on November 29th to a fully-featured ARG experience with hidden puzzles, easter eggs, immersive audiovisual effects, a **staged reveal strategy** for the Cinematic Narrative Engine, and now a **live time-triggered event system**—this project has been a journey of creative iteration, problem-solving, and user experience refinement.
 
-Each commit represented a decision, a fix, or a new feature. Some commits were moments of inspiration (the CRT TV, the easter eggs, the Cinematic Engine pivot). Others were technical pragmatism (video compression, autoplay fixes, TypeScript migration, feature locks, deployment optimization, layout restoration, UI polish). Together, they built something that feels alive—a transmission from an alternate reality, waiting to be deciphered.
+Each commit represented a decision, a fix, or a new feature. Some commits were moments of inspiration (the CRT TV, the easter eggs, the Cinematic Engine pivot, the live transformation). Others were technical pragmatism (video compression, autoplay fixes, TypeScript migration, feature locks, deployment optimization, layout restoration, UI polish, time-based state management). Together, they built something that feels alive—a transmission from an alternate reality, waiting to be deciphered.
 
-The S33K3R TRANSMISSION is live. The puzzle is solvable. The secrets are hidden but discoverable. The Cinematic Narrative Engine is built and waiting in the shadows. And the countdown to December 12th has begun.
+The S33K3R TRANSMISSION is live. The puzzle is solvable. The secrets are hidden but discoverable. The Cinematic Narrative Engine is built and waiting in the shadows. The live event timer is counting down. And December 12th at 10:00 AM PST will mark the moment everything changes.
 
-**What happens on December 12th, 2025?**
+**What happens on December 12th, 2025 at 10:00 AM PST?**
 
-The rooms unlock. The choices become real. The narrative branches. The transmission evolves.
+The CRT glitches. The screen transforms. The movie begins. The rooms unlock. The choices become real. The narrative branches. The transmission evolves into something new.
 
-That's for the players to find out.
+That's for the players to discover—in real time.
 
 ---
 
