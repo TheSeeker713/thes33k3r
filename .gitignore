@@ -41,3 +41,11 @@ coverage
 # Misc
 .cache
 .turbo
+
+# Large media (keep under 100MB; ignore originals)
+public/rooms/THE S33K3R TRANSMISSION .mp4
+
+# Rooms assets: ignore non-canonical exports
+public/rooms/*
+!public/rooms/*_room*.png
+!public/rooms/ASSETS_README.md

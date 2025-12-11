@@ -179,25 +179,6 @@ The project matured. A proper navigation bar was added with menu items for diffe
 - HOME
 - TRANSMISSIONS
 - THE PUZZLE
-- ABOUT
-- CONTACT
-
-The special hidden menu was removed in favor of this cleaner, more user-friendly approach. Video assets were further compressed to optimize load times.
-
----
-
-## **PART VIII: THE AUTOPLAY SAGA** 🎥
-
-### December 7, 2025 - 19:31 PM
-**Commit:** Fix: Add muted attribute to CRT video element for autoplay support
-
-Browser autoplay policies are strict: videos must be muted to autoplay without user interaction. The CRT video was added with the `muted` attribute to comply with modern browser restrictions while still providing the immersive background experience.
-
----
-
-### December 8, 2025 - 11:41 AM
-**Commit:** Fix: Unmute video on playback to enable audio while maintaining autoplay support
-
 But wait—we wanted audio! The solution was elegant: start muted for autoplay compliance, then unmute when the user actually plays the video. Users get the full sensory experience, browsers are happy, and the transmission plays with all its mysterious audio intact.
 
 ---
@@ -407,8 +388,27 @@ Final polish pass before the December 12th reveal, focusing on visual clarity an
 
 ### December 10, 2025 - 11:00 AM (11:00:00)
 **Live Event System:** Time-Triggered Cinema Screen Transformation
-
 Implemented a real-time event system that transforms the experience precisely at **December 12, 2025, 10:00 AM PST**. This is the core mechanism for the ARG's climactic reveal.
+
+---
+
+### December 11, 2025 - 10:45 AM (10:45:00)
+**Transmission Compression & Room Asset Policy**
+
+**Video Compression:**
+- Original master: `public/rooms/THE S33K3R TRANSMISSION .mp4` (505 MB) — left locally, now gitignored to keep repo lean.
+- New MP4 delivery copy: `public/rooms/the-s33k3r-transmission-100mb.mp4` (~94.7 MB, H.264, AAC) capped under 100 MB for web delivery.
+- New WEBM delivery copy: `public/rooms/the-s33k3r-transmission-100mb.webm` (~99.1 MB, VP9, Opus) capped under 100 MB.
+- Target: keep all distributable media in `/public/rooms/` under 100 MB to avoid repo bloat and hosting friction.
+
+**Room Asset Naming Rule:**
+- Only track room art named with `_room`, `_room1`, `_room2`, etc. (e.g., `saloon_room.png`, `cave_room2.png`).
+- Ignore or gitignore any `/public/rooms/` assets that do not follow the `_room` naming convention or exceed 100 MB.
+- Reason: keeps git clean, prevents accidental commits of exploratory renders/screenshots.
+
+**Status:**
+- Added gitignore entry for the 505 MB master (`THE S33K3R TRANSMISSION .mp4`).
+- Delivery MP4 + WEBM ready for app consumption (both <100 MB).
 
 **Time-Based State Management:**
 - **Target Timestamp**: `2025-12-12T10:00:00-08:00` (December 12, 2025, 10:00 AM PST)
@@ -457,6 +457,26 @@ Implemented a real-time event system that transforms the experience precisely at
 
 **Why This Matters:**
 This creates a **live ARG event**. Players who are online at the exact moment witness the transformation happen in real-time. Those who visit later see the new state. The countdown in the Navbar now has tangible meaning—December 12th isn't just a date, it's when the transmission fundamentally changes.
+
+---
+
+### December 11, 2025 - 10:45 AM (10:45:00)
+**Transmission Compression & Room Asset Policy**
+
+**Video Compression:**
+- Original master: `public/rooms/THE S33K3R TRANSMISSION .mp4` (505 MB) — left locally, now gitignored to keep repo lean.
+- New MP4 delivery copy: `public/rooms/the-s33k3r-transmission-100mb.mp4` (~94.7 MB, H.264, AAC) capped under 100 MB for web delivery.
+- New WEBM delivery copy: `public/rooms/the-s33k3r-transmission-100mb.webm` (~99.1 MB, VP9, Opus) capped under 100 MB.
+- Target: keep all distributable media in `/public/rooms/` under 100 MB to avoid repo bloat and hosting friction.
+
+**Room Asset Naming Rule:**
+- Only track room art named with `_room`, `_room1`, `_room2`, etc. (e.g., `saloon_room.png`, `cave_room2.png`).
+- Ignore or gitignore any `/public/rooms/` assets that do not follow the `_room` naming convention or exceed 100 MB.
+- Reason: keeps git clean, prevents accidental commits of exploratory renders/screenshots.
+
+**Status:**
+- Added gitignore entry for the 505 MB master (`THE S33K3R TRANSMISSION .mp4`).
+- Delivery MP4 + WEBM ready for app consumption (both <100 MB).
 
 ---
 
