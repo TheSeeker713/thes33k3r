@@ -54,20 +54,20 @@ const MovieScreen = () => {
             <div className="relative p-1 bg-gradient-to-tl from-stone-700 via-stone-800 to-stone-900 rounded-md">
               {/* 16:9 Widescreen Container - The Actual Screen */}
               <div className="relative w-full aspect-video bg-black rounded overflow-hidden shadow-inner">
-                <YouTube
-                  videoId="yJN0NaqxzyA"
-                  opts={youtubeOpts}
-                  onReady={handlePlayerReady}
-                  className="absolute inset-0 w-full h-full"
-                  iframeClassName="absolute inset-0 w-full h-full"
-                />
-
-                {/* Cover Layer - Theater Curtain Style */}
+                {/* Cover Layer - Theater Curtain Style with Background Image */}
                 <div
-                  className={`absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-stone-950 via-stone-900 to-black transition-opacity duration-1000 ${
+                  className={`absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-1000 ${
                     isCoverHidden ? 'opacity-0 pointer-events-none' : 'opacity-100'
                   }`}
+                  style={{
+                    backgroundImage: 'url(/moviescreen.webp)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }}
                 >
+                  {/* Dark overlay for better contrast on top of image */}
+                  <div className="absolute inset-0 bg-black/10"></div>
+
                   {/* Film grain effect */}
                   <div
                     className="absolute inset-0 opacity-20"
@@ -94,6 +94,17 @@ const MovieScreen = () => {
                     <div className="w-full h-full scanlines opacity-20"></div>
                   </div>
                 </div>
+
+                {/* YouTube Player - Positioned over the white screen area */}
+                <YouTube
+                  videoId="yJN0NaqxzyA"
+                  opts={youtubeOpts}
+                  onReady={handlePlayerReady}
+                  className={`absolute inset-0 w-full h-full transition-opacity duration-500 ${
+                    isCoverHidden ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                  }`}
+                  iframeClassName="absolute inset-0 w-full h-full"
+                />
               </div>
             </div>
           </div>
