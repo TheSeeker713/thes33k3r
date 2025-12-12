@@ -496,6 +496,8 @@ This creates a **live ARG event**. Players who are online at the exact moment wi
 - **Critical shift:** The game (Message + PuzzleGame) remains unlocked and accessible at all times. Only the Cinematic Engine (MovieScreen with YouTube) is gated behind Phase 1 (10:10 AM MST) and playback behind Phase 2 (11:11 AM MST).
 - This ensures players can continue solving puzzles while the movie theater screen remains "coming soon" until the launch window.
 - Public/rooms assets temporarily ignored until greenlight for inclusion.
+- Updated main transmission message to: "THE S33K3R TRANSMISSION BEGINS DECEMBER 12TH, 2025 AT 11:11AM"
+- **Critical fix:** Re-enabled crtvideo.mp4 and crtvideo.webm in repository—these are core CRT TV assets and must be committed (not ignored).
 
 ---
 
