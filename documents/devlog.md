@@ -198,6 +198,15 @@ The infrastructure is now future-proof and optimized for performance.
 
 ---
 
+### December 11, 2025 - 17:30 PM
+**Status:** Phase-gated launch logic and YouTube integration
+
+- Added double-stage MST timers: layout swap at 10:10 (Phase I → II) and video unlock at 11:11, with glitch only before the swap.
+- Refactored `MovieScreen` to use `react-youtube` with a cover overlay and gated popcorn trigger that plays on direct click.
+- Added Phase II amber notice and unmounted Puzzle/Message post-swap; build now passes with Turbopack.
+
+---
+
 ## **PART IX: THE GAME ENGINE** 🎮
 
 ### December 8, 2025 - 20:00 PM

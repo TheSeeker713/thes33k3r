@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import VideoBackground from '@/components/VideoBackground'
 import CRTOverlay from '@/components/CRTOverlay'
 import MovieScreen from '@/components/MovieScreen'
@@ -10,10 +10,11 @@ import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
 
 export default function Home() {
-  // Target date: December 12, 2025, 10:00 AM PST (ISO: 2025-12-12T10:00:00-08:00)
-  const targetDate = new Date('2025-12-12T10:00:00-08:00')
-  
-  const [isAfterTargetTime, setIsAfterTargetTime] = useState(false)
+  const phase1Time = useMemo(() => new Date('2025-12-12T10:10:00-07:00'), [])
+  const phase2Time = useMemo(() => new Date('2025-12-12T11:11:00-07:00'), [])
+
+  const [isAfterPhase1, setIsAfterPhase1] = useState(false)
+  const [isAfterPhase2, setIsAfterPhase2] = useState(false)
   const [showGlitch, setShowGlitch] = useState(false)
   const [isInitialized, setIsInitialized] = useState(false)
 
@@ -21,20 +22,25 @@ export default function Home() {
   useEffect(() => {
     const checkTime = () => {
       const now = new Date()
-      const wasAfter = isAfterTargetTime
-      const isNowAfter = now >= targetDate
+      const nextAfterPhase1 = now >= phase1Time
+      const nextAfterPhase2 = now >= phase2Time
       
       // If we just crossed the threshold while page is open, trigger glitch
-      if (isInitialized && !wasAfter && isNowAfter) {
+      if (isInitialized && !isAfterPhase1 && nextAfterPhase1) {
         setShowGlitch(true)
         setTimeout(() => {
           setShowGlitch(false)
-          setIsAfterTargetTime(true)
-        }, 3000) // 3 second glitch effect
+          setIsAfterPhase1(true)
+          setIsAfterPhase2(nextAfterPhase2)
+        }, 3000) // 3 second glitch effect before layout swap
       } else if (!isInitialized) {
         // Initial load - set state without glitch
-        setIsAfterTargetTime(isNowAfter)
+        setIsAfterPhase1(nextAfterPhase1)
+        setIsAfterPhase2(nextAfterPhase2)
         setIsInitialized(true)
+      } else {
+        setIsAfterPhase1(nextAfterPhase1)
+        setIsAfterPhase2(nextAfterPhase2)
       }
     }
 
@@ -45,7 +51,7 @@ export default function Home() {
     const interval = setInterval(checkTime, 1000)
 
     return () => clearInterval(interval)
-  }, [isAfterTargetTime, isInitialized, targetDate])
+  }, [isAfterPhase1, isInitialized, phase1Time, phase2Time])
 
   return (
     <div className="relative min-h-screen flex flex-col bg-[#0d0a08] text-stone-200 overflow-x-hidden">
@@ -53,7 +59,7 @@ export default function Home() {
       <VideoBackground />
       
       {/* Glitch Overlay Effect - Only shows during transition */}
-      {showGlitch && (
+      {showGlitch && !isAfterPhase1 && (
         <div className="fixed inset-0 z-[100] pointer-events-none animate-pulse">
           <div className="absolute inset-0 bg-red-500/20 mix-blend-overlay animate-[glitch_0.3s_infinite]"></div>
           <div className="absolute inset-0 bg-cyan-500/20 mix-blend-overlay animate-[glitch_0.2s_infinite_reverse]"></div>
@@ -87,18 +93,31 @@ export default function Home() {
         
         {/* Conditional Display: CRT TV (Before) or Movie Screen (After) */}
         <section id="transmissions" className="scroll-mt-24">
-          {isAfterTargetTime ? <MovieScreen /> : <CRTOverlay />}
+          {isAfterPhase1 ? <MovieScreen isUnlocked={isAfterPhase2} /> : <CRTOverlay />}
         </section>
-        
-        {/* Message Section */}
-        <section className="scroll-mt-24">
-          <Message />
-        </section>
-        
-        {/* Puzzle Game */}
-        <section id="puzzle" className="scroll-mt-24">
-          <PuzzleGame />
-        </section>
+
+        {/* Phase II Text after layout swap */}
+        {isAfterPhase1 && (
+          <section className="scroll-mt-24 mt-8 px-4">
+            <div className="max-w-4xl mx-auto text-center bg-[#11100f]/70 border border-amber-600/40 rounded-lg p-6 md:p-8 shadow-lg backdrop-blur-sm">
+              <p className="text-amber-500 text-lg md:text-xl font-mono leading-relaxed text-glow">
+                PROJECT S33K3R: PHASE II INITIATED. The simulation evolves in 2026. A Full-Motion Video Cinematic Experience is currently in development. You are invited to test the prototype... soon.
+              </p>
+            </div>
+          </section>
+        )}
+
+        {/* Message and Puzzle only before Phase 1 */}
+        {!isAfterPhase1 && (
+          <>
+            <section className="scroll-mt-24">
+              <Message />
+            </section>
+            <section id="puzzle" className="scroll-mt-24">
+              <PuzzleGame />
+            </section>
+          </>
+        )}
       </main>
 
       {/* Footer - Fixed */}

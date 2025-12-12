@@ -1,21 +1,36 @@
 'use client'
 
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState } from 'react'
+import YouTube from 'react-youtube'
 
-const MovieScreen = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const videoRef = useRef(null);
+const MovieScreen = ({ isUnlocked = false }) => {
+  const playerRef = useRef(null)
+  const [isCoverHidden, setIsCoverHidden] = useState(false)
+
+  const youtubeOpts = {
+    width: '100%',
+    height: '100%',
+    playerVars: {
+      autoplay: 0,
+      controls: 1,
+      modestbranding: 1,
+      rel: 0,
+      iv_load_policy: 3,
+    },
+  }
+
+  const handlePlayerReady = (event) => {
+    playerRef.current = event.target
+  }
 
   const handlePlayClick = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play().catch(e => console.log('Play error:', e));
-      }
-      setIsPlaying(!isPlaying);
+    if (!isUnlocked) return
+    setIsCoverHidden(true)
+    const player = playerRef.current?.internalPlayer
+    if (player && player.playVideo) {
+      player.playVideo().catch((e) => console.log('Play error:', e))
     }
-  };
+  }
 
   return (
     <div className="relative z-10 text-center px-4 py-8 md:py-12">
@@ -31,43 +46,38 @@ const MovieScreen = () => {
           
           {/* 16:9 Widescreen Container */}
           <div className="relative w-full aspect-video bg-black rounded shadow-2xl overflow-hidden border-2 border-stone-700">
-            {/* Video Element (Future) */}
-            <video
-              ref={videoRef}
-              className="absolute inset-0 w-full h-full object-cover"
-              onPlay={() => setIsPlaying(true)}
-              onPause={() => setIsPlaying(false)}
-              onEnded={() => setIsPlaying(false)}
+            <YouTube
+              videoId="yJN0NaqxzyA"
+              opts={youtubeOpts}
+              onReady={handlePlayerReady}
+              className="absolute inset-0 w-full h-full"
+              iframeClassName="absolute inset-0 w-full h-full"
+            />
+
+            {/* Cover Image Layer (reused overlay) */}
+            <div
+              className={`absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-stone-950 via-stone-900 to-black transition-opacity duration-700 ${
+                isCoverHidden ? 'opacity-0 pointer-events-none' : 'opacity-100'
+              }`}
             >
-              {/* Video source will be added when ready */}
-              <source src="/video/transmission.mp4" type="video/mp4" />
-              <source src="/video/transmission.webm" type="video/webm" />
-            </video>
-            
-            {/* Placeholder - No Video Loaded State */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-stone-950 via-stone-900 to-black">
               {/* Film grain effect */}
-              <div 
+              <div
                 className="absolute inset-0 opacity-20"
                 style={{
                   backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
                 }}
               ></div>
-              
-              {/* Placeholder message */}
+
               <div className="relative z-10 text-center px-4">
                 <div className="text-6xl md:text-8xl mb-4 animate-pulse">🎬</div>
                 <h2 className="text-2xl md:text-4xl font-bold font-mono text-amber-500 mb-4 text-glow">
                   TRANSMISSION READY
                 </h2>
                 <p className="text-sm md:text-base text-stone-400 font-mono">
-                  The feature presentation will begin shortly...
+                  Cover layer will fade when you trigger the signal.
                 </p>
-                <div className="mt-4 text-xs text-stone-600">
-                  [Video content pending upload to /video/ directory]
-                </div>
               </div>
-              
+
               {/* Subtle scanlines for cinematic feel */}
               <div className="absolute inset-0 pointer-events-none">
                 <div className="w-full h-full scanlines opacity-30"></div>
@@ -83,23 +93,29 @@ const MovieScreen = () => {
         <div className="flex items-center justify-center gap-4 mt-6">
           <button
             onClick={handlePlayClick}
-            className="group relative bg-gradient-to-br from-amber-600 via-amber-700 to-amber-800 hover:from-amber-500 hover:via-amber-600 hover:to-amber-700 text-white font-bold py-4 px-8 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-amber-500"
+            disabled={!isUnlocked}
+            className={`group relative font-bold py-4 px-8 rounded-lg shadow-lg transform transition-all duration-300 border-2 border-amber-500 text-white ${
+              isUnlocked
+                ? 'bg-gradient-to-br from-amber-600 via-amber-700 to-amber-800 hover:from-amber-500 hover:via-amber-600 hover:to-amber-700 hover:scale-105 active:scale-95 animate-pulse'
+                : 'bg-stone-800 text-stone-400 cursor-not-allowed opacity-70'
+            }`}
           >
-            {/* Popcorn Icon */}
             <div className="flex items-center gap-3">
-              <span className="text-4xl animate-bounce">🍿</span>
+              <span className={`text-4xl ${isUnlocked ? 'animate-bounce' : ''}`}>🍿</span>
               <div className="text-left">
                 <div className="text-lg font-mono tracking-wider">
-                  {isPlaying ? 'PAUSE' : 'PLAY'} TRANSMISSION
+                  {isUnlocked ? 'PLAY TRANSMISSION' : 'SIGNAL ENCRYPTED // DECRYPTION AT 11:11'}
                 </div>
-                <div className="text-xs text-amber-200 font-mono">
-                  Click to {isPlaying ? 'pause' : 'watch'} the video
+                <div className="text-xs font-mono text-amber-200">
+                  {isUnlocked ? 'Click to watch and unmask the signal' : 'Awaiting unlock window'}
                 </div>
               </div>
             </div>
-            
+
             {/* Glow effect on hover */}
-            <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-amber-400/20 via-amber-500/20 to-amber-600/20 blur-xl"></div>
+            {isUnlocked && (
+              <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-amber-400/20 via-amber-500/20 to-amber-600/20 blur-xl"></div>
+            )}
           </button>
         </div>
         
@@ -108,13 +124,13 @@ const MovieScreen = () => {
           <p className="text-amber-500/70 font-mono text-sm">
             ▮ NOW SHOWING: THE S33K3R TRANSMISSION ▮
           </p>
-          <p className="text-stone-600 font-mono text-xs mt-2">
-            DECEMBER 12, 2025 • 10:00 AM PST
+          <p className="text-stone-500 font-mono text-xs mt-2">
+            DECEMBER 12, 2025 • 10:10 AM MST • UNLOCK AT 11:11 AM MST
           </p>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MovieScreen;
+export default MovieScreen
