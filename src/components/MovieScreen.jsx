@@ -39,14 +39,6 @@ const MovieScreen = () => {
       <div className="max-w-7xl mx-auto">
         {/* Movie Theater Frame - Cinematic Design */}
         <div className="relative bg-black p-6 md:p-12 lg:p-16 rounded-xl shadow-[0_0_100px_rgba(0,0,0,0.9)]">
-          {/* Theater Velvet Curtains - Top with draped effect */}
-          <div className="absolute -top-4 left-0 right-0 h-16 bg-gradient-to-b from-red-900/60 via-red-950/50 to-transparent rounded-t-xl"></div>
-          
-          {/* Theater Velvet Curtains - Left with folds */}
-          <div className="absolute top-0 -left-4 bottom-0 w-12 bg-gradient-to-r from-red-900/60 via-red-950/50 to-transparent"></div>
-          
-          {/* Theater Velvet Curtains - Right with folds */}
-          <div className="absolute top-0 -right-4 bottom-0 w-12 bg-gradient-to-l from-red-900/60 via-red-950/50 to-transparent"></div>
           
           {/* Cinema Screen Border - Silver/Chrome Frame */}
           <div className="relative p-2 bg-gradient-to-br from-stone-400 via-stone-500 to-stone-600 rounded-lg shadow-2xl">
@@ -79,9 +71,6 @@ const MovieScreen = () => {
               </div>
             </div>
           </div>
-          
-          {/* Theater Velvet Curtains - Bottom draped */}
-          <div className="absolute -bottom-4 left-0 right-0 h-16 bg-gradient-to-t from-red-900/60 via-red-950/50 to-transparent rounded-b-xl"></div>
         </div>
         
         {/* Play Button - Cinematic Control */}
