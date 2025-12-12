@@ -45,7 +45,11 @@ coverage
 # Large media (keep under 100MB; ignore originals)
 public/rooms/THE S33K3R TRANSMISSION .mp4
 
-# Rooms assets: ignore non-canonical exports
+# Rooms assets: ignore non-canonical exports until greenlight
 public/rooms/*
 !public/rooms/*_room*.png
+public/rooms/*-compressed.png
+public/rooms/*.webp
+public/rooms/*.mp4
+public/rooms/*.webm
 !public/rooms/ASSETS_README.md

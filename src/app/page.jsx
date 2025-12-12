@@ -107,17 +107,13 @@ export default function Home() {
           </section>
         )}
 
-        {/* Message and Puzzle only before Phase 1 */}
-        {!isAfterPhase1 && (
-          <>
-            <section className="scroll-mt-24">
-              <Message />
-            </section>
-            <section id="puzzle" className="scroll-mt-24">
-              <PuzzleGame />
-            </section>
-          </>
-        )}
+        {/* Message and Puzzle always available (game remains unlocked) */}
+        <section className="scroll-mt-24">
+          <Message />
+        </section>
+        <section id="puzzle" className="scroll-mt-24">
+          <PuzzleGame />
+        </section>
       </main>
 
       {/* Footer - Fixed */}

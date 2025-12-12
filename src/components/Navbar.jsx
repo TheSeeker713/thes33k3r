@@ -49,7 +49,7 @@ const Navbar = () => {
             
             {/* Coming Soon Label */}
             <span className="font-mono text-xs tracking-wider text-amber-500 animate-pulse pointer-events-none">
-              COMING SOON: DEC 12
+              COMING SOON: DEC 14
             </span>
             
             {/* Disabled Room Button */}
@@ -95,7 +95,7 @@ const Navbar = () => {
             
             {/* Mobile Coming Soon & Locked Room */}
             <span className="font-mono text-xs tracking-wider py-2 px-2 text-amber-500 animate-pulse">
-              COMING SOON: DEC 12
+              COMING SOON: DEC 14
             </span>
             <button
               disabled

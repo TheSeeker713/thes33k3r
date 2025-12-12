@@ -489,6 +489,16 @@ This creates a **live ARG event**. Players who are online at the exact moment wi
 
 ---
 
+### December 11, 2025 - 17:45 PM
+**Status:** Cinematic Engine gating & event launch refinement
+
+- Postponed "Coming Soon" from December 12th to December 14th in navbar (preserving the Dec 12 ARG mystery for the puzzle/game).
+- **Critical shift:** The game (Message + PuzzleGame) remains unlocked and accessible at all times. Only the Cinematic Engine (MovieScreen with YouTube) is gated behind Phase 1 (10:10 AM MST) and playback behind Phase 2 (11:11 AM MST).
+- This ensures players can continue solving puzzles while the movie theater screen remains "coming soon" until the launch window.
+- Public/rooms assets temporarily ignored until greenlight for inclusion.
+
+---
+
 ## **REFLECTION**
 
 From a mysterious transmission on November 29th to a fully-featured ARG experience with hidden puzzles, easter eggs, immersive audiovisual effects, a **staged reveal strategy** for the Cinematic Narrative Engine, and now a **live time-triggered event system**—this project has been a journey of creative iteration, problem-solving, and user experience refinement.
