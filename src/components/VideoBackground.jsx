@@ -5,16 +5,6 @@ import React from 'react';
 const VideoBackground = () => {
   return (
     <div className="fixed inset-0 z-0 overflow-hidden">
-      {/* Noise SVG Filter - defined once for reuse */}
-      <svg className="absolute inset-0 w-0 h-0 pointer-events-none">
-        <defs>
-          <filter id="dustNoise">
-            <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch" />
-            <feColorMatrix type="saturate" values="0" />
-          </filter>
-        </defs>
-      </svg>
-
       {/* Background video layer */}
       <div className="absolute inset-0 bg-gradient-to-b from-stone-950 via-[#0d0a08] to-stone-950">
         {/* Looping background video - optimized with preload and decoding hints */}
