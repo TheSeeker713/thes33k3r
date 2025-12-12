@@ -1,11 +1,27 @@
 'use client'
 
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import YouTube from 'react-youtube'
 
 const MovieScreen = ({ isUnlocked = false }) => {
   const playerRef = useRef(null)
   const [isCoverHidden, setIsCoverHidden] = useState(false)
+  const [playerReady, setPlayerReady] = useState(false)
+  const [showUnlockHighlight, setShowUnlockHighlight] = useState(false)
+
+  // Reset cover when isUnlocked prop changes
+  useEffect(() => {
+    setIsCoverHidden(false)
+  }, [isUnlocked])
+
+  // Show unlock highlight when player becomes unlocked
+  useEffect(() => {
+    if (isUnlocked && playerReady && !showUnlockHighlight) {
+      setShowUnlockHighlight(true)
+      const timer = setTimeout(() => setShowUnlockHighlight(false), 2000)
+      return () => clearTimeout(timer)
+    }
+  }, [isUnlocked, playerReady, showUnlockHighlight])
 
   const youtubeOpts = {
     width: '100%',
@@ -21,10 +37,11 @@ const MovieScreen = ({ isUnlocked = false }) => {
 
   const handlePlayerReady = (event) => {
     playerRef.current = event.target
+    setPlayerReady(true)
   }
 
   const handlePlayClick = () => {
-    if (!isUnlocked) return
+    if (!isUnlocked || !playerReady) return
     setIsCoverHidden(true)
     const player = playerRef.current?.internalPlayer
     if (player && player.playVideo) {
@@ -90,7 +107,12 @@ const MovieScreen = ({ isUnlocked = false }) => {
         </div>
         
         {/* Popcorn Button - Control Panel */}
-        <div className="flex items-center justify-center gap-4 mt-6">
+        <div className="flex items-center justify-center gap-4 mt-6 relative">
+          {/* Unlock highlight effect */}
+          {showUnlockHighlight && isUnlocked && (
+            <div className="absolute -inset-6 border-4 border-amber-400 rounded-lg animate-[pulse_0.5s_ease-in-out] pointer-events-none shadow-xl shadow-amber-500/60"></div>
+          )}
+          
           <button
             onClick={handlePlayClick}
             disabled={!isUnlocked}

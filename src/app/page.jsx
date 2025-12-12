@@ -51,7 +51,7 @@ export default function Home() {
     const interval = setInterval(checkTime, 1000)
 
     return () => clearInterval(interval)
-  }, [isAfterPhase1, isInitialized, phase1Time, phase2Time])
+  }, [phase1Time, phase2Time])
 
   return (
     <div className="relative min-h-screen flex flex-col bg-[#0d0a08] text-stone-200 overflow-x-hidden">
