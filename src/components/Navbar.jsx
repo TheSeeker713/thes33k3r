@@ -47,6 +47,14 @@ const Navbar = () => {
               </Link>
             ))}
             
+            {/* Prominent Warning Button */}
+            <Link
+              href="/about"
+              className="font-mono text-xs tracking-wider px-4 py-2 rounded border-2 border-amber-500 text-amber-500 bg-amber-900/20 hover:bg-amber-800/40 hover:border-amber-400 hover:text-amber-400 transition-all duration-300 animate-pulse font-bold shadow-lg shadow-amber-500/30"
+            >
+              ⚠ THE WARNING
+            </Link>
+            
             {/* Coming Soon Label */}
             <span className="font-mono text-xs tracking-wider text-amber-500 animate-pulse pointer-events-none">
               COMING SOON: DEC 14
@@ -76,7 +84,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Dropdown */}
-        <div className={`md:hidden overflow-hidden transition-all duration-300 ${isMenuOpen ? 'max-h-64 pb-4' : 'max-h-0'}`}>
+        <div className={`md:hidden overflow-hidden transition-all duration-300 ${isMenuOpen ? 'max-h-80 pb-4' : 'max-h-0'}`}>
           <div className="flex flex-col space-y-2 pt-2 border-t border-amber-900/20">
             {menuItems.map((item) => (
               <Link
@@ -92,6 +100,15 @@ const Navbar = () => {
                 {item.label}
               </Link>
             ))}
+            
+            {/* Mobile Warning Button */}
+            <Link
+              href="/about"
+              onClick={() => setIsMenuOpen(false)}
+              className="font-mono text-sm tracking-wider py-3 px-4 rounded border-2 border-amber-500 text-amber-500 bg-amber-900/20 hover:bg-amber-800/40 transition-all duration-300 animate-pulse font-bold text-center shadow-lg shadow-amber-500/30"
+            >
+              ⚠ THE WARNING
+            </Link>
             
             {/* Mobile Coming Soon & Locked Room */}
             <span className="font-mono text-xs tracking-wider py-2 px-2 text-amber-500 animate-pulse">
