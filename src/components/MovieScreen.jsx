@@ -1,27 +1,12 @@
 'use client'
 
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState } from 'react'
 import YouTube from 'react-youtube'
 
-const MovieScreen = ({ isUnlocked = false }) => {
+const MovieScreen = () => {
   const playerRef = useRef(null)
   const [isCoverHidden, setIsCoverHidden] = useState(false)
   const [playerReady, setPlayerReady] = useState(false)
-  const [showUnlockHighlight, setShowUnlockHighlight] = useState(false)
-
-  // Reset cover when isUnlocked prop changes
-  useEffect(() => {
-    setIsCoverHidden(false)
-  }, [isUnlocked])
-
-  // Show unlock highlight when player becomes unlocked
-  useEffect(() => {
-    if (isUnlocked && playerReady && !showUnlockHighlight) {
-      setShowUnlockHighlight(true)
-      const timer = setTimeout(() => setShowUnlockHighlight(false), 2000)
-      return () => clearTimeout(timer)
-    }
-  }, [isUnlocked, playerReady, showUnlockHighlight])
 
   const youtubeOpts = {
     width: '100%',
@@ -41,7 +26,7 @@ const MovieScreen = ({ isUnlocked = false }) => {
   }
 
   const handlePlayClick = () => {
-    if (!isUnlocked || !playerReady) return
+    if (!playerReady) return
     setIsCoverHidden(true)
     const player = playerRef.current?.internalPlayer
     if (player && player.playVideo) {
@@ -52,102 +37,102 @@ const MovieScreen = ({ isUnlocked = false }) => {
   return (
     <div className="relative z-10 text-center px-4 py-8 md:py-12">
       <div className="max-w-7xl mx-auto">
-        {/* Movie Theater Frame */}
-        <div className="relative bg-gradient-to-b from-stone-950 via-stone-900 to-stone-950 p-4 md:p-8 rounded-lg shadow-2xl border-4 border-stone-800">
-          {/* Theater Curtains - Top */}
-          <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-red-950/40 to-transparent"></div>
+        {/* Movie Theater Frame - Cinematic Design */}
+        <div className="relative bg-black p-6 md:p-12 lg:p-16 rounded-xl shadow-[0_0_100px_rgba(0,0,0,0.9)]">
+          {/* Theater Velvet Curtains - Top with draped effect */}
+          <div className="absolute -top-4 left-0 right-0 h-16 bg-gradient-to-b from-red-900/60 via-red-950/50 to-transparent rounded-t-xl"></div>
           
-          {/* Theater Curtains - Sides */}
-          <div className="absolute top-0 left-0 bottom-0 w-8 bg-gradient-to-r from-red-950/40 to-transparent"></div>
-          <div className="absolute top-0 right-0 bottom-0 w-8 bg-gradient-to-l from-red-950/40 to-transparent"></div>
+          {/* Theater Velvet Curtains - Left with folds */}
+          <div className="absolute top-0 -left-4 bottom-0 w-12 bg-gradient-to-r from-red-900/60 via-red-950/50 to-transparent"></div>
           
-          {/* 16:9 Widescreen Container */}
-          <div className="relative w-full aspect-video bg-black rounded shadow-2xl overflow-hidden border-2 border-stone-700">
-            <YouTube
-              videoId="yJN0NaqxzyA"
-              opts={youtubeOpts}
-              onReady={handlePlayerReady}
-              className="absolute inset-0 w-full h-full"
-              iframeClassName="absolute inset-0 w-full h-full"
-            />
+          {/* Theater Velvet Curtains - Right with folds */}
+          <div className="absolute top-0 -right-4 bottom-0 w-12 bg-gradient-to-l from-red-900/60 via-red-950/50 to-transparent"></div>
+          
+          {/* Cinema Screen Border - Silver/Chrome Frame */}
+          <div className="relative p-2 bg-gradient-to-br from-stone-400 via-stone-500 to-stone-600 rounded-lg shadow-2xl">
+            {/* Inner Screen Frame */}
+            <div className="relative p-1 bg-gradient-to-tl from-stone-700 via-stone-800 to-stone-900 rounded-md">
+              {/* 16:9 Widescreen Container - The Actual Screen */}
+              <div className="relative w-full aspect-video bg-black rounded overflow-hidden shadow-inner">
+                <YouTube
+                  videoId="yJN0NaqxzyA"
+                  opts={youtubeOpts}
+                  onReady={handlePlayerReady}
+                  className="absolute inset-0 w-full h-full"
+                  iframeClassName="absolute inset-0 w-full h-full"
+                />
 
-            {/* Cover Image Layer (reused overlay) */}
-            <div
-              className={`absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-stone-950 via-stone-900 to-black transition-opacity duration-700 ${
-                isCoverHidden ? 'opacity-0 pointer-events-none' : 'opacity-100'
-              }`}
-            >
-              {/* Film grain effect */}
-              <div
-                className="absolute inset-0 opacity-20"
-                style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-                }}
-              ></div>
+                {/* Cover Layer - Theater Curtain Style */}
+                <div
+                  className={`absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-stone-950 via-stone-900 to-black transition-opacity duration-1000 ${
+                    isCoverHidden ? 'opacity-0 pointer-events-none' : 'opacity-100'
+                  }`}
+                >
+                  {/* Film grain effect */}
+                  <div
+                    className="absolute inset-0 opacity-20"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+                    }}
+                  ></div>
 
-              <div className="relative z-10 text-center px-4">
-                <div className="text-6xl md:text-8xl mb-4 animate-pulse">🎬</div>
-                <h2 className="text-2xl md:text-4xl font-bold font-mono text-amber-500 mb-4 text-glow">
-                  TRANSMISSION READY
-                </h2>
-                <p className="text-sm md:text-base text-stone-400 font-mono">
-                  Cover layer will fade when you trigger the signal.
-                </p>
-              </div>
+                  <div className="relative z-10 text-center px-4">
+                    <div className="text-7xl md:text-9xl mb-6">🎬</div>
+                    <h2 className="text-3xl md:text-5xl font-bold font-mono text-amber-500 mb-4 text-glow tracking-wider">
+                      THE S33K3R TRANSMISSION
+                    </h2>
+                    <p className="text-base md:text-lg text-amber-400/80 font-mono mb-2">
+                      ▮ NOW SHOWING ▮
+                    </p>
+                    <p className="text-sm md:text-base text-stone-400 font-mono">
+                      Click below to begin the transmission
+                    </p>
+                  </div>
 
-              {/* Subtle scanlines for cinematic feel */}
-              <div className="absolute inset-0 pointer-events-none">
-                <div className="w-full h-full scanlines opacity-30"></div>
+                  {/* Subtle scanlines for cinematic feel */}
+                  <div className="absolute inset-0 pointer-events-none">
+                    <div className="w-full h-full scanlines opacity-20"></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
           
-          {/* Theater Curtains - Bottom */}
-          <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-red-950/40 to-transparent"></div>
+          {/* Theater Velvet Curtains - Bottom draped */}
+          <div className="absolute -bottom-4 left-0 right-0 h-16 bg-gradient-to-t from-red-900/60 via-red-950/50 to-transparent rounded-b-xl"></div>
         </div>
         
-        {/* Popcorn Button - Control Panel */}
-        <div className="flex items-center justify-center gap-4 mt-6 relative">
-          {/* Unlock highlight effect */}
-          {showUnlockHighlight && isUnlocked && (
-            <div className="absolute -inset-6 border-4 border-amber-400 rounded-lg animate-[pulse_0.5s_ease-in-out] pointer-events-none shadow-xl shadow-amber-500/60"></div>
-          )}
-          
+        {/* Play Button - Cinematic Control */}
+        <div className="flex items-center justify-center gap-4 mt-8">
           <button
             onClick={handlePlayClick}
-            disabled={!isUnlocked}
-            className={`group relative font-bold py-4 px-8 rounded-lg shadow-lg transform transition-all duration-300 border-2 border-amber-500 text-white ${
-              isUnlocked
-                ? 'bg-gradient-to-br from-amber-600 via-amber-700 to-amber-800 hover:from-amber-500 hover:via-amber-600 hover:to-amber-700 hover:scale-105 active:scale-95 animate-pulse'
-                : 'bg-stone-800 text-stone-400 cursor-not-allowed opacity-70'
-            }`}
+            disabled={!playerReady}
+            className="group relative font-bold py-5 px-10 rounded-lg shadow-2xl transform transition-all duration-300 border-2 border-amber-500 text-white bg-gradient-to-br from-amber-600 via-amber-700 to-amber-800 hover:from-amber-500 hover:via-amber-600 hover:to-amber-700 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <div className="flex items-center gap-3">
-              <span className={`text-4xl ${isUnlocked ? 'animate-bounce' : ''}`}>🍿</span>
+            <div className="flex items-center gap-4">
+              <span className="text-5xl">▶</span>
               <div className="text-left">
-                <div className="text-lg font-mono tracking-wider">
-                  {isUnlocked ? 'PLAY TRANSMISSION' : 'SIGNAL ENCRYPTED // DECRYPTION AT 11:11'}
+                <div className="text-xl font-mono tracking-wider">
+                  PLAY TRANSMISSION
                 </div>
                 <div className="text-xs font-mono text-amber-200">
-                  {isUnlocked ? 'Click to watch and unmask the signal' : 'Awaiting unlock window'}
+                  Click to watch the cinematic experience
                 </div>
               </div>
             </div>
 
             {/* Glow effect on hover */}
-            {isUnlocked && (
-              <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-amber-400/20 via-amber-500/20 to-amber-600/20 blur-xl"></div>
-            )}
+            <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-amber-400/30 via-amber-500/30 to-amber-600/30 blur-xl -z-10"></div>
           </button>
         </div>
         
         {/* Theater Info */}
-        <div className="mt-6 text-center">
-          <p className="text-amber-500/70 font-mono text-sm">
-            ▮ NOW SHOWING: THE S33K3R TRANSMISSION ▮
+        <div className="mt-8 text-center">
+          <p className="text-amber-500/80 font-mono text-sm tracking-wider">
+            ▮ THE S33K3R CINEMATIC EXPERIENCE ▮
           </p>
           <p className="text-stone-500 font-mono text-xs mt-2">
-            DECEMBER 12, 2025 • 10:10 AM MST • UNLOCK AT 11:11 AM MST
+            A MYCELIA INTERACTIVE PRODUCTION • DIGIARTIFACT 2025
           </p>
         </div>
       </div>
