@@ -14,13 +14,13 @@ const Message = () => {
         
         {/* Instructions */}
         <div className="space-y-2 text-lg md:text-xl lg:text-2xl text-stone-400 font-mono">
-          <p className="text-amber-400 animate-pulse">
+          <p className="text-amber-400 opacity-80">
             ▶ Play the game
           </p>
-          <p className="text-orange-500">
+          <p className="text-orange-500 opacity-90">
             ▶ Solve the puzzle
           </p>
-          <p className="text-amber-600">
+          <p className="text-amber-600 opacity-85">
             ▶ Get the real date
           </p>
           <p className="text-red-800 font-bold mt-4 text-xl md:text-2xl">
@@ -30,9 +30,9 @@ const Message = () => {
         
         {/* Decorative elements - bullet holes / western stars */}
         <div className="mt-8 flex justify-center space-x-4 text-amber-700/50 text-2xl">
-          <span className="animate-pulse">✧</span>
-          <span className="animate-pulse delay-100">◆</span>
-          <span className="animate-pulse delay-200">✧</span>
+          <span>✧</span>
+          <span>◆</span>
+          <span>✧</span>
         </div>
       </div>
     </div>

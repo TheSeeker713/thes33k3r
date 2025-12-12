@@ -6,11 +6,15 @@ const AboutSeeker = () => {
       <div className="max-w-5xl mx-auto">
         {/* Terminal-style container */}
         <div className="relative bg-gradient-to-br from-[#0d0a08] via-[#11100f] to-[#0d0a08] border-4 border-amber-600/60 rounded-lg shadow-2xl overflow-hidden">
-          {/* Film grain overlay */}
+          {/* Film grain overlay - CSS-based instead of SVG */}
           <div 
             className="absolute inset-0 opacity-10 pointer-events-none"
             style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+              backgroundImage: `
+                radial-gradient(circle at 10% 20%, rgba(255, 193, 7, 0.2) 1px, transparent 1px),
+                radial-gradient(circle at 80% 80%, rgba(139, 69, 19, 0.2) 1px, transparent 1px)
+              `,
+              backgroundSize: '60px 60px, 100px 100px',
             }}
           ></div>
 
@@ -45,7 +49,7 @@ const AboutSeeker = () => {
               <div className="space-y-4 text-stone-200 font-mono text-base md:text-lg leading-relaxed">
                 <p>
                   There is a <span className="text-red-500 font-bold">multiversal war</span> already in progress, and other realities have already been erased by an invisible hive-mind called{' '}
-                  <span className="text-red-600 font-bold text-xl animate-pulse">THE NULL DOMINION</span>.
+                  <span className="text-red-600 font-bold text-xl">THE NULL DOMINION</span>.
                 </p>
 
                 <p>
@@ -67,7 +71,7 @@ const AboutSeeker = () => {
 
               {/* Warning footer */}
               <div className="mt-8 pt-6 border-t-2 border-amber-900/40">
-                <p className="text-center text-red-500 font-mono text-sm md:text-base font-bold animate-pulse">
+                <p className="text-center text-red-500 font-mono text-sm md:text-base font-bold opacity-90">
                   ▶ TIME IS RUNNING OUT ◀
                 </p>
                 <p className="text-center text-stone-500 font-mono text-xs mt-2">
@@ -77,10 +81,10 @@ const AboutSeeker = () => {
             </div>
           </div>
 
-          {/* Glowing border effect */}
-          <div className="absolute inset-0 pointer-events-none opacity-50">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-amber-500 to-transparent animate-pulse"></div>
-            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-amber-500 to-transparent animate-pulse"></div>
+          {/* Glowing border effect - only pulse the top border for reduced CPU cost */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-amber-500 to-transparent opacity-70"></div>
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-amber-500 to-transparent opacity-50"></div>
           </div>
         </div>
       </div>

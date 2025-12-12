@@ -10,8 +10,24 @@ import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
 
 export default function Home() {
-  const phase1Time = useMemo(() => new Date('2025-12-12T10:10:00-07:00'), [])
-  const phase2Time = useMemo(() => new Date('2025-12-12T11:11:00-07:00'), [])
+  // Get current date and create phase times for today at 10:10 AM and 11:11 AM MST
+  const phase1Time = useMemo(() => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    const date = now.getDate();
+    // Create time at 10:10 AM in local time (system is set to MST)
+    return new Date(year, month, date, 10, 10, 0, 0);
+  }, [])
+  
+  const phase2Time = useMemo(() => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    const date = now.getDate();
+    // Create time at 11:11 AM in local time (system is set to MST)
+    return new Date(year, month, date, 11, 11, 0, 0);
+  }, [])
 
   const [isAfterPhase1, setIsAfterPhase1] = useState(false)
   const [isAfterPhase2, setIsAfterPhase2] = useState(false)

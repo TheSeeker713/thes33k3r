@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 
 const CRTOverlay = () => {
   const [isOn, setIsOn] = useState(false);
@@ -84,6 +84,12 @@ const CRTOverlay = () => {
 
   const isStaticChannel = !channels[currentChannel].src;
 
+  // Memoize filter string to prevent recalculation on every render
+  const screenFilter = useMemo(() => {
+    if (!isOn) return 'none';
+    return `brightness(${brightness}%) contrast(${contrast}%)`;
+  }, [isOn, brightness, contrast]);
+
   return (
     <div className="relative z-10 flex justify-center items-start pt-8 md:pt-16">
       {/* CRT TV Frame */}
@@ -101,7 +107,8 @@ const CRTOverlay = () => {
             <div 
               className="relative w-80 h-60 md:w-[480px] md:h-[360px] lg:w-[600px] lg:h-[450px] bg-stone-950 rounded-sm overflow-hidden"
               style={{
-                filter: isOn ? `brightness(${brightness}%) contrast(${contrast}%)` : 'none'
+                filter: screenFilter,
+                willChange: isOn ? 'filter' : 'auto'
               }}
             >
               {/* Video element - always rendered but hidden when off */}
@@ -110,6 +117,8 @@ const CRTOverlay = () => {
                 loop
                 playsInline
                 muted
+                preload="auto"
+                decoding="async"
                 className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${isOn && !isStaticChannel && !isChangingChannel ? 'opacity-100' : 'opacity-0'}`}
               >
                 <source src="/crtvideo.webm" type="video/webm" />
@@ -122,12 +131,12 @@ const CRTOverlay = () => {
                   <div 
                     className="absolute inset-0 opacity-70"
                     style={{
-                      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-                      animation: 'static 0.1s steps(5) infinite',
+                      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='staticNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch' seed='1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23staticNoise)'/%3E%3C/svg%3E")`,
+                      animation: 'crt-static 0.5s steps(5) infinite',
                     }}
                   ></div>
                   {isStaticChannel && (
-                    <div className="text-amber-500/70 font-mono text-sm z-10 animate-pulse">
+                    <div className="text-amber-500/70 font-mono text-sm z-10">
                       ▮ NO SIGNAL ▮
                     </div>
                   )}
@@ -137,17 +146,18 @@ const CRTOverlay = () => {
               {/* TV Off State - Static/noise */}
               {!isOn && (
                 <div className="absolute inset-0 flex flex-col items-center justify-center scanlines">
-                  {/* Static noise effect */}
+                  {/* Static noise effect - optimized SVG */}
                   <div 
-                    className="absolute inset-0 opacity-30 animate-pulse"
+                    className="absolute inset-0 opacity-30"
                     style={{
-                      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+                      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='offNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch' seed='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23offNoise)'/%3E%3C/svg%3E")`,
+                      backgroundSize: 'cover',
                     }}
                   ></div>
                   
                   {/* Off state message */}
                   <div className="text-amber-500/50 font-mono text-center z-10 p-4">
-                    <div className="text-xs md:text-sm opacity-70 animate-pulse">
+                    <div className="text-xs md:text-sm opacity-70">
                       ▮ NO SIGNAL ▮
                     </div>
                     <div className="text-xs mt-2 text-stone-500">

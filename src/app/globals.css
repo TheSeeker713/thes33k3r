@@ -29,25 +29,7 @@
 /* CRT Screen Effect */
 @keyframes flicker {
   0% { opacity: 0.97; }
-  5% { opacity: 0.95; }
-  10% { opacity: 0.9; }
-  15% { opacity: 0.95; }
-  20% { opacity: 0.98; }
-  25% { opacity: 0.95; }
-  30% { opacity: 0.9; }
-  35% { opacity: 0.97; }
-  40% { opacity: 0.95; }
-  45% { opacity: 0.9; }
-  50% { opacity: 0.95; }
-  55% { opacity: 0.97; }
-  60% { opacity: 0.9; }
-  65% { opacity: 0.95; }
-  70% { opacity: 0.97; }
-  75% { opacity: 0.9; }
-  80% { opacity: 0.95; }
-  85% { opacity: 0.97; }
-  90% { opacity: 0.9; }
-  95% { opacity: 0.95; }
+  50% { opacity: 0.93; }
   100% { opacity: 0.97; }
 }
 
@@ -75,8 +57,26 @@
   50% { filter: blur(0.5px); }
 }
 
+@keyframes crt-static {
+  0% { background-position: 0 0; }
+  10% { background-position: 10px 10px; }
+  20% { background-position: -10px 10px; }
+  30% { background-position: 10px -10px; }
+  40% { background-position: -10px -10px; }
+  50% { background-position: 0 0; }
+  60% { background-position: 10px 10px; }
+  70% { background-position: -10px 10px; }
+  80% { background-position: 10px -10px; }
+  90% { background-position: -10px -10px; }
+  100% { background-position: 0 0; }
+}
+
 .crt-flicker {
-  animation: flicker 0.15s infinite;
+  animation: flicker 0.2s infinite;
+}
+
+.crt-static {
+  animation: crt-static 0.5s steps(5) infinite;
 }
 
 .scanlines::after {
