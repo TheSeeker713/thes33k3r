@@ -6,7 +6,7 @@ const Message = () => {
       <div className="max-w-4xl mx-auto">
         {/* Main message */}
         <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-amber-500 mb-4 text-glitch font-mono leading-tight text-glow">
-          THEY SAY THE S33K3R TRANSMISSION BEGINS NOVEMBER 29TH,
+          THE S33K3R TRANSMISSION BEGINS DECEMBER 12TH, 2025 AT 11:11AM
         </h1>
         <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-red-700 mb-8 font-mono italic animate-pulse">
           But is that true?
