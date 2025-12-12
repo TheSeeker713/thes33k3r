@@ -54,9 +54,9 @@ const MovieScreen = () => {
             <div className="relative p-1 bg-gradient-to-tl from-stone-700 via-stone-800 to-stone-900 rounded-md">
               {/* 16:9 Widescreen Container - The Actual Screen */}
               <div className="relative w-full aspect-video bg-black rounded overflow-hidden shadow-inner">
-                {/* Cover Layer - Theater Curtain Style with Background Image */}
+                {/* Cover Layer - Moviescreen Image Background */}
                 <div
-                  className={`absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-1000 ${
+                  className={`absolute inset-0 transition-opacity duration-1000 ${
                     isCoverHidden ? 'opacity-0 pointer-events-none' : 'opacity-100'
                   }`}
                   style={{
@@ -64,36 +64,7 @@ const MovieScreen = () => {
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                   }}
-                >
-                  {/* Dark overlay for better contrast on top of image */}
-                  <div className="absolute inset-0 bg-black/10"></div>
-
-                  {/* Film grain effect */}
-                  <div
-                    className="absolute inset-0 opacity-20"
-                    style={{
-                      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-                    }}
-                  ></div>
-
-                  <div className="relative z-10 text-center px-4">
-                    <div className="text-7xl md:text-9xl mb-6">🎬</div>
-                    <h2 className="text-3xl md:text-5xl font-bold font-mono text-amber-500 mb-4 text-glow tracking-wider">
-                      THE S33K3R TRANSMISSION
-                    </h2>
-                    <p className="text-base md:text-lg text-amber-400/80 font-mono mb-2">
-                      ▮ NOW SHOWING ▮
-                    </p>
-                    <p className="text-sm md:text-base text-stone-400 font-mono">
-                      Click below to begin the transmission
-                    </p>
-                  </div>
-
-                  {/* Subtle scanlines for cinematic feel */}
-                  <div className="absolute inset-0 pointer-events-none">
-                    <div className="w-full h-full scanlines opacity-20"></div>
-                  </div>
-                </div>
+                ></div>
 
                 {/* YouTube Player - Positioned over the white screen area */}
                 <YouTube
