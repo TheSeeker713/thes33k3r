@@ -1,17 +1,9 @@
-import { getDevlogs, getDevlogBySlug } from '@/lib/devlogs'
+import { getDevlogs } from '@/lib/devlogs'
 import Link from 'next/link'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
-import rehypeRaw from 'rehype-raw'
-import { ArticleGrid } from '@/components/mdx/MagazineComponents'
-import mdxComponents from '@/components/mdx/mdxComponents'
+import DevlogGrid from '@/components/DevlogGrid'
 
 export default async function DevlogPage() {
   const devlogs = await getDevlogs()
-  
-  // Get the latest devlog content for display
-  const latestDevlog = devlogs[0]
-  const devlogContent = latestDevlog ? await getDevlogBySlug(latestDevlog.slug) : null
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-slate-900 to-zinc-950 text-slate-100">
@@ -36,59 +28,29 @@ export default async function DevlogPage() {
           </div>
 
           {/* Main Title */}
-          <h1 className="text-6xl sm:text-7xl font-bold mb-4 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-slate-100 via-amber-400 to-slate-100">
-            DEVELOPER MAGAZINE
+          <h1 className="text-6xl sm:text-7xl font-bold mb-4 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-slate-100 via-slate-200 to-slate-300">
+            DEVELOPER LOGS
           </h1>
           
           {/* Metadata */}
           <div className="flex flex-wrap gap-4 text-xs text-slate-500 font-mono">
-            <div>DIR: /SRC/CONTENT/DEVLOG</div>
+            <div>DIR: /SRC/CONTENT/DEVLOGS</div>
             <div>•</div>
             <div>ACCESS_LEVEL: UNRESTRICTED</div>
           </div>
         </div>
       </header>
 
-      {/* Magazine Layout */}
-      <main className="relative">
-        {devlogContent && (
-          <ArticleGrid>
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
-              rehypePlugins={[rehypeRaw]}
-              components={mdxComponents}
-            >
-              {devlogContent.content}
-            </ReactMarkdown>
-          </ArticleGrid>
-        )}
-
-        
-        {/* Issue Selector */}
-        <div className="max-w-7xl mx-auto px-6 py-8">
-          <div className="flex items-center gap-4 overflow-x-auto pb-4">
-            <span className="text-slate-500 text-sm font-mono whitespace-nowrap">ISSUES:</span>
-            {devlogs.map((devlog) => (
-              <button
-                key={devlog.slug}
-                className={`px-4 py-2 rounded-lg font-mono text-sm border transition-all whitespace-nowrap ${
-                  devlog.slug === latestDevlog?.slug
-                    ? 'bg-orange-600 border-orange-500 text-white'
-                    : 'bg-zinc-900/50 border-slate-700/50 text-slate-400 hover:border-orange-500/50 hover:text-orange-400'
-                }`}
-              >
-                {devlog.number}
-              </button>
-            ))}
-          </div>
-        </div>
+      {/* Card Grid */}
+      <main className="relative max-w-7xl mx-auto px-6 py-12">
+        <DevlogGrid devlogs={devlogs} />
       </main>
 
       {/* Footer */}
       <footer className="relative border-t border-slate-700/30 backdrop-blur-xl bg-zinc-950/60 mt-16">
         <div className="max-w-7xl mx-auto px-6 py-8 text-center">
           <p className="text-slate-500 text-sm font-mono">
-            DEVELOPER MAGAZINE — Chronicling{' '}
+            DEVELOPER LOGS — Chronicling{' '}
             <Link href="/" className="text-orange-500 hover:text-orange-400 transition-colors">
               THE S33K3R TRANSMISSION
             </Link>
