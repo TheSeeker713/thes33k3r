@@ -30,7 +30,7 @@ interface ParagraphProps {
 
 export function Paragraph({ children }: ParagraphProps) {
   return (
-    <p className="col-start-3 col-span-8 text-slate-300 text-lg leading-relaxed mb-6 font-light tracking-wide">
+    <p className="col-start-3 col-span-8 text-zinc-300 text-lg leading-relaxed mb-6 font-light tracking-wide">
       {children}
     </p>
   )
@@ -51,18 +51,18 @@ export function PullQuote({ children }: PullQuoteProps) {
       className="col-start-2 col-span-10 my-12 py-8 px-12 text-center relative"
     >
       {/* Background glow */}
-      <div className="absolute inset-0 bg-gradient-to-r from-orange-600/10 via-amber-500/20 to-orange-600/10 rounded-lg blur-xl" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#8B4513]/10 via-[#CC5500]/20 to-[#8B4513]/10 rounded-lg blur-xl" />
       
       {/* Quote marks */}
-      <div className="absolute -top-4 left-8 text-6xl text-orange-500/30 font-serif">"</div>
-      <div className="absolute -bottom-8 right-8 text-6xl text-orange-500/30 font-serif">"</div>
+      <div className="absolute -top-4 left-8 text-6xl text-[#8B4513]/30 font-serif">"</div>
+      <div className="absolute -bottom-8 right-8 text-6xl text-[#8B4513]/30 font-serif">"</div>
       
       {/* Content */}
       <div className="relative">
-        <p className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-400 to-orange-500 leading-tight mb-4">
+        <p className="text-3xl sm:text-4xl font-bold text-[#CC5500] leading-tight mb-4">
           {children}
         </p>
-        <div className="h-1 w-24 bg-gradient-to-r from-orange-500 to-amber-500 mx-auto rounded-full" />
+        <div className="h-1 w-24 bg-[#CC5500] mx-auto rounded-full" />
       </div>
     </motion.blockquote>
   )
@@ -100,7 +100,7 @@ export function H1({ children }: H1Props) {
   return (
     <h1
       ref={textRef}
-      className="col-span-12 text-5xl sm:text-6xl md:text-7xl font-bold mb-8 mt-12 text-transparent bg-clip-text bg-gradient-to-r from-slate-100 via-amber-400 to-slate-100 tracking-tight"
+      className="col-span-12 text-5xl sm:text-6xl md:text-7xl font-bold mb-8 mt-12 text-zinc-100 tracking-tight"
     >
       {children}
     </h1>
@@ -139,7 +139,7 @@ export function H2({ children }: H2Props) {
   return (
     <h2
       ref={textRef}
-      className="col-start-3 col-span-8 text-3xl sm:text-4xl font-bold mb-6 mt-10 text-amber-400 border-b border-orange-500/30 pb-3"
+      className="col-start-3 col-span-8 text-3xl sm:text-4xl font-bold mb-6 mt-10 text-[#CC5500] border-b border-zinc-800 pb-3"
     >
       {children}
     </h2>
@@ -153,7 +153,7 @@ interface H3Props {
 
 export function H3({ children }: H3Props) {
   return (
-    <h3 className="col-start-3 col-span-8 text-xl sm:text-2xl font-mono text-orange-500 mb-4 mt-8 tracking-wider">
+    <h3 className="col-start-3 col-span-8 text-xl sm:text-2xl font-mono text-[#CC5500] mb-4 mt-8 tracking-wider">
       {children}
     </h3>
   )
@@ -212,10 +212,10 @@ export function TechFigure({
         <div className="p-4 border-t-2 border-slate-700/50 bg-zinc-950/80 backdrop-blur-sm">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-3">
-              <span className="font-mono text-orange-500 text-sm tracking-wider">
+              <span className="font-mono text-[#CC5500] text-sm tracking-wider">
                 FIG_{figNumber}
               </span>
-              <span className="text-slate-600">//</span>
+              <span className="text-zinc-600">//</span>
               <span className={`font-mono text-xs px-2 py-1 border rounded ${classificationColors[classification]}`}>
                 {classification}
               </span>
@@ -235,10 +235,10 @@ export function TechFigure({
         </div>
 
         {/* Corner brackets (schematic style) */}
-        <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-orange-500/40" />
-        <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-orange-500/40" />
-        <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-orange-500/40" />
-        <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-orange-500/40" />
+        <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-[#CC5500]/40" />
+        <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-[#CC5500]/40" />
+        <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-[#CC5500]/40" />
+        <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-[#CC5500]/40" />
       </div>
     </motion.figure>
   )
@@ -257,8 +257,8 @@ export function DropCap({ children }: DropCapProps) {
   const restOfText = text.slice(1)
 
   return (
-    <p className="col-start-3 col-span-8 text-slate-300 text-lg leading-relaxed mb-6 font-light tracking-wide">
-      <span className="float-left text-8xl font-bold leading-none mr-4 mt-2 text-transparent bg-clip-text bg-gradient-to-br from-orange-500 via-amber-400 to-orange-600">
+    <p className="col-start-3 col-span-8 text-zinc-300 text-lg leading-relaxed mb-6 font-light tracking-wide">
+      <span className="float-left text-8xl font-bold leading-none mr-4 mt-2 text-[#CC5500]">
         {firstLetter}
       </span>
       {restOfText}
@@ -317,7 +317,7 @@ interface StrongProps {
 
 export function Strong({ children }: StrongProps) {
   return (
-    <strong className="text-amber-300 font-semibold">
+    <strong className="text-[#CC5500] font-semibold">
       {children}
     </strong>
   )
@@ -333,7 +333,7 @@ export function Link({ children, href }: LinkProps) {
   return (
     <a
       href={href}
-      className="text-orange-400 underline decoration-orange-500/30 hover:text-orange-300 hover:decoration-orange-400/50 transition-colors"
+      className="text-[#CC5500] underline decoration-[#8B4513]/30 hover:text-[#ff8800] hover:decoration-[#CC5500]/50 transition-colors"
     >
       {children}
     </a>
@@ -343,7 +343,7 @@ export function Link({ children, href }: LinkProps) {
 // Horizontal Rule
 export function HR() {
   return (
-    <hr className="col-start-3 col-span-8 my-12 border-0 h-px bg-gradient-to-r from-transparent via-orange-500/50 to-transparent" />
+    <hr className="col-start-3 col-span-8 my-12 border-0 h-px bg-gradient-to-r from-transparent via-[#8B4513]/50 to-transparent" />
   )
 }
 
@@ -354,7 +354,7 @@ interface ULProps {
 
 export function UL({ children }: ULProps) {
   return (
-    <ul className="col-start-3 col-span-8 list-disc list-inside text-slate-300 text-lg space-y-3 mb-6 ml-6">
+    <ul className="col-start-3 col-span-8 list-disc list-inside text-zinc-300 text-lg space-y-3 mb-6 ml-6">
       {children}
     </ul>
   )
@@ -362,7 +362,7 @@ export function UL({ children }: ULProps) {
 
 export function OL({ children }: ULProps) {
   return (
-    <ol className="col-start-3 col-span-8 list-decimal list-inside text-slate-300 text-lg space-y-3 mb-6 ml-6">
+    <ol className="col-start-3 col-span-8 list-decimal list-inside text-zinc-300 text-lg space-y-3 mb-6 ml-6">
       {children}
     </ol>
   )

@@ -27,10 +27,9 @@ export default async function DevlogDetailPage({ params }: DevlogDetailPageProps
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-slate-900 to-zinc-950 text-slate-100">
+    <div className="min-h-screen bg-black text-zinc-100">
       {/* Background effects */}
-      <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.1),transparent_50%)] pointer-events-none" />
-      <div className="fixed inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.3)_100%)] pointer-events-none" />
+      <div className="fixed inset-0 bg-black pointer-events-none" />
 
       {/* Header */}
       <header className="sticky top-0 z-40 border-b border-slate-700/30 backdrop-blur-xl bg-zinc-950/80">
@@ -62,11 +61,11 @@ export default async function DevlogDetailPage({ params }: DevlogDetailPageProps
       </main>
 
       {/* Footer */}
-      <footer className="relative border-t border-slate-700/30 backdrop-blur-xl bg-zinc-950/60 mt-16">
+      <footer className="relative border-t border-zinc-800 backdrop-blur-xl bg-black/60 mt-16">
         <div className="max-w-7xl mx-auto px-6 py-8 text-center">
-          <p className="text-slate-500 text-sm font-mono">
+          <p className="text-zinc-500 text-sm font-mono">
             DEVELOPER MAGAZINE — Chronicling{' '}
-            <Link href="/" className="text-orange-500 hover:text-orange-400 transition-colors">
+            <Link href="/" className="text-[#CC5500] hover:text-[#8B4513] transition-colors">
               THE S33K3R TRANSMISSION
             </Link>
           </p>
