@@ -2,9 +2,9 @@
   "id": "devlog06",
   "title": "Part 6: The Bank Encounter Game",
   "date": "[December 13th, 2025]",
-  "time": "[12:00 PM]",
+  "time": "[9:00 AM]",
   "timezone": "MT",
   "author": "J.W.",
   "contentPath": "../../../documents/devlog/devlog06.md",
-  "excerpt": "The /bank route was architected as a four-phase cinematic experience: lobby introduction with glassmorphism story card, full-motion video transition, numbers matching puzzle game with lives system and sound effects, and an unlocked phase celebrating victory. Each phase designed with narrative continuity, accessible UX, and deployment-first asset management. The first playable game loop is complete."
+  "excerpt": "I woke up Friday morning with a realization: this EARTIX needed a proper game loop. Not just a puzzle with a hidden date. Something players could sink their teeth into. The Bank Encounter concept crystalized over breakfast—four phases creating one cohesive experience. From story card to cinematic transition to numbers matching with lives system to victory screen. I spent three hours tuning the balance. Six lives felt right. Challenging but fair. The first complete game loop was born."
 }

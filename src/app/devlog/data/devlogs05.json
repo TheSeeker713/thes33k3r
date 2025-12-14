@@ -6,5 +6,5 @@
   "timezone": "MT",
   "author": "J.W.",
   "contentPath": "../../../documents/devlog/devlog05.md",
-  "excerpt": "Launch day. Adrenaline pumping. Five minutes before the Phase 1 transition and I'm hunting for performance bottlenecks like my life depends on it. The original landing page layout was restored while preserving the Cinematic Engine code for the December 12th unlock. Critical fixes were applied, performance optimizations implemented, and phase timing bugs resolved—all in the final hours before the live EARTIX event."
+  "excerpt": "Sometimes you build something complex and realize the simple version was better all along. After constructing the entire Cinematic Engine, I made the strategic call to restore the original landing page—the one with the CRT TV and sliding tile puzzle. December 12th needed to feel like a reveal, not a replacement. Five minutes before Phase 1 launch, I was hunting performance bottlenecks with terminal open and coffee in hand. The transmission was about to begin."
 }
