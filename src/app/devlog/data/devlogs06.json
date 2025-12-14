@@ -5,6 +5,6 @@
   "time": "[9:00 AM]",
   "timezone": "MT",
   "author": "J.W.",
-  "contentPath": "../../../documents/devlog/devlog06.md",
+  "contentPath": "/devlog/devlog06.md",
   "excerpt": "I woke up Friday morning with a realization: this EARTIX needed a proper game loop. Not just a puzzle with a hidden date. Something players could sink their teeth into. The Bank Encounter concept crystalized over breakfast—four phases creating one cohesive experience. From story card to cinematic transition to numbers matching with lives system to victory screen. I spent three hours tuning the balance. Six lives felt right. Challenging but fair. The first complete game loop was born."
 }

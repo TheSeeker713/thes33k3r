@@ -135,3 +135,29 @@ When working with existing projects:
 ---
 
 **Remember:** Always maintain bleeding-edge versions (Next.js 16+, React 19+, Tailwind v4+) unless there's a specific technical constraint preventing the upgrade.
+
+---
+
+## Devlog Update Instructions
+
+When the user says **"update devlog"**, follow the comprehensive workflow defined in `documents/DEVLOG_INSTRUCTIONS.md`.
+
+### Quick Overview (Full details in DEVLOG_INSTRUCTIONS.md):
+
+1. **Check git commits first** - Extract timestamps and messages
+2. **Identify target file** - devlogXX.md format, max 111 lines
+3. **Write in magazine article format** - First-person narrative with personality
+4. **Use bracketed timestamps** - `[December 14th, 2025] [2:30 PM MT]` format
+5. **Update corresponding JSON** - Sync devlogsXX.json with engaging excerpt
+6. **Verify magazine integration** - Test expansion and rendering
+7. **Build, commit, push** - Ensure clean build before deployment
+
+### Critical Rules:
+- ✅ Magazine article style (NOT technical documentation)
+- ✅ 111 line maximum per devlog file
+- ✅ Individual timestamps for each entry (12-hour MT format)
+- ✅ Always sync markdown + JSON files together
+- ✅ Devlog markdown files stored in `public/devlog/`
+- ✅ JSON metadata stored in `src/app/devlog/data/`
+
+**Full instructions:** [DEVLOG_INSTRUCTIONS.md](../documents/DEVLOG_INSTRUCTIONS.md)

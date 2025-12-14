@@ -5,6 +5,6 @@
   "time": "[10:48 AM]",
   "timezone": "MT",
   "author": "J.W.",
-  "contentPath": "../../../documents/devlog/devlog05.md",
+  "contentPath": "/devlog/devlog05.md",
   "excerpt": "Sometimes you build something complex and realize the simple version was better all along. After constructing the entire Cinematic Engine, I made the strategic call to restore the original landing page—the one with the CRT TV and sliding tile puzzle. December 12th needed to feel like a reveal, not a replacement. Five minutes before Phase 1 launch, I was hunting performance bottlenecks with terminal open and coffee in hand. The transmission was about to begin."
 }

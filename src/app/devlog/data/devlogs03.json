@@ -5,6 +5,6 @@
   "time": "[3:56 PM]",
   "timezone": "MT",
   "author": "J.W.",
-  "contentPath": "../../../documents/devlog/devlog03.md",
+  "contentPath": "/devlog/devlog03.md",
   "excerpt": "The project matured with proper navigation and evolved beyond a single landing page. A complete point-and-click adventure game framework was built, complete with TypeScript support, percentage-based coordinate system for responsive hitboxes, and state management for inventory and puzzle tracking. The S33K3R TRANSMISSION is no longer just a mystery to observe—it's a world to explore."
 }

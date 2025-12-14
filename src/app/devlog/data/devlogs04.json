@@ -5,6 +5,6 @@
   "time": "[10:08 AM]",
   "timezone": "MT",
   "author": "J.W.",
-  "contentPath": "../../../documents/devlog/devlog04.md",
+  "contentPath": "/devlog/devlog04.md",
   "excerpt": "A fundamental architectural shift. Sometimes you build something and realize it's not quite right. The point-and-click felt static, disconnected. I wanted something more visceral. The game moved from a traditional point-and-click adventure to an FMV (Full Motion Video) style choose-your-own-adventure system. This wasn't just a feature add—it was a complete reimagining of how players would experience THE S33K3R universe. A risk, yes. But the right one."
 }
