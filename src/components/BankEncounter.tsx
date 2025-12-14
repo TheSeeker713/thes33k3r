@@ -25,9 +25,22 @@ function playSound(src: string) {
   })
 }
 
+function hasPlayedBefore(): boolean {
+  if (typeof window === 'undefined') return false
+  const hasPlayed = localStorage.getItem('bankGamePlayed')
+  return hasPlayed === 'true'
+}
+
+function markGameAsPlayed() {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('bankGamePlayed', 'true')
+  }
+}
+
 export default function BankEncounter() {
   const [phase, setPhase] = useState<Phase>('lobby')
   const [fadeBlack, setFadeBlack] = useState(false)
+  const [hasPlayed, setHasPlayed] = useState(false)
 
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const musicRef = useRef<HTMLAudioElement | null>(null)
@@ -37,6 +50,11 @@ export default function BankEncounter() {
   const [selection, setSelection] = useState<number[]>([])
   const [lives, setLives] = useState(6)
   const [gameOver, setGameOver] = useState(false)
+
+  // Check if user has played before (client-side only)
+  useEffect(() => {
+    setHasPlayed(hasPlayedBefore())
+  }, [])
 
   useEffect(() => {
     const allMatched = cards.every((c) => c.matched)
@@ -61,6 +79,11 @@ export default function BankEncounter() {
     setSelection([])
     setLives(6)
     setGameOver(false)
+    setPhase('lobby')
+  }
+
+  function handlePlayAgain() {
+    resetGame()
   }
 
   useEffect(() => {
@@ -150,6 +173,7 @@ export default function BankEncounter() {
               }
             }}
             onEnded={() => {
+              markGameAsPlayed()
               setFadeBlack(true)
               setTimeout(() => {
                 setFadeBlack(false)
@@ -157,6 +181,27 @@ export default function BankEncounter() {
               }, 350)
             }}
           />
+          
+          {/* Skip button for returning players */}
+          {hasPlayed && (
+            <motion.button
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+              onClick={() => {
+                markGameAsPlayed()
+                setFadeBlack(true)
+                setTimeout(() => {
+                  setFadeBlack(false)
+                  setPhase('game')
+                }, 350)
+              }}
+              className="absolute bottom-6 right-6 px-4 py-2 rounded border border-amber-500/60 text-amber-300 hover:bg-amber-500/10 transition-colors text-sm font-mono bg-black/70 backdrop-blur-sm"
+            >
+              skip ⏩
+            </motion.button>
+          )}
+          
           <AnimatePresence>
             {fadeBlack && (
               <motion.div
@@ -270,7 +315,7 @@ export default function BankEncounter() {
                 return home
               </Link>
               <button
-                onClick={() => setPhase('lobby')}
+                onClick={handlePlayAgain}
                 className="px-4 py-2 rounded bg-amber-600 text-black font-semibold shadow hover:bg-amber-500 transition-colors font-mono text-sm"
               >
                 play again
