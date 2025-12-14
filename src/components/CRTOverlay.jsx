@@ -122,7 +122,6 @@ const CRTOverlay = () => {
                 className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${isOn && !isStaticChannel && !isChangingChannel ? 'opacity-100' : 'opacity-0'}`}
               >
                 <source src="/crtvideo.webm" type="video/webm" />
-                <source src="/crtvideo.mp4" type="video/mp4" />
               </video>
               
               {/* Channel change static effect */}

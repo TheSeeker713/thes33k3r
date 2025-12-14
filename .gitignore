@@ -51,6 +51,9 @@ public/rooms/THE S33K3R TRANSMISSION .mp4
 public/video/transmission.mp4
 public/video/transmission.webm
 
+# Block legacy mp4 sources (use webm instead)
+public/**/*.mp4
+
 # Rooms assets: ignore non-canonical exports until greenlight
 public/rooms/*
 !public/rooms/*.webp

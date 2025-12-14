@@ -19,7 +19,6 @@ const VideoBackground = () => {
           style={{ willChange: 'auto' }}
         >
           <source src="/background.webm" type="video/webm" />
-          <source src="/background.mp4" type="video/mp4" />
         </video>
         
         {/* Desert heat haze gradient overlay */}
