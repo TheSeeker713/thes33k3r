@@ -59,7 +59,7 @@ const Navbar = () => {
               href="/bank"
               className="font-mono text-xs tracking-wider px-3 py-1 rounded border border-amber-500 text-amber-400 bg-amber-900/20 hover:bg-amber-800/30 transition-colors"
             >
-              ROOM
+              PLAY THE GAME
             </Link>
           </div>
 
@@ -110,7 +110,7 @@ const Navbar = () => {
               onClick={() => setIsMenuOpen(false)}
               className="font-mono text-sm tracking-wider py-2 px-2 rounded border border-amber-500 text-amber-400 bg-amber-900/20 hover:bg-amber-800/30 transition-colors text-left"
             >
-              ROOM
+              PLAY THE GAME
             </Link>
           </div>
         </div>
