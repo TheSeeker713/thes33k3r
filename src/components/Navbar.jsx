@@ -11,7 +11,6 @@ const Navbar = () => {
   const menuItems = [
     { label: 'HOME', href: '/', type: 'link' },
     { label: 'TRANSMISSIONS', href: { pathname: '/', hash: 'transmissions' }, type: 'link' },
-    { label: 'THE PUZZLE', href: { pathname: '/', hash: 'puzzle' }, type: 'link' },
   ]
 
   const isActive = (href) => {
@@ -55,18 +54,13 @@ const Navbar = () => {
               ⚠ THE WARNING
             </Link>
             
-            {/* Coming Soon Label */}
-            <span className="font-mono text-xs tracking-wider text-amber-500 animate-pulse pointer-events-none">
-              COMING SOON: DEC 14
-            </span>
-            
-            {/* Disabled Room Button */}
-            <button
-              disabled
-              className="font-mono text-xs tracking-wider px-3 py-1 rounded border border-red-500/50 text-red-400 bg-red-900/20 cursor-not-allowed opacity-60"
+            {/* Room link to the game */}
+            <Link
+              href="/bank"
+              className="font-mono text-xs tracking-wider px-3 py-1 rounded border border-amber-500 text-amber-400 bg-amber-900/20 hover:bg-amber-800/30 transition-colors"
             >
-              ROOM [LOCKED]
-            </button>
+              ROOM
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -110,16 +104,14 @@ const Navbar = () => {
               ⚠ THE WARNING
             </Link>
             
-            {/* Mobile Coming Soon & Locked Room */}
-            <span className="font-mono text-xs tracking-wider py-2 px-2 text-amber-500 animate-pulse">
-              COMING SOON: DEC 14
-            </span>
-            <button
-              disabled
-              className="font-mono text-sm tracking-wider py-2 px-2 rounded border border-red-500/50 text-red-400 bg-red-900/20 cursor-not-allowed opacity-60 text-left"
+            {/* Mobile Room link */}
+            <Link
+              href="/bank"
+              onClick={() => setIsMenuOpen(false)}
+              className="font-mono text-sm tracking-wider py-2 px-2 rounded border border-amber-500 text-amber-400 bg-amber-900/20 hover:bg-amber-800/30 transition-colors text-left"
             >
-              ROOM [LOCKED]
-            </button>
+              ROOM
+            </Link>
           </div>
         </div>
       </div>

@@ -23,6 +23,10 @@ dist-ssr
 .env*.local
 *.local
 
+# Audio source files
+*.wav
+temp/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
