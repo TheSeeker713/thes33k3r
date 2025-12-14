@@ -4,11 +4,12 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 
-type Phase = 'lobby' | 'transition' | 'game' | 'unlocked'
+type Phase = 'lobby' | 'transition' | 'game' | 'unlocked' | 'reward-video'
 
 const LOBBY_BG = '/rooms/banklobby_room.webp'
 const GAME_BG = '/rooms/bankvault_room.webp'
 const TRANSITION_VIDEO = '/rooms/banklobby_to_bankvault.webm'
+const REWARD_VIDEO = '/rooms/safe_open.webm'
 const BG_MUSIC = '/rooms/game_assets/music/Echoes in the Static.mp3'
 const SOUND_FX = {
   match: '/rooms/game_assets/sound_fx/match.webm',
@@ -43,6 +44,7 @@ export default function BankEncounter() {
   const [hasPlayed, setHasPlayed] = useState(false)
 
   const videoRef = useRef<HTMLVideoElement | null>(null)
+  const rewardVideoRef = useRef<HTMLVideoElement | null>(null)
   const musicRef = useRef<HTMLAudioElement | null>(null)
 
   const deck = useMemo(() => buildShuffledDeck(), [])
@@ -60,7 +62,7 @@ export default function BankEncounter() {
     const allMatched = cards.every((c) => c.matched)
     if (allMatched && phase === 'game' && !gameOver) {
       playSound(SOUND_FX.gameWon)
-      setPhase('unlocked')
+      setPhase('reward-video')
     }
   }, [cards, phase, gameOver])
 
@@ -270,6 +272,29 @@ export default function BankEncounter() {
               </button>
             </div>
           </motion.div>
+        </div>
+      )}
+
+      {/* REWARD VIDEO: safe_open.webm */}
+      {phase === 'reward-video' && (
+        <div className="absolute inset-0 z-50 bg-black flex items-center justify-center">
+          <video
+            ref={rewardVideoRef}
+            className="max-w-full max-h-full object-contain"
+            src={REWARD_VIDEO}
+            autoPlay
+            playsInline
+            preload="auto"
+            onCanPlay={() => {
+              if (rewardVideoRef.current) {
+                rewardVideoRef.current.muted = false
+                rewardVideoRef.current.volume = 0.8
+              }
+            }}
+            onEnded={() => {
+              setPhase('unlocked')
+            }}
+          />
         </div>
       )}
 

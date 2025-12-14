@@ -1,0 +1,10 @@
+{
+  "id": "devlog05",
+  "title": "Part 5: Launch Day & Live Event",
+  "date": "[December 10th, 2025]",
+  "time": "[10:48 AM]",
+  "timezone": "MT",
+  "author": "J.W.",
+  "contentPath": "../../../documents/devlog/devlog05.md",
+  "excerpt": "Launch day. Adrenaline pumping. Five minutes before the Phase 1 transition and I'm hunting for performance bottlenecks like my life depends on it. The original landing page layout was restored while preserving the Cinematic Engine code for the December 12th unlock. Critical fixes were applied, performance optimizations implemented, and phase timing bugs resolved—all in the final hours before the live EARTIX event."
+}

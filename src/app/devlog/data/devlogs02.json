@@ -1,0 +1,10 @@
+{
+  "id": "devlog02",
+  "title": "Part 2: Mechanics & Secrets",
+  "date": "[November 29th, 2025]",
+  "time": "[11:16 AM]",
+  "timezone": "MT",
+  "author": "J.W.",
+  "contentPath": "../../../documents/devlog/devlog02.md",
+  "excerpt": "Video playback was buggy. Videos weren't playing consistently. The solution: keep the video component mounted and use useEffect hooks to manage playback state properly. A subtle but crucial fix that made the experience feel polished. Late night creative bursts brought hidden easter eggs—the kind of secrets that make people feel clever when they find them."
+}

@@ -61,6 +61,14 @@ const Navbar = () => {
             >
               PLAY THE GAME
             </Link>
+            
+            {/* Developer Magazine link */}
+            <Link
+              href="/devlog"
+              className="font-mono text-xs tracking-wider px-4 py-2 rounded border border-cyan-500 text-cyan-400 bg-cyan-900/20 hover:bg-cyan-800/30 hover:border-cyan-400 transition-all font-semibold shadow-md shadow-cyan-500/20"
+            >
+              📖 DEV MAGAZINE
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -78,7 +86,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Dropdown */}
-        <div className={`md:hidden overflow-hidden transition-all duration-300 ${isMenuOpen ? 'max-h-80 pb-4' : 'max-h-0'}`}>
+        <div className={`md:hidden overflow-hidden transition-all duration-300 ${isMenuOpen ? 'max-h-96 pb-4' : 'max-h-0'}`}>
           <div className="flex flex-col space-y-2 pt-2 border-t border-amber-900/20">
             {menuItems.map((item) => (
               <Link
@@ -111,6 +119,15 @@ const Navbar = () => {
               className="font-mono text-sm tracking-wider py-2 px-2 rounded border border-amber-500 text-amber-400 bg-amber-900/20 hover:bg-amber-800/30 transition-colors text-left"
             >
               PLAY THE GAME
+            </Link>
+            
+            {/* Mobile Developer Magazine link */}
+            <Link
+              href="/devlog"
+              onClick={() => setIsMenuOpen(false)}
+              className="font-mono text-sm tracking-wider py-3 px-4 rounded border border-cyan-500 text-cyan-400 bg-cyan-900/20 hover:bg-cyan-800/30 transition-all font-semibold text-center shadow-md shadow-cyan-500/20"
+            >
+              📖 DEV MAGAZINE
             </Link>
           </div>
         </div>

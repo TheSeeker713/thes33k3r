@@ -1,0 +1,10 @@
+{
+  "id": "devlog06",
+  "title": "Part 6: The Bank Encounter Game",
+  "date": "[December 13th, 2025]",
+  "time": "[12:00 PM]",
+  "timezone": "MT",
+  "author": "J.W.",
+  "contentPath": "../../../documents/devlog/devlog06.md",
+  "excerpt": "The /bank route was architected as a four-phase cinematic experience: lobby introduction with glassmorphism story card, full-motion video transition, numbers matching puzzle game with lives system and sound effects, and an unlocked phase celebrating victory. Each phase designed with narrative continuity, accessible UX, and deployment-first asset management. The first playable game loop is complete."
+}
