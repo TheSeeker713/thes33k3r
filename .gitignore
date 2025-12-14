@@ -53,9 +53,7 @@ public/video/transmission.webm
 
 # Rooms assets: ignore non-canonical exports until greenlight
 public/rooms/*
-!public/rooms/*_room*.png
-public/rooms/*-compressed.png
-public/rooms/*.webp
-public/rooms/*.mp4
-public/rooms/*.webm
+!public/rooms/*.webp
+!public/rooms/*.webm
+!public/rooms/game_assets/**
 !public/rooms/ASSETS_README.md
