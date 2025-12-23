@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+import S33k3rCard from './S33k3rCard'
 
 type Phase = 'lobby' | 'transition' | 'game' | 'unlocked' | 'reward-video'
 
@@ -309,28 +310,7 @@ export default function BankEncounter() {
             <div className="text-3xl mb-2 text-amber-400 font-bold">access granted</div>
             <p className="text-amber-300/80 mb-6 text-sm">vault seal disengaged</p>
 
-            <div className="bg-zinc-950/80 rounded-lg p-6 mb-6 border border-amber-700/30">
-              <h3 className="text-xl font-mono font-bold text-amber-400 mb-3">⚠️ development notice</h3>
-              <p className="text-amber-200/90 mb-4 leading-relaxed">
-                THE S33K3R thanks you for playing. Come back soon for a real reward!
-              </p>
-
-              <div className="bg-zinc-900/60 rounded p-4 mb-4">
-                <h4 className="text-amber-300 font-mono font-semibold mb-3 text-sm">🗺️ roadmap</h4>
-                <ul className="text-amber-100/80 text-sm space-y-2 font-mono">
-                  <li>✓ Mini-game: Numbers Matching (Complete)</li>
-                  <li>🎁 Game Reward: Coming within 7 days</li>
-                  <li>💬 Contact Form: Coming soon</li>
-                  <li className="text-xs text-amber-300/60 mt-3">
-                    Until then, reach out: <a href="mailto:Digiartifact11@gmail.com" className="text-amber-400 hover:text-amber-300 underline">Digiartifact11@gmail.com</a>
-                  </li>
-                </ul>
-              </div>
-
-              <p className="text-amber-200/70 text-xs italic">
-                Come back here for more roadmap features, questions, feedback, or ideas.
-              </p>
-            </div>
+            <S33k3rCard />
 
             <div className="flex gap-3 justify-end">
               <Link
