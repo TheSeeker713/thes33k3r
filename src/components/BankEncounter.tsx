@@ -11,7 +11,8 @@ const LOBBY_BG = '/rooms/banklobby_room.webp'
 const GAME_BG = '/rooms/bankvault_room.webp'
 const TRANSITION_VIDEO = '/rooms/banklobby_to_bankvault.webm'
 const REWARD_VIDEO = '/rooms/safe_open.webm'
-const BG_MUSIC = '/rooms/game_assets/music/Echoes in the Static.mp3'
+const UNLOCKED_BG = '/rooms/safe_open.png'
+const BG_MUSIC = '/rooms/game_assets/music/Echoes in the Static.mp3' 
 const SOUND_FX = {
   match: '/rooms/game_assets/sound_fx/match.webm',
   lifeLost: '/rooms/game_assets/sound_fx/life_lost.webm',
@@ -126,7 +127,7 @@ export default function BankEncounter() {
             exit={{ opacity: 0 }}
             className="absolute inset-0"
             style={{
-              backgroundImage: `url(${phase === 'game' ? GAME_BG : LOBBY_BG})`,
+              backgroundImage: `url(${phase === 'game' ? GAME_BG : phase === 'unlocked' ? UNLOCKED_BG : LOBBY_BG})`,
               backgroundSize: 'contain',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
