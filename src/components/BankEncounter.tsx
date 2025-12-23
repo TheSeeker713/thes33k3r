@@ -121,14 +121,17 @@ export default function BankEncounter() {
       <AnimatePresence>
         {(phase === 'lobby' || phase === 'game' || phase === 'unlocked') && (
           <motion.div
-            key="bg"
+            // use phase in key so the background DOM node remounts on phase change
+            key={`bg-${phase}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="absolute inset-0"
             style={{
+              // compute current background explicitly for clarity
               backgroundImage: `url(${phase === 'game' ? GAME_BG : phase === 'unlocked' ? UNLOCKED_BG : LOBBY_BG})`,
-              backgroundSize: 'contain',
+              // use cover so the unlocked image fills the screen as expected
+              backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
               backgroundColor: '#000',
