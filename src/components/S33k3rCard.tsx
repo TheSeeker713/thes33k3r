@@ -1,32 +1,51 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import Image from 'next/image'
 
 const CARD_FLIP_SOUND = '/rooms/game_assets/sound_fx/card_flip.mp3'
 
-function playSound(src: string) {
-  const audio = new Audio(src)
-  audio.play().catch(() => {
-    // Silence audio errors
-  })
-}
-
 export default function S33k3rCard() {
   const [isFlipped, setIsFlipped] = useState(false)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
 
-  const handleClick = () => {
-    playSound(CARD_FLIP_SOUND)
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    
+    // Play sound on click
+    try {
+      if (!audioRef.current) {
+        audioRef.current = new Audio(CARD_FLIP_SOUND)
+        audioRef.current.volume = 0.8
+        audioRef.current.preload = 'auto'
+      }
+      // Reset and play
+      audioRef.current.currentTime = 0
+      const playPromise = audioRef.current.play()
+      if (playPromise !== undefined) {
+        playPromise.catch((error) => {
+          console.warn('Audio play failed:', error)
+        })
+      }
+    } catch (error) {
+      console.warn('Audio initialization failed:', error)
+    }
+    
     setIsFlipped(!isFlipped)
   }
 
   return (
-    <div className="perspective-1000 w-full aspect-[2/3] max-w-md mx-auto mb-6 cursor-pointer" onClick={handleClick}>
-      <div
-        className={`transform-style-3d relative w-full h-full transition-transform duration-700 ${
-          isFlipped ? 'rotate-y-180' : ''
-        }`}
+    <div className="w-full flex justify-center mb-6">
+      <div 
+        className="perspective-1000 aspect-[2/3] w-full max-w-sm cursor-pointer"
+        onClick={handleClick}
+        style={{ minHeight: '400px' }}
       >
+        <div
+          className={`transform-style-3d relative w-full h-full transition-transform duration-700 ${
+            isFlipped ? 'rotate-y-180' : ''
+          }`}
+        >
         {/* Front Face */}
         <div className="backface-hidden absolute inset-0 w-full h-full rounded-lg overflow-hidden border-2 border-amber-600/40">
           <Image
@@ -91,6 +110,7 @@ export default function S33k3rCard() {
               // TRANSMISSION INTERCEPTED //
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>

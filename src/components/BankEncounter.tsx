@@ -307,10 +307,12 @@ export default function BankEncounter() {
             animate={{ scale: 1, opacity: 1 }}
             className="max-w-2xl w-full rounded-2xl p-8 bg-black/70 backdrop-blur-md border border-amber-600/50 text-left"
           >
-            <div className="text-3xl mb-2 text-amber-400 font-bold">access granted</div>
-            <p className="text-amber-300/80 mb-6 text-sm">vault seal disengaged</p>
+            <div className="text-3xl mb-2 text-amber-400 font-bold text-center">access granted</div>
+            <p className="text-amber-300/80 mb-6 text-sm text-center">vault seal disengaged</p>
 
-            <S33k3rCard />
+            <div className="flex justify-center">
+              <S33k3rCard />
+            </div>
 
             <div className="flex gap-3 justify-end">
               <Link
