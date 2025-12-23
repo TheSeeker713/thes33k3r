@@ -68,6 +68,24 @@ export default function BankEncounter() {
     }
   }, [cards, phase, gameOver])
 
+  // Diagnostic: preload unlocked background when transitioning to 'unlocked' so we can see if it fails to load on the live site
+  useEffect(() => {
+    if (phase === 'unlocked') {
+      try {
+        const img = new Image()
+        img.src = UNLOCKED_BG
+        img.onload = () => {
+          console.log('[BankEncounter] UNLOCKED_BG loaded:', UNLOCKED_BG)
+        }
+        img.onerror = (e) => {
+          console.error('[BankEncounter] UNLOCKED_BG failed to load:', UNLOCKED_BG, e)
+        }
+      } catch (err) {
+        console.error('[BankEncounter] Error preloading UNLOCKED_BG', err)
+      }
+    }
+  }, [phase])
+
   useEffect(() => {
     if (lives === 0 && phase === 'game') {
       playSound(SOUND_FX.scary)

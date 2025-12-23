@@ -9,6 +9,32 @@ export default function S33k3rCard() {
   const [isFlipped, setIsFlipped] = useState(false)
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
+  // Fallback: try Web Audio API if HTMLAudioElement fails to play (useful for some browsers / cross-origin issues)
+  async function playViaWebAudio(src: string) {
+    try {
+      const AudioCtx = (window as any).AudioContext || (window as any).webkitAudioContext
+      if (!AudioCtx) throw new Error('Web Audio API not supported')
+
+      const ctx = new AudioCtx()
+      const resp = await fetch(src, { mode: 'cors' })
+      const arrayBuffer = await resp.arrayBuffer()
+      const decoded = await ctx.decodeAudioData(arrayBuffer)
+      const srcNode = ctx.createBufferSource()
+      srcNode.buffer = decoded
+      const gain = ctx.createGain()
+      gain.gain.value = 0.8
+      srcNode.connect(gain).connect(ctx.destination)
+      srcNode.start(0)
+      // stop after buffer duration
+      setTimeout(() => {
+        try { srcNode.stop() } catch (e) {}
+        try { ctx.close() } catch (e) {}
+      }, (decoded.duration + 0.1) * 1000)
+    } catch (err) {
+      console.error('playViaWebAudio failed:', err)
+    }
+  }
+
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation()
     
@@ -16,19 +42,26 @@ export default function S33k3rCard() {
     try {
       if (!audioRef.current) {
         audioRef.current = new Audio(CARD_FLIP_SOUND)
+        audioRef.current.crossOrigin = 'anonymous'
         audioRef.current.volume = 0.8
         audioRef.current.preload = 'auto'
+        // listen for element-level errors
+        audioRef.current.addEventListener('error', (ev) => {
+          console.error('[S33k3rCard] HTMLAudioElement error', ev)
+        })
       }
       // Reset and play
       audioRef.current.currentTime = 0
       const playPromise = audioRef.current.play()
       if (playPromise !== undefined) {
         playPromise.catch((error) => {
-          console.warn('Audio play failed:', error)
+          console.warn('[S33k3rCard] Audio play failed, falling back to WebAudio:', error)
+          void playViaWebAudio(CARD_FLIP_SOUND)
         })
       }
     } catch (error) {
-      console.warn('Audio initialization failed:', error)
+      console.warn('[S33k3rCard] Audio initialization failed, using WebAudio fallback:', error)
+      void playViaWebAudio(CARD_FLIP_SOUND)
     }
     
     setIsFlipped(!isFlipped)
