@@ -5,7 +5,7 @@
 
 ---
 
-### [December 15th, 2025] [10:30 AM MT]
+### [December 22nd, 2025] [7:48 PM MT]
 **The Reward Card Concept**
 
 After players complete the Bank Encounter game, they reach the unlocked phase. The victory screen needed something special. Something tangible. Something that felt like a real reward for solving the puzzle.
@@ -16,7 +16,7 @@ The concept was clear. The implementation would require 3D CSS transforms, audio
 
 ---
 
-### [December 15th, 2025] [11:00 AM MT]
+### [December 22nd, 2025] [8:11 PM MT]
 **Building the Flip Card Component**
 
 Started with the basics: a React component using `useState` for flip state, CSS `perspective` and `transform-style-3d` for the 3D effect. The card would rotate 180 degrees on click, revealing the back face with all the lore details.
@@ -27,10 +27,23 @@ Back face: white background with black text. Monospace font. Subject name, class
 
 The flip animation used `transition-transform duration-700` for smooth rotation. CSS `backface-hidden` ensured only one face was visible at a time. It worked. But something was missing.
 
+Integrated the card into the BankEncounter's unlocked phase. The component was imported and rendered in the victory screen. Players could now flip the card after completing the matching game.
+
 ---
 
-### [December 15th, 2025] [11:45 AM MT]
-**Adding Audio Feedback**
+### [December 22nd, 2025] [8:25 PM MT]
+**Adding the Safe Background**
+
+The BankEncounter unlocked phase needed the `safe_open.png` background. I added it to the phase's background styling, using `backgroundSize: 'cover'` to ensure it filled the screen properly.
+
+But I realized the card itself should also have this background—layered behind the card content. The card was rendering on top of the safe_open background, but it didn't feel integrated. The card needed to be part of the safe's visual design.
+
+At this point, I added the background to the BankEncounter phase, but the card component itself still needed the background styling. That would come later.
+
+---
+
+### [December 23rd, 2025] [12:15 PM MT]
+**Adding Audio Feedback & WebAudio Fallback**
 
 Every interaction needs feedback. The card flip needed a sound. Not just any sound—something that felt like turning a physical card over. A satisfying *whoosh* or *flip*.
 
@@ -40,12 +53,12 @@ Initial implementation: create an `Audio` element on click, set the source, play
 
 Added a fallback: if HTML5 Audio fails, use Web Audio API. Fetch the MP3, decode it, create a buffer source, connect to gain node, play. More complex, but more reliable across browsers. The fallback worked perfectly.
 
-The sound played. The card flipped. The experience felt complete.
+Also added diagnostic logging to help debug any audio issues. The sound played. The card flipped. The experience felt more complete.
 
 ---
 
-### [December 15th, 2025] [2:15 PM MT]
-**The Missing Background**
+### [December 27th, 2025] [11:19 AM MT]
+**The Missing Background Fix & Audio Preloading**
 
 I'd been testing the card in the unlocked phase, and something felt off. The card looked good, but it didn't feel integrated with the safe_open background. The screenshot showed the card should have `safe_open.png` as its background—layered behind the card content.
 
@@ -60,12 +73,7 @@ The front face now shows the safe_open background behind the card front image. T
 
 The card now feels like it's emerging from the safe itself. Thematic. Cohesive.
 
----
-
-### [December 15th, 2025] [2:45 PM MT]
-**Audio Preloading & Polish**
-
-The card flip sound was working, but there was a slight delay on first click. The audio element was being created on-demand, which meant the browser had to fetch and decode the file before playing.
+Also fixed the audio delay issue. The card flip sound was working, but there was a slight delay on first click. The audio element was being created on-demand, which meant the browser had to fetch and decode the file before playing.
 
 Solution: preload the audio on component mount using `useEffect`. Create the `Audio` element once, set all the properties (volume, crossOrigin, preload), and keep it in a ref. When the user clicks, just reset `currentTime` to 0 and call `play()`. Instant feedback.
 
@@ -75,23 +83,7 @@ The card now feels responsive. Every click triggers immediate audio feedback. No
 
 ---
 
-### [December 15th, 2025] [3:00 PM MT]
-**Integration with BankEncounter**
-
-The card component was ready. Now it needed to be integrated into the BankEncounter's unlocked phase.
-
-Already done. The `S33k3rCard` component was already imported and rendered in the unlocked phase UI. But I verified the integration:
-
-- Card appears after players complete the matching game
-- Positioned center of the unlocked screen
-- Surrounded by "access granted" header and action buttons
-- Fully interactive—players can flip it to read the lore
-
-The reward feels earned. Players solve the puzzle, unlock the vault, and discover the truth about THE S33K3R. The card is both a reward and a narrative delivery mechanism.
-
----
-
-### [December 15th, 2025] [3:30 PM MT]
+### [December 27th, 2025] [11:20 AM MT]
 **Final Testing & Reflection**
 
 Tested the complete flow:
