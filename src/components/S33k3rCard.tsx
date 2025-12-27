@@ -1,13 +1,29 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 
 const CARD_FLIP_SOUND = '/rooms/game_assets/sound_fx/card_flip.mp3'
+const SAFE_OPEN_BG = '/rooms/safe_open.png'
 
 export default function S33k3rCard() {
   const [isFlipped, setIsFlipped] = useState(false)
   const audioRef = useRef<HTMLAudioElement | null>(null)
+
+  // Preload audio on mount
+  useEffect(() => {
+    try {
+      audioRef.current = new Audio(CARD_FLIP_SOUND)
+      audioRef.current.crossOrigin = 'anonymous'
+      audioRef.current.volume = 0.8
+      audioRef.current.preload = 'auto'
+      audioRef.current.addEventListener('error', (ev) => {
+        console.error('[S33k3rCard] HTMLAudioElement error', ev)
+      })
+    } catch (error) {
+      console.warn('[S33k3rCard] Audio initialization failed:', error)
+    }
+  }, [])
 
   // Fallback: try Web Audio API if HTMLAudioElement fails to play (useful for some browsers / cross-origin issues)
   async function playViaWebAudio(src: string) {
@@ -40,27 +56,22 @@ export default function S33k3rCard() {
     
     // Play sound on click
     try {
-      if (!audioRef.current) {
-        audioRef.current = new Audio(CARD_FLIP_SOUND)
-        audioRef.current.crossOrigin = 'anonymous'
-        audioRef.current.volume = 0.8
-        audioRef.current.preload = 'auto'
-        // listen for element-level errors
-        audioRef.current.addEventListener('error', (ev) => {
-          console.error('[S33k3rCard] HTMLAudioElement error', ev)
-        })
-      }
-      // Reset and play
-      audioRef.current.currentTime = 0
-      const playPromise = audioRef.current.play()
-      if (playPromise !== undefined) {
-        playPromise.catch((error) => {
-          console.warn('[S33k3rCard] Audio play failed, falling back to WebAudio:', error)
-          void playViaWebAudio(CARD_FLIP_SOUND)
-        })
+      if (audioRef.current) {
+        // Reset and play
+        audioRef.current.currentTime = 0
+        const playPromise = audioRef.current.play()
+        if (playPromise !== undefined) {
+          playPromise.catch((error) => {
+            console.warn('[S33k3rCard] Audio play failed, falling back to WebAudio:', error)
+            void playViaWebAudio(CARD_FLIP_SOUND)
+          })
+        }
+      } else {
+        // Fallback if audio wasn't initialized
+        void playViaWebAudio(CARD_FLIP_SOUND)
       }
     } catch (error) {
-      console.warn('[S33k3rCard] Audio initialization failed, using WebAudio fallback:', error)
+      console.warn('[S33k3rCard] Audio play failed, using WebAudio fallback:', error)
       void playViaWebAudio(CARD_FLIP_SOUND)
     }
     
@@ -80,7 +91,15 @@ export default function S33k3rCard() {
           }`}
         >
         {/* Front Face */}
-        <div className="backface-hidden absolute inset-0 w-full h-full rounded-lg overflow-hidden border-2 border-amber-600/40">
+        <div 
+          className="backface-hidden absolute inset-0 w-full h-full rounded-lg overflow-hidden border-2 border-amber-600/40"
+          style={{
+            backgroundImage: `url(${SAFE_OPEN_BG})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}
+        >
           <Image
             src="/rooms/thes33k3r_card_front.webp"
             alt="THE S33K3R Card Front"
@@ -91,8 +110,16 @@ export default function S33k3rCard() {
         </div>
 
         {/* Back Face */}
-        <div className="backface-hidden absolute inset-0 w-full h-full rounded-lg overflow-hidden border-2 border-amber-600/40 rotate-y-180 bg-white">
-          <div className="h-full p-6 flex flex-col text-black font-mono text-sm">
+        <div 
+          className="backface-hidden absolute inset-0 w-full h-full rounded-lg overflow-hidden border-2 border-amber-600/40 rotate-y-180"
+          style={{
+            backgroundImage: `url(${SAFE_OPEN_BG})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}
+        >
+          <div className="h-full p-6 flex flex-col text-black font-mono text-sm bg-white/95 backdrop-blur-sm">
             {/* Header Section */}
             <div className="mb-4 border-b-2 border-black pb-3">
               <div className="text-lg font-bold mb-1">Subject Name: THE S33K3R</div>
