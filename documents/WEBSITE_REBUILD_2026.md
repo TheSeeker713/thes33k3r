@@ -7,7 +7,7 @@ Authorized scope: redesign and deploy the existing website, update copyright, re
 - Signal Teal palette: warm ivory #F4F1E8, deep ink #182B2D, teal #287F80, amber #C48A35, fog #BBC8C4. Interactive teal is darkened for text contrast.
 - Original background.webm loop retained in the cinematic section with a pause control and reduced-motion handling.
 - Theater player retained as a cinematic presentation, with original teal theater artwork and click-to-load privacy-enhanced YouTube embed. No third-party video request before activation.
-- Collective content follows the supplied eleven-fragment canon. Twin labels explicitly remain temporary. Decorative homepage marks are visual motifs, not canonical identities.
+- Collective content follows the supplied eleven-fragment canon. The October 2 character update names the Twin Seekers Ethan James Walker and Emma Grace Walker: male and female alternate-reality versions of the same person, each a distinct fragment within S33k3r.
 - Bank moves to /games/bank; Cloudflare redirect preserves /bank links. Existing Bank media retained. Missing reward background recovered from its existing reward video.
 - All eight historical devlog source files preserved verbatim. Rendering is now readable and HTML is sanitized.
 - Footer: creator role and company credit, © Mycelia Interactive 2026, protected intellectual-property wording.
@@ -56,3 +56,10 @@ Cloudflare Wrangler 4.147.0 runtime verification passed: independent responses h
 ## Production verification and requested polish
 GitHub checks passed after production pushes. Live website, archive routes, light/dark toggle, privacy-enhanced theater activation, video loop playback and /bank redirect were verified in browser. All content pages fit a 390px viewport without horizontal overflow. Homepage also checked at 320px, 375px and 768px; Bank card interface checked at 390px in the Cloudflare runtime. Physical-device testing remains unperformed. Cloudflare bot protection rejected automated Python requests while the browser site remained functional.
 At user request, background video visibility increased from 6.5% to 12% in light mode and 14% to 20% in dark mode; text and theater controls remain foregrounded.
+
+## Character portraits and collective cards
+The eight approved environment portraits (Soul, Shadow, Radio, Lost, Ethan, Emma, Silent and modern-cloaked Unknown) replace their landing-page symbols. Sun, Star and Song retain their symbols until their existing approved portraits are supplied. Every landing-page profile links to its matching collective card. The same shared fragment list controls both pages, preserving all eleven identities and their order.
+
+The collective page presents portrait cards with accessible image descriptions, fragment numbers, names and concise roles. The Walkers' descriptions establish their alternate-self relationship; the temporary naming notices are removed. Unknown retains his concealed face and bronze triangle pin.
+
+Approved PNG originals are retained in the local character pack. The site ships WebP derivatives at 768 pixels wide for cards and 256 pixels wide for profile images, approximately 1.7 MB total. Images load lazily with reserved layout dimensions. Profile crops use CSS; the approved artwork is not regenerated or repainted. Cards use three columns on desktop, two on tablets and one below 650px. The landing roster wraps to six columns on tablets and four on phones. Light remains the default; dark-mode tokens and reduced-motion settings are preserved.

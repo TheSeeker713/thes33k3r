@@ -2,6 +2,7 @@ import Link from 'next/link'
 import MovieScreen from '@/components/MovieScreen'
 import VideoBackground from '@/components/VideoBackground'
 import SiteShell from '@/components/SiteShell'
+import { fragments, portraitPath } from '@/lib/fragments'
 export default function Home() {
   return <SiteShell>
     <section className="hero">
@@ -12,7 +13,14 @@ export default function Home() {
     </section>
     <div className="signal-strip"><span>FMV & CINEMA</span><span aria-hidden="true">✳</span><span>INTERACTIVE WORLDS</span><span aria-hidden="true">✳</span><span>MUSIC & MEMORY</span><span aria-hidden="true">✳</span><span>THE S33K3R TRANSMISSION</span></div>
     <section id="transmissions" className="transmission-section"><VideoBackground /><div className="section-heading"><div><p className="eyebrow">01 / RECEIVE THE SIGNAL</p><h2>A world beyond<br /><em>the screen.</em></h2></div><p>A cinematic transmission from The S33k3r.<br />Step into the story. Follow what remains.</p></div><MovieScreen /></section>
-    <section className="collective-preview content-section"><div className="section-heading"><div><p className="eyebrow">02 / THE COLLECTIVE</p><h2>Eleven lives.<br /><em>Still connected.</em></h2></div><div className="section-intro"><p>S33k3r is a collective consciousness of eleven surviving human fragments. Each carries a distinct personality, memory and connection to a world that no longer exists.</p><Link className="text-link" href="/collective">Meet the collective <span>↗</span></Link></div></div><div className="signal-art" aria-hidden="true">{Array.from({length:11}, (_,i) => <div key={i}><span className={`signal-symbol symbol-${i % 4}`}>{['◯','✳','≋','⌁'][i%4]}</span><span>{String(i+1).padStart(2,'0')}</span></div>)}</div><p className="fine-note">Eleven fragments. Distinct memories. A shared transmission.</p></section>
+    <section className="collective-preview content-section"><div className="section-heading"><div><p className="eyebrow">02 / THE COLLECTIVE</p><h2>Eleven lives.<br /><em>Still connected.</em></h2></div><div className="section-intro"><p>S33k3r is a collective consciousness of eleven surviving human fragments. Each carries a distinct personality, memory and connection to a world that no longer exists.</p><Link className="text-link" href="/collective">Meet the collective <span>↗</span></Link></div></div>
+      <nav className="collective-profiles" aria-label="Meet the eleven fragments">
+        {fragments.map((fragment, i) => <Link key={fragment.id} className="collective-profile" href={`/collective#${fragment.id}`} aria-label={`Meet ${fragment.name}`}>
+          <span className="profile-image">{portraitPath(fragment) ? <img src={portraitPath(fragment, true)} alt="" width="256" height="384" loading="lazy" decoding="async" /> : <span className="profile-symbol" aria-hidden="true">{fragment.symbol}</span>}</span>
+          <span className="profile-name">{fragment.label}</span><span className="profile-number">{String(i+1).padStart(2,'0')}</span>
+        </Link>)}
+      </nav>
+      <p className="fine-note">Eleven fragments. Distinct memories. A shared transmission.</p></section>
     <section className="explore-section content-section"><p className="eyebrow">03 / FOLLOW THE TRANSMISSION</p><div className="experience-grid"><Link href="/games" className="experience-card bank-card"><img src="/rooms/banklobby_room.webp" alt="Sunlight entering the abandoned Bank lobby" loading="lazy" width="1280" height="720" /><div><span className="eyebrow">INTERACTIVE EXPERIENCE</span><h2>The Bank</h2><p>The signal leads here. The vault contains the first truth.</p><span className="text-link">Explore the games <span>↗</span></span></div></Link><Link href="/devlog" className="experience-card archive-card"><span className="archive-number" aria-hidden="true">08</span><div><span className="eyebrow">THE DEVELOPMENT ARCHIVE</span><h2>Behind the signal.</h2><p>Eight chapters tracing the early cinematic experience, its puzzles and the Bank encounter.</p><span className="text-link">Read the archive <span>↗</span></span></div></Link></div></section>
   </SiteShell>
 }

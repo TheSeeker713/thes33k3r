@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "next build --webpack && node scripts/security-headers.mjs",
     "start": "next start",
-    "lint": "eslint src/app/page.jsx src/app/layout.jsx src/components/Navbar.jsx src/components/Footer.jsx src/components/VideoBackground.jsx src/components/MovieScreen.jsx src/components/SiteShell.jsx scripts",
+    "lint": "eslint src/lib/fragments.js src/app/collective/page.jsx src/app/page.jsx src/app/layout.jsx src/components/Navbar.jsx src/components/Footer.jsx src/components/VideoBackground.jsx src/components/MovieScreen.jsx src/components/SiteShell.jsx scripts",
     "verify": "node scripts/verify-export.mjs"
   },
   "dependencies": {
