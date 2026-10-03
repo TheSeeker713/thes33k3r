@@ -35,7 +35,7 @@ export default async function DevlogPage({ params }: PageProps) {
       <p className="article-byline">By {log.author}, {log.authorRole}</p>
     </header>
     <article className="prose">
-      <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw, rehypeSanitize]}>{log.content}</ReactMarkdown>
+      <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw, rehypeSanitize]} components={{h3: ({children}) => /^\[.+\] \[\d/.test(String(children)) ? <p className="article-time">{children}</p> : <h3>{children}</h3>}}>{log.content}</ReactMarkdown>
     </article>
     <nav className="article-navigation" aria-label="Continue through the development archive">
       {previous ? <Link href={`/devlog/${previous.slug}`}><span className="eyebrow">← Previous entry / {previous.number}</span><span>{previous.title}</span></Link> : <Link href="/devlog"><span className="eyebrow">The archive begins here</span><span>Browse all entries</span></Link>}
