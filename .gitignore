@@ -60,3 +60,6 @@ public/rooms/*
 !public/rooms/*.webm
 !public/rooms/game_assets/**
 !public/rooms/ASSETS_README.md
+
+# Cloudflare local runtime state
+.wrangler/
