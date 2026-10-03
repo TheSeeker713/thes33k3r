@@ -3,6 +3,7 @@ import path from 'node:path'
 import crypto from 'node:crypto'
 const output = 'out'
 const common = `/*
+  ! Access-Control-Allow-Origin
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin

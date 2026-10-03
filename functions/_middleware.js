@@ -23,6 +23,7 @@ export async function onRequest(context) {
  secured.headers.set('Content-Security-Policy', `default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://i.ytimg.com; media-src 'self'; font-src 'self'; style-src 'self' 'unsafe-inline'; frame-src 'self' https://www.youtube-nocookie.com https://challenges.cloudflare.com; connect-src 'self' https://cloudflareinsights.com; script-src 'self' 'nonce-${nonce}' https://static.cloudflareinsights.com https://challenges.cloudflare.com; upgrade-insecure-requests`)
  // Never reuse a nonce through browser or shared HTML caches.
  secured.headers.set('Cache-Control','no-store')
+ secured.headers.delete('Access-Control-Allow-Origin')
  secured.headers.delete('ETag')
  secured.headers.delete('Last-Modified')
  return new HTMLRewriter().on('script', {element(element) {element.setAttribute('nonce',nonce)}}).transform(secured)
