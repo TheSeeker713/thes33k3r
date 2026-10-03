@@ -1,0 +1,20 @@
+{
+  "id": "devlog11",
+  "slug": "devlog11",
+  "number": "11",
+  "title": "Working through Cloudflare security",
+  "subtitle": "Working through Cloudflare security",
+  "date": "[October 2nd, 2026]",
+  "time": "[11:03 PM MT]",
+  "timezone": "America/Denver",
+  "author": "Jeremy Robards",
+  "authorRole": "CTO of Mycelia Interactive LLC",
+  "startDate": "2026-10-02T23:03:42-06:00",
+  "endDate": "2026-10-02T23:08:34-06:00",
+  "dateRange": "October 2nd, 2026",
+  "phase": "Security",
+  "revisedDate": "2026-10-03",
+  "contentPath": "/devlog/devlog11.md",
+  "excerpt": "I tightened delivery rules and worked through the interaction between a strict script policy and Cloudflare bot detection. The result protects the current website without claiming that multiplayer security has already been built.",
+  "status": "DECRYPTED"
+}

@@ -1,10 +1,20 @@
 {
   "id": "devlog05",
-  "title": "Part 5: Launch Day & Live Event",
+  "slug": "devlog05",
+  "number": "05",
+  "title": "Preparing the December transmission",
+  "subtitle": "Preparing the December transmission",
   "date": "[December 10th, 2025]",
-  "time": "[10:48 AM]",
-  "timezone": "MT",
-  "author": "J.W.",
+  "time": "[10:48 AM MT]",
+  "timezone": "America/Denver",
+  "author": "Jeremy Robards",
+  "authorRole": "CTO of Mycelia Interactive LLC",
+  "startDate": "2025-12-10T10:48:40-07:00",
+  "endDate": "2025-12-12T10:06:12-07:00",
+  "dateRange": "December 10th, 2025 \u2013 December 12th, 2025",
+  "phase": "Early build",
+  "revisedDate": "2026-10-03",
   "contentPath": "/devlog/devlog05.md",
-  "excerpt": "Sometimes you build something complex and realize the simple version was better all along. After constructing the entire Cinematic Engine, I made the strategic call to restore the original landing page—the one with the CRT TV and sliding tile puzzle. December 12th needed to feel like a reveal, not a replacement. Five minutes before Phase 1 launch, I was hunting performance bottlenecks with terminal open and coffee in hand. The transmission was about to begin."
+  "excerpt": "I brought the CRT back to the landing page and prepared its transition into a theater screen. The reveal needed timing, media delivery and a player that could recover when the first load failed.",
+  "status": "ARCHIVED"
 }

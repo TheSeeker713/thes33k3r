@@ -1,10 +1,20 @@
 {
   "id": "devlog06",
-  "title": "Part 6: The Bank Encounter Game",
-  "date": "[December 13th, 2025]",
-  "time": "[9:00 AM]",
-  "timezone": "MT",
-  "author": "J.W.",
+  "slug": "devlog06",
+  "number": "06",
+  "title": "Keeping the theater and opening the Bank",
+  "subtitle": "Keeping the theater and opening the Bank",
+  "date": "[December 12th, 2025]",
+  "time": "[10:17 AM MT]",
+  "timezone": "America/Denver",
+  "author": "Jeremy Robards",
+  "authorRole": "CTO of Mycelia Interactive LLC",
+  "startDate": "2025-12-12T10:17:43-07:00",
+  "endDate": "2025-12-14T01:25:55-07:00",
+  "dateRange": "December 12th, 2025 \u2013 December 14th, 2025",
+  "phase": "Early build",
+  "revisedDate": "2026-10-03",
   "contentPath": "/devlog/devlog06.md",
-  "excerpt": "I woke up Friday morning with a realization: this EARTIX needed a proper game loop. Not just a puzzle with a hidden date. Something players could sink their teeth into. The Bank Encounter concept crystalized over breakfast—four phases creating one cohesive experience. From story card to cinematic transition to numbers matching with lives system to victory screen. I spent three hours tuning the balance. Six lives felt right. Challenging but fair. The first complete game loop was born."
+  "excerpt": "The theater became the permanent landing-page player, and the Bank became the first focused game encounter. I built the lobby-to-vault sequence around a six-pair puzzle, then fixed media delivery and repeat play.",
+  "status": "ARCHIVED"
 }

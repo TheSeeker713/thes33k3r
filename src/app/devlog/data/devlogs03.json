@@ -1,10 +1,20 @@
 {
   "id": "devlog03",
-  "title": "Part 3: Navigation & Game Engine",
+  "slug": "devlog03",
+  "number": "03",
+  "title": "Moving from the landing page into a world",
+  "subtitle": "Moving from the landing page into a world",
   "date": "[December 1st, 2025]",
-  "time": "[3:56 PM]",
-  "timezone": "MT",
-  "author": "J.W.",
+  "time": "[3:56 PM MT]",
+  "timezone": "America/Denver",
+  "author": "Jeremy Robards",
+  "authorRole": "CTO of Mycelia Interactive LLC",
+  "startDate": "2025-12-01T15:56:33-07:00",
+  "endDate": "2025-12-09T14:16:51-07:00",
+  "dateRange": "December 1st, 2025 \u2013 December 9th, 2025",
+  "phase": "Early build",
+  "revisedDate": "2026-10-03",
   "contentPath": "/devlog/devlog03.md",
-  "excerpt": "The project matured with proper navigation and evolved beyond a single landing page. A complete point-and-click adventure game framework was built, complete with TypeScript support, percentage-based coordinate system for responsive hitboxes, and state management for inventory and puzzle tracking. The S33K3R TRANSMISSION is no longer just a mystery to observe—it's a world to explore."
+  "excerpt": "I moved the site from Vite to Next.js and built a reusable room interface. The change gave the project room to grow, while browser audio restrictions kept the entry experience tied to a deliberate visitor action.",
+  "status": "ARCHIVED"
 }

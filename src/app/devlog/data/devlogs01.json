@@ -1,10 +1,20 @@
 {
   "id": "devlog01",
-  "title": "Part 1: The Signal & Early Days",
+  "slug": "devlog01",
+  "number": "01",
+  "title": "Starting with a screen",
+  "subtitle": "Starting with a screen",
   "date": "[November 29th, 2025]",
-  "time": "[7:49 AM]",
-  "timezone": "MT",
-  "author": "J.W.",
+  "time": "[7:49 AM MT]",
+  "timezone": "America/Denver",
+  "author": "Jeremy Robards",
+  "authorRole": "CTO of Mycelia Interactive LLC",
+  "startDate": "2025-11-29T07:49:36-07:00",
+  "endDate": "2025-11-29T11:01:35-07:00",
+  "dateRange": "November 29th, 2025",
+  "phase": "Early build",
+  "revisedDate": "2026-10-03",
   "contentPath": "/devlog/devlog01.md",
-  "excerpt": "What you're about to read isn't just a technical journal—it's the chronicle of building something that doesn't fit neatly into existing categories. This project is an EARTIX (Evolving Alternate Reality Trans-media Immersive & Interactive eXperience): a living, breathing digital world that blurs the line between storytelling, gameplay, and reality itself."
+  "excerpt": "I started with a CRT screen, a short message and a place for the transmission to arrive. Getting that first version online meant solving the hosting and video limits as well as the design.",
+  "status": "ARCHIVED"
 }

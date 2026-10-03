@@ -3,7 +3,9 @@ import MovieScreen from '@/components/MovieScreen'
 import VideoBackground from '@/components/VideoBackground'
 import SiteShell from '@/components/SiteShell'
 import { fragments, portraitPath } from '@/lib/fragments'
-export default function Home() {
+import { getDevlogs } from '@/lib/devlogs'
+export default async function Home() {
+  const devlogs = await getDevlogs()
   return <SiteShell>
     <section className="hero">
       <img className="hero-image" src="/images/signal-park.webp" alt="An atmospheric amusement park beside a misty canal, with teal railings and amber lanterns" fetchPriority="high" width="1536" height="1024" />
@@ -21,6 +23,6 @@ export default function Home() {
         </Link>)}
       </nav>
       <p className="fine-note">Eleven fragments. Distinct memories. A shared transmission.</p></section>
-    <section className="explore-section content-section"><p className="eyebrow">03 / FOLLOW THE TRANSMISSION</p><div className="experience-grid"><Link href="/games" className="experience-card bank-card"><img src="/rooms/banklobby_room.webp" alt="Sunlight entering the abandoned Bank lobby" loading="lazy" width="1280" height="720" /><div><span className="eyebrow">INTERACTIVE EXPERIENCE</span><h2>The Bank</h2><p>The signal leads here. The vault contains the first truth.</p><span className="text-link">Explore the games <span>↗</span></span></div></Link><Link href="/devlog" className="experience-card archive-card"><span className="archive-number" aria-hidden="true">08</span><div><span className="eyebrow">THE DEVELOPMENT ARCHIVE</span><h2>Behind the signal.</h2><p>Eight chapters tracing the early cinematic experience, its puzzles and the Bank encounter.</p><span className="text-link">Read the archive <span>↗</span></span></div></Link></div></section>
+    <section className="explore-section content-section"><p className="eyebrow">03 / FOLLOW THE TRANSMISSION</p><div className="experience-grid"><Link href="/games" className="experience-card bank-card"><img src="/rooms/banklobby_room.webp" alt="Sunlight entering the abandoned Bank lobby" loading="lazy" width="1280" height="720" /><div><span className="eyebrow">INTERACTIVE EXPERIENCE</span><h2>The Bank</h2><p>The signal leads here. The vault contains the first truth.</p><span className="text-link">Explore the games <span>↗</span></span></div></Link><Link href="/devlog" className="experience-card archive-card"><span className="archive-number" aria-hidden="true">{String(devlogs.length).padStart(2, '0')}</span><div><span className="eyebrow">THE DEVELOPMENT ARCHIVE</span><h2>Behind the signal.</h2><p>{devlogs.length} entries, from the first CRT and the Bank encounter to the Signal Teal rebuild and the faces of the collective.</p><span className="text-link">Read the archive <span>↗</span></span></div></Link></div></section>
   </SiteShell>
 }

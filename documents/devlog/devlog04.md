@@ -1,99 +1,36 @@
-# THE S33K3R TRANSMISSION - DEVLOG
-## Part 4: The Cinematic Pivot
+# Building the cinematic room engine
 
-*Continued from devlog03.md*
+### [December 10th, 2025] [10:08 AM MT]
 
----
+On December 10, I added the cinematic engine. The basic sequence was straightforward: load a room, play its video, then offer choices that lead somewhere else. I wanted the movement through the world to come from the scene and the player's decision.
 
-## **PART VIII: THE CINEMATIC PIVOT** 🎬
+The room definitions held the video, the available choices and their destinations. Keeping that information separate from the player made the engine easier to reuse. A new room could be described through its data without rebuilding the video interface each time.
 
-### [December 10th, 2025] [10:08 AM MT] (10:08:50 AM MT)
-**Major Refactor:** Pivot from Point-and-Click to Cinematic Narrative Engine
+## What this version actually contained
 
-A fundamental architectural shift. Sometimes you build something and realize it's not quite *right*. The point-and-click felt static, disconnected. I wanted something more visceral. The game moved from a traditional point-and-click adventure to an **FMV (Full Motion Video) style choose-your-own-adventure system**. This wasn't just a feature add—it was a complete reimagining of how players would experience THE S33K3R universe. A risk, yes. But the right one.
+The commit included five sample room configurations and choice cards. Those examples established the structure for an FMV experience; they weren't five finished chapters of a game. That difference matters when looking back at how quickly the code developed.
 
-**New Architecture:**
-- **Type System** (`src/types/game.ts`): Strict TypeScript definitions for `RoomNode`, `ChoiceCard`, and `WorldConfig`
-- **CinematicEngine Component** (`src/components/CinematicEngine.tsx`): Three-layer rendering system (background image → transition video → interactive cards)
-- **Seamless Transitions**: Videos with `preload="auto"` ensure instant playback when cards are clicked
-- **Frame-Perfect Magic**: Last frame of transition video matches destination room's static image (no visible cuts)
+I also included a date gate for the planned December 12 reveal. It was a presentation rule based on the visitor's clock. Content that needed access protection would require a server-side decision.
 
-**Sample World Created:**
-- 5 rooms configured: Bank, Bank Vault, Saloon, Sheriff's Office, Hotel
-- Each room has 3 choice cards with narrative descriptions
-- Nested navigation supported (Bank → Vault demonstrates sub-room access)
-- Header navigation for main rooms (hard-cut, no video)
-- Card choices trigger cinematic POV transitions
+## Keeping the build deployable
 
-**Visual Design:**
-- Weathered tarot/data-pad style cards with dark backgrounds
-- Amber borders with glow effects on hover
-- Corner decorations for retro-futuristic aesthetic
-- Smooth fade animations and scale transforms
+The next change enabled Next.js static export and disabled its server-dependent image optimization. Cloudflare Pages needed a set of files it could serve from the export directory. The room engine had to work within that delivery model.
 
-**Asset Pipeline Established:**
-- `/public/rooms/` directory structured with naming conventions
-- Comprehensive guide created (`ASSETS_README.md`) for video/image requirements
-- Critical alignment documented: first frame = source room, last frame = destination room
-
-The experience transformed from clicking hotspots to making narrative choices that trigger immersive first-person transitions. This is now a true **Cinematic Decision Engine**.
+This pass gave me the structure for videos, transitions and choices. The next problem was deciding how to introduce it without losing the CRT presentation that already gave the landing page its identity.
 
 ---
 
-### [December 10th, 2025] [10:08 AM MT] (10:08:50 AM MT)
-**Feature Lock:** Implement "Coming Soon December 12th" Restriction
+## Sources
 
-With the Cinematic Engine built, the strategic decision was made to lock it behind a launch date. Players would see the system but couldn't interact until December 12th, 2025.
+Work dates follow the linked commit record in Mountain Time. This account was revised on October 3, 2026.
 
-**Implementation:**
-- **Header Replacement**: Room navigation buttons replaced with animated "COMING SOON: DECEMBER 12TH" message
-- **Error Indicator**: Red pulsing alert icon pointing to disabled "ROOMS [LOCKED]" button
-- **Full Lock Overlay**: Semi-transparent backdrop with centered lock icon, "ACCESS RESTRICTED" message, and unlock date
-- **Engine Preview**: Background visible at 30% opacity with blur effect—players can see what's coming but can't interact
-- **Disabled Prop**: `CinematicEngine` now accepts `disabled={true}` to prevent all card clicks and transitions
+### GitHub commits
 
-**Visual Polish:**
-- Animated pulse effects on "Coming Soon" text and error icon
-- Red theme for locked state (vs amber for active state)
-- Large lock icon with amber accents maintaining S33K3R aesthetic
-- Clear unlock date display: "DECEMBER 12TH, 2025"
+- [f9d5e38 — Introduce the FMV room engine and sample room configuration](https://github.com/TheSeeker713/thes33k3r/commit/f9d5e38185400cc0cdab97ecd55a99025dbe7e56)
+- [a5efe72 — Enable static export and unoptimized images](https://github.com/TheSeeker713/thes33k3r/commit/a5efe72c195d91ee9837e9dc45dfd08280b0a20c)
 
-**Purpose**: Build anticipation. Let players see the sophistication of what's coming, but hold back the full experience until the reveal date. The EARTIX continues—December 12th becomes a key date in the narrative.
+### Site source at this stage
 
----
-
-### [December 10th, 2025] [10:28 AM MT] (10:28:56 AM MT)
-**Deployment Config:** Enable Static Export for Cloudflare Pages
-
-With the Cinematic Engine locked and ready, deployment infrastructure needed optimization. Next.js configuration was updated to support static export for Cloudflare Pages deployment.
-
-**Configuration Changes** (`next.config.mjs`):
-- **Static Export Mode**: Set `output: 'export'` to generate fully static HTML/CSS/JS
-- **Image Optimization**: Set `images: { unoptimized: true }` to prevent Image component build errors in static mode
-- **Cloudflare Compatibility**: Static export ensures seamless deployment to Cloudflare Pages without serverless requirements
-
-**Why Static Export?**
-- No server-side rendering needed for this EARTIX experience
-- Faster page loads (pre-rendered at build time)
-- CDN-friendly (Cloudflare's edge network delivers static assets globally)
-- Perfect for the locked Cinematic Engine (no dynamic server logic until December 12th unlock)
-
-The transmission is now optimized for global distribution. December 12th will arrive at the same instant across all time zones.
-
----
-
-## **REFLECTION**
-
-From a mysterious transmission on November 29th to a fully-featured EARTIX experience with hidden puzzles, easter eggs, immersive audiovisual effects, and now a **locked Cinematic Narrative Engine** awaiting its December 12th debut—this project has been a journey of creative iteration, problem-solving, and user experience refinement.
-
-Each commit represented a decision, a fix, or a new feature. Some commits were moments of inspiration (the CRT TV, the easter eggs, the Cinematic Engine pivot). Others were technical pragmatism (video compression, autoplay fixes, TypeScript migration, feature locks, deployment optimization). Together, they built something that feels alive—a transmission from an alternate reality, waiting to be deciphered.
-
-The S33K3R TRANSMISSION is live. The puzzle is solvable. The secrets are hidden but discoverable. The Cinematic Narrative Engine is visible but locked. And the countdown to December 12th has begun.
-
-**What happens on December 12th, 2025?**
-
-The rooms unlock. The choices become real. The narrative branches.
-
-That's for the players to find out.
-
-*Continued in devlog05.md*
+- [Cinematic-engine source](https://github.com/TheSeeker713/thes33k3r/blob/f9d5e38185400cc0cdab97ecd55a99025dbe7e56/src/components/CinematicEngine.tsx)
+- [Room and choice definitions](https://github.com/TheSeeker713/thes33k3r/blob/f9d5e38185400cc0cdab97ecd55a99025dbe7e56/src/types/game.ts)
+- [Static-export configuration](https://github.com/TheSeeker713/thes33k3r/blob/a5efe72c195d91ee9837e9dc45dfd08280b0a20c/next.config.mjs)

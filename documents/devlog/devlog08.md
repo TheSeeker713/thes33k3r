@@ -1,108 +1,47 @@
-# THE S33K3R TRANSMISSION - DEVLOG
-## Part 8: The S33K3R Card Reveal
-
-*Continued from devlog07.md*
-
----
+# Finishing the Bank reward card
 
 ### [December 22nd, 2025] [7:48 PM MT]
-**The Reward Card Concept**
 
-After players complete the Bank Encounter game, they reach the unlocked phase. The victory screen needed something special. Something tangible. Something that felt like a real reward for solving the puzzle.
+The Bank needed a reward that belonged to the story. Between December 22 and December 27, I worked on the S33k3r card that appears after the vault puzzle. Its front carries the artwork; turning it over reveals the entity record.
 
-I'd been thinking about a collectible card. Not just a static image—an interactive flip card that reveals the lore behind THE S33K3R. The card would show the dual nature of the entity: the Seeker (old west aesthetic) on one side, the S33K3R (tactical modern) on the other. A physical metaphor for the same consciousness wearing different skins.
+I added a three-dimensional flip and connected the card to the win state. The card gave the player something to inspect after completing the puzzle. It also made the end of the encounter more specific than a success message on an otherwise empty screen.
 
-The concept was clear. The implementation would require 3D CSS transforms, audio feedback, and careful asset layering. This wasn't just a UI component—it was a narrative device.
+During this pass, I removed the abandoned brothel route. It was an older room experiment that no longer had a place in the experience I was shipping.
 
----
+## The safe had to stay open
 
-### [December 22nd, 2025] [8:11 PM MT]
-**Building the Flip Card Component**
+The reward background changed to the open-safe image. I then corrected how that background survived phase changes and adjusted its cover behavior. The puzzle state could be correct while the room still showed the wrong image; both needed to tell the same story.
 
-Started with the basics: a React component using `useState` for flip state, CSS `perspective` and `transform-style-3d` for the 3D effect. The card would rotate 180 degrees on click, revealing the back face with all the lore details.
+I added image preloading to reduce the chance of the background appearing late.
 
-Front face: the split design showing both personas. Used Next.js `Image` component with `fill` and `object-cover` to ensure crisp rendering. The card front asset (`thes33k3r_card_front.webp`) was already in the repo—I'd created it earlier during the asset pipeline setup.
+## Sound needed a fallback, and files needed to ship
 
-Back face: white background with black text. Monospace font. Subject name, classification, ID number. The full lore paragraph explaining the collective consciousness. Warning box about THE NULL DOMINION. Stats grid showing STR, INT, AGI, LUCK values. Footer with "// TRANSMISSION INTERCEPTED //".
+The card flip used a short sound effect. I added audio preloading, error reporting and a Web Audio fallback for cases where the usual audio element couldn't play. The fallback gave the sound another playback path, while the error reporting made a failed attempt easier to investigate.
 
-The flip animation used `transition-transform duration-700` for smooth rotation. CSS `backface-hidden` ensured only one face was visible at a time. It worked. But something was missing.
+The last issue was in the repository. The safe image and flip sound were referenced by the code but affected by ignore rules. I corrected the tracking so the files could reach the deployment.
 
-Integrated the card into the BankEncounter's unlocked phase. The component was imported and rendered in the victory screen. Players could now flip the card after completing the matching game.
+That was the useful lesson from this set of changes: the game state, the presentation and the asset inventory have to agree. The card isn't finished just because it flips correctly in a local build.
 
 ---
 
-### [December 22nd, 2025] [8:25 PM MT]
-**Adding the Safe Background**
+## Sources
 
-The BankEncounter unlocked phase needed the `safe_open.png` background. I added it to the phase's background styling, using `backgroundSize: 'cover'` to ensure it filled the screen properly.
+Work dates follow the linked commit record in Mountain Time. This account was revised on October 3, 2026.
 
-But I realized the card itself should also have this background—layered behind the card content. The card was rendering on top of the safe_open background, but it didn't feel integrated. The card needed to be part of the safe's visual design.
+### GitHub commits
 
-At this point, I added the background to the BankEncounter phase, but the card component itself still needed the background styling. That would come later.
+- [9bb5db4 — Introduce the reward-card flip](https://github.com/TheSeeker713/thes33k3r/commit/9bb5db44c0b1b9c3e98edd8b555b430696aaf4c4)
+- [038fcbe — Remove the abandoned brothel route](https://github.com/TheSeeker713/thes33k3r/commit/038fcbea92f4351e58c4a0cac33e42aed74ff2d2)
+- [1410a03 — Integrate the card into the Bank win state](https://github.com/TheSeeker713/thes33k3r/commit/1410a035a92513b860bea18abe9111b6d7ef9d8f)
+- [825a8db — Use the open-safe image for the reward background](https://github.com/TheSeeker713/thes33k3r/commit/825a8db9b036afcb2a4292c45ef9df5cdca67e3d)
+- [1f93c54 — Correct the reward background after phase changes](https://github.com/TheSeeker713/thes33k3r/commit/1f93c541661750f4ca72337d6f06ad221b99ab3c)
+- [2ce9170 — Preload media and add audio fallback diagnostics](https://github.com/TheSeeker713/thes33k3r/commit/2ce9170477f33fe2bf62f27fb3eac46ecc0ff5f0)
+- [4dbbd0f — Revise the safe background and card-flip preload](https://github.com/TheSeeker713/thes33k3r/commit/4dbbd0f5206b9e21470aebb5c8af5781aea61628)
+- [b803ab0 — Correct the historical date range](https://github.com/TheSeeker713/thes33k3r/commit/b803ab0f5337dce02d051849a97061507edaa0b4)
+- [4bbed39 — Track required image and sound files](https://github.com/TheSeeker713/thes33k3r/commit/4bbed39f1180dfdac51ba2345627fee7c37086bb)
 
----
+### Site source at this stage
 
-### [December 23rd, 2025] [12:15 PM MT]
-**Adding Audio Feedback & WebAudio Fallback**
-
-Every interaction needs feedback. The card flip needed a sound. Not just any sound—something that felt like turning a physical card over. A satisfying *whoosh* or *flip*.
-
-Found `card_flip.mp3` in the sound effects directory. Already there from the game asset organization. Perfect.
-
-Initial implementation: create an `Audio` element on click, set the source, play it. Simple. But browser autoplay policies are strict. Audio must be triggered by user interaction. The click handler qualified, but I needed to handle potential failures gracefully.
-
-Added a fallback: if HTML5 Audio fails, use Web Audio API. Fetch the MP3, decode it, create a buffer source, connect to gain node, play. More complex, but more reliable across browsers. The fallback worked perfectly.
-
-Also added diagnostic logging to help debug any audio issues. The sound played. The card flipped. The experience felt more complete.
-
----
-
-### [December 27th, 2025] [11:19 AM MT]
-**The Missing Background Fix & Audio Preloading**
-
-I'd been testing the card in the unlocked phase, and something felt off. The card looked good, but it didn't feel integrated with the safe_open background. The screenshot showed the card should have `safe_open.png` as its background—layered behind the card content.
-
-I'd missed that detail. The card was rendering on top of the safe_open background, but the card itself didn't have the background image. It needed to be part of the card's visual design, not just the page background.
-
-Fixed it by adding inline styles to both card faces:
-- `backgroundImage: url('/rooms/safe_open.png')`
-- `backgroundSize: 'cover'`
-- `backgroundPosition: 'center'`
-
-The front face now shows the safe_open background behind the card front image. The back face shows the safe_open background with a semi-transparent white overlay (`bg-white/95 backdrop-blur-sm`) to maintain text readability.
-
-The card now feels like it's emerging from the safe itself. Thematic. Cohesive.
-
-Also fixed the audio delay issue. The card flip sound was working, but there was a slight delay on first click. The audio element was being created on-demand, which meant the browser had to fetch and decode the file before playing.
-
-Solution: preload the audio on component mount using `useEffect`. Create the `Audio` element once, set all the properties (volume, crossOrigin, preload), and keep it in a ref. When the user clicks, just reset `currentTime` to 0 and call `play()`. Instant feedback.
-
-Also improved error handling. Added event listeners for audio errors, console warnings for debugging, and ensured the Web Audio API fallback always works if HTML5 Audio fails.
-
-The card now feels responsive. Every click triggers immediate audio feedback. No lag. No delays. Just smooth, satisfying interaction.
-
----
-
-### [December 27th, 2025] [11:20 AM MT]
-**Final Testing & Reflection**
-
-Tested the complete flow:
-1. Play the Bank Encounter game
-2. Match all pairs
-3. Watch the reward video
-4. Reach the unlocked phase
-5. See the card with safe_open background
-6. Click to flip—hear the sound
-7. Read the lore on the back
-8. Flip again to see the front
-
-Everything works. The background is visible. The sound plays every time. The animation is smooth. The experience feels polished.
-
-The S33K3R card represents more than just a reward. It's a collectible. A piece of the EARTIX that players can interact with. A physical manifestation of the transmission's core mythology.
-
-This component bridges gameplay and narrative. It rewards completion while delivering essential lore. It's both functional and meaningful.
-
-The Bank Encounter is now complete. The card is the perfect capstone to the experience.
-
-*End of transmission*
-
+- [Reward-card and audio source](https://github.com/TheSeeker713/thes33k3r/blob/4bbed39f1180dfdac51ba2345627fee7c37086bb/src/components/S33k3rCard.tsx)
+- [Bank reward integration](https://github.com/TheSeeker713/thes33k3r/blob/4bbed39f1180dfdac51ba2345627fee7c37086bb/src/components/BankEncounter.tsx)
+- [Asset tracking rules](https://github.com/TheSeeker713/thes33k3r/blob/4bbed39f1180dfdac51ba2345627fee7c37086bb/.gitignore)

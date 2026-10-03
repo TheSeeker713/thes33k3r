@@ -1,0 +1,20 @@
+{
+  "id": "devlog12",
+  "slug": "devlog12",
+  "number": "12",
+  "title": "Letting more of the video loop show",
+  "subtitle": "Letting more of the video loop show",
+  "date": "[October 2nd, 2026]",
+  "time": "[11:10 PM MT]",
+  "timezone": "America/Denver",
+  "author": "Jeremy Robards",
+  "authorRole": "CTO of Mycelia Interactive LLC",
+  "startDate": "2026-10-02T23:10:29-06:00",
+  "endDate": "2026-10-02T23:10:29-06:00",
+  "dateRange": "October 2nd, 2026",
+  "phase": "Design refinement",
+  "revisedDate": "2026-10-03",
+  "contentPath": "/devlog/devlog12.md",
+  "excerpt": "The landing-page layout was right, but the looping video was too subdued. I raised its visibility in both themes while keeping the text, controls and reduced-motion behavior in place.",
+  "status": "DECRYPTED"
+}

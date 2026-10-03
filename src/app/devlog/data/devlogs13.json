@@ -1,0 +1,20 @@
+{
+  "id": "devlog13",
+  "slug": "devlog13",
+  "number": "13",
+  "title": "Giving the collective its faces",
+  "subtitle": "Giving the collective its faces",
+  "date": "[October 3rd, 2026]",
+  "time": "[12:51 AM MT]",
+  "timezone": "America/Denver",
+  "author": "Jeremy Robards",
+  "authorRole": "CTO of Mycelia Interactive LLC",
+  "startDate": "2026-10-03T00:51:06-06:00",
+  "endDate": "2026-10-03T00:51:06-06:00",
+  "dateRange": "October 3rd, 2026",
+  "phase": "Character integration",
+  "revisedDate": "2026-10-03",
+  "contentPath": "/devlog/devlog13.md",
+  "excerpt": "I brought eight approved character portraits onto the landing page and the collective cards. The implementation also carried an essential story correction: Ethan and Emma Walker are alternate-reality versions of the same person.",
+  "status": "DECRYPTED"
+}

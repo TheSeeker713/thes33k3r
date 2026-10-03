@@ -1,0 +1,20 @@
+{
+  "id": "devlog10",
+  "slug": "devlog10",
+  "number": "10",
+  "title": "Rebuilding the site behind the design",
+  "subtitle": "Rebuilding the site behind the design",
+  "date": "[October 2nd, 2026]",
+  "time": "[11:03 PM MT]",
+  "timezone": "America/Denver",
+  "author": "Jeremy Robards",
+  "authorRole": "CTO of Mycelia Interactive LLC",
+  "startDate": "2026-10-02T23:03:42-06:00",
+  "endDate": "2026-10-02T23:03:42-06:00",
+  "dateRange": "October 2nd, 2026",
+  "phase": "Rebuild",
+  "revisedDate": "2026-10-03",
+  "contentPath": "/devlog/devlog10.md",
+  "excerpt": "The visual redesign shared a commit with a substantial rebuild. I kept the static Cloudflare deployment, updated the stack and added checks that could catch missing routes and assets before a push went live.",
+  "status": "DECRYPTED"
+}

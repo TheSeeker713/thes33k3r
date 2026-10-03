@@ -1,10 +1,20 @@
 {
   "id": "devlog04",
-  "title": "Part 4: The Cinematic Pivot",
+  "slug": "devlog04",
+  "number": "04",
+  "title": "Building the cinematic room engine",
+  "subtitle": "Building the cinematic room engine",
   "date": "[December 10th, 2025]",
-  "time": "[10:08 AM]",
-  "timezone": "MT",
-  "author": "J.W.",
+  "time": "[10:08 AM MT]",
+  "timezone": "America/Denver",
+  "author": "Jeremy Robards",
+  "authorRole": "CTO of Mycelia Interactive LLC",
+  "startDate": "2025-12-10T10:08:50-07:00",
+  "endDate": "2025-12-10T10:28:56-07:00",
+  "dateRange": "December 10th, 2025",
+  "phase": "Early build",
+  "revisedDate": "2026-10-03",
   "contentPath": "/devlog/devlog04.md",
-  "excerpt": "A fundamental architectural shift. Sometimes you build something and realize it's not quite right. The point-and-click felt static, disconnected. I wanted something more visceral. The game moved from a traditional point-and-click adventure to an FMV (Full Motion Video) style choose-your-own-adventure system. This wasn't just a feature add—it was a complete reimagining of how players would experience THE S33K3R universe. A risk, yes. But the right one."
+  "excerpt": "I built an engine that could play a room video and offer a choice when it ended. Then I configured the Next.js build to export static pages for Cloudflare.",
+  "status": "ARCHIVED"
 }

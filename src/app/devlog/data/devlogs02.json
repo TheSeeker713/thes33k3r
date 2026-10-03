@@ -1,10 +1,20 @@
 {
   "id": "devlog02",
-  "title": "Part 2: Mechanics & Secrets",
+  "slug": "devlog02",
+  "number": "02",
+  "title": "Teaching the CRT to respond",
+  "subtitle": "Teaching the CRT to respond",
   "date": "[November 29th, 2025]",
-  "time": "[11:16 AM]",
-  "timezone": "MT",
-  "author": "J.W.",
+  "time": "[11:16 AM MT]",
+  "timezone": "America/Denver",
+  "author": "Jeremy Robards",
+  "authorRole": "CTO of Mycelia Interactive LLC",
+  "startDate": "2025-11-29T11:16:54-07:00",
+  "endDate": "2025-11-30T00:50:51-07:00",
+  "dateRange": "November 29th, 2025 \u2013 November 30th, 2025",
+  "phase": "Early build",
+  "revisedDate": "2026-10-03",
   "contentPath": "/devlog/devlog02.md",
-  "excerpt": "Video playback was buggy. Videos weren't playing consistently. The solution: keep the video component mounted and use useEffect hooks to manage playback state properly. A subtle but crucial fix that made the experience feel polished. Late night creative bursts brought hidden easter eggs—the kind of secrets that make people feel clever when they find them."
+  "excerpt": "The CRT gained a message puzzle and working television controls. I kept adjusting the background and overlays because the atmosphere was competing with the text people needed to read.",
+  "status": "ARCHIVED"
 }

@@ -146,16 +146,18 @@ When the user says **"update devlog"**, follow the comprehensive workflow define
 
 1. **Check git commits first** - Extract timestamps and messages
 2. **Identify target file** - devlogXX.md format, max 111 lines
-3. **Write in magazine article format** - First-person narrative with personality
-4. **Use bracketed timestamps** - `[December 14th, 2025] [2:30 PM MT]` format
+3. **Write as Jeremy Robards** - First-person project account grounded in sources
+4. **Use bracketed timestamps** - `[October 2nd, 2026] [11:03 PM MT]` format
 5. **Update corresponding JSON** - Sync devlogsXX.json with engaging excerpt
-6. **Verify magazine integration** - Test expansion and rendering
+6. **Verify Archive integration** - Oldest first; check reading pages, bylines and source sections
 7. **Build, commit, push** - Ensure clean build before deployment
 
 ### Critical Rules:
 - ✅ Magazine article style (NOT technical documentation)
 - ✅ 111 line maximum per devlog file
-- ✅ Individual timestamps for each entry (12-hour MT format)
+- ✅ Recorded work timestamps (12-hour MT, America/Denver) and a separate revision date
+- ✅ Oldest entry first; commit and pinned site-source links at the bottom of every entry
+- ✅ No invented anecdotes or unsupported performance claims
 - ✅ Always sync markdown + JSON files together
 - ✅ Devlog markdown files stored in `public/devlog/`
 - ✅ JSON metadata stored in `src/app/devlog/data/`

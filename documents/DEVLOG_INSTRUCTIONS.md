@@ -1,322 +1,33 @@
-# DEVLOG INSTRUCTIONS FOR GITHUB COPILOT
+# Development Archive workflow
 
-## CRITICAL: Read This First When User Says "Update Devlog"
+## Author and voice
 
-When the user requests a devlog update, **ALWAYS** follow this exact workflow:
+Write the devlogs as Jeremy Robards, CTO of Mycelia Interactive LLC. Use first-person project ownership, direct language and concrete decisions. The public article header carries this byline. Research and the rationale for the October 2026 rewrite are recorded in [ARCHIVE_EDITORIAL_RESEARCH_2026.md](ARCHIVE_EDITORIAL_RESEARCH_2026.md).
 
----
+Do not invent personal scenes, conversations, emotions, audience feedback or benchmarks to make a log sound human. Explain what changed and why; distinguish recorded plans from completed work. Technical details should help readers understand the experience.
 
-## STEP 1: CHECK COMMIT HISTORY
+## Sources and dates
 
-**Before writing anything**, check recent git commits:
+Inspect the Git history and relevant source files before writing. Every article must end with a Sources section containing GitHub commit links and site-source links pinned to the commit discussed. Verify that each cited file exists at that commit. When one commit spans two topics, disclose that relationship rather than inventing separate releases.
 
-```bash
-git log --oneline --since="[DATE OF LAST DEVLOG ENTRY]" --format="%h - %s - %ai"
-```
+Use actual commit timestamps for the recorded work. Convert them with the America/Denver timezone, including daylight-saving adjustments. Display bracketed dates with a full month, ordinal day and year, followed by a 12-hour time with MT. The work date and editorial revision date are separate.
 
-**Extract:**
-- Commit hashes
-- Commit messages
-- Commit timestamps (convert to Mountain Time 12-hour format)
-- Author information
+Example: `### [October 2nd, 2026] [11:03 PM MT]`.
 
-**If no commits exist since last entry:**
-- Use current date/time
-- Reference the active chat conversation
-- Document real-time development decisions
+## Files and metadata
 
----
+Use `devlogXX.md` filenames with zero-padded numbers and no more than 111 lines. Keep the public reading copy in `public/devlog/` synchronized with its mirror in `documents/devlog/`. The combined `documents/devlog.md` is an index of the individual articles.
 
-## STEP 2: DETERMINE FILE TARGET
+Each article has `src/app/devlog/data/devlogsXX.json` metadata containing id, slug, number, title, subtitle, date, time, timezone, author, authorRole, startDate, endDate, dateRange, phase, revisedDate, contentPath, excerpt and status. ISO startDate/endDate include the actual timezone offset. Excerpts summarize the article in first person. Public contentPath points to `/devlog/devlogXX.md`.
 
-**Naming Convention:** `devlogXX.md` where XX is zero-padded (01, 02, 03... 99)
+## Order and publishing
 
-**File Size Rule:** Maximum **111 lines** per devlog file
+The Archive reads from oldest to newest: first entry at the top, last at the bottom. `src/lib/devlogs.ts` loads the metadata automatically and orders it by startDate, then entry number. The homepage count, sitemap and exported-route verification use the same catalog; do not add hardcoded imports or totals.
 
-**When to create new file:**
-- Current devlog file exceeds 111 lines
-- New major project phase begins
-- Natural narrative break point reached
+The article renderer sanitizes markdown HTML. Preserve that protection. Previous/next links follow the same chronological order as the index.
 
-**Current devlog count check:**
-```bash
-ls documents/devlog/*.md | Measure-Object -Line
-```
+Run scoped lint, the production build and export verification. Check the rendered index and article pages at desktop and mobile widths, including source sections and navigation. Confirm all reading copies, metadata and intended UI changes are staged. Commit and push when publishing is authorized, then verify GitHub and Cloudflare checks plus the live pages.
 
----
+Historical versions remain available through Git history. Date and source corrections should improve the reading record without presenting a retrospective rewrite as an untouched original.
 
-## STEP 3: WRITE IN MAGAZINE ARTICLE FORMAT
-
-### Required Structure
-
-Each devlog entry **MUST** include:
-
-1. **Bracketed Date & Time Header:**
-   ```markdown
-   ### [December 14th, 2025] [11:45 AM MT]
-   ```
-
-2. **Entry Title (Optional but Recommended):**
-   ```markdown
-   **Building the Asset Pipeline**
-   ```
-
-3. **Narrative Body:**
-   - First-person perspective ("I", "me", "my")
-   - Conversational tone with personality
-   - Technical details wrapped in story
-   - Emotional context ("excited", "frustrated", "relieved")
-   - Problem → Solution → Result flow
-
-4. **Code Samples (When Relevant):**
-   - Use markdown code blocks with language tags
-   - Explain *why* not just *what*
-   - Include before/after comparisons when helpful
-
-### Writing Style Guidelines
-
-**DO:**
-- ✅ Write like a human developer blogging their journey
-- ✅ Use contractions ("it's", "I'm", "wasn't")
-- ✅ Show personality and emotion
-- ✅ Explain the "why" behind decisions
-- ✅ Include failures and pivots, not just successes
-- ✅ Add time-of-day context ("Late night coding", "Morning coffee in hand")
-- ✅ Use short paragraphs (2-4 sentences)
-- ✅ Mix technical jargon with plain English
-
-**DON'T:**
-- ❌ Use bullet-point technical documentation format
-- ❌ Write in third person or passive voice
-- ❌ List features without narrative context
-- ❌ Skip the emotional/decision-making process
-- ❌ Use only technical jargon without explanation
-- ❌ Write walls of text (break into paragraphs)
-
-### Example Entry Format
-
-```markdown
-### [December 14th, 2025] [2:30 PM MT]
-**The Animation Breakthrough**
-
-I'd been staring at the same choppy transition for twenty minutes. The card expansion looked janky—too fast, too linear. No easing. It felt like a PowerPoint slide, not a magazine page.
-
-Then it hit me: `ease-in-out` wasn't enough. I needed spring physics. Framer Motion's spring animations simulate real-world motion with mass and damping. Changed the transition config:
-
-\`\`\`tsx
-transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-\`\`\`
-
-Instant improvement. The cards now *bounce* slightly on expansion. Satisfying. Tactile. Real.
-
-Ran the build. Deployed. Tested on mobile. Perfect. Sometimes the smallest tweaks make the biggest difference.
-```
-
----
-
-## STEP 4: UPDATE CORRESPONDING JSON
-
-**Location:** `src/app/devlog/data/devlogsXX.json`
-
-**Required Fields:**
-```json
-{
-  "id": "devlog07",
-  "title": "Part 7: Reflection & Credits",
-  "date": "[December 14th, 2025]",
-  "time": "[11:11 AM]",
-  "timezone": "MT",
-  "author": "J.W.",
-  "contentPath": "../../../documents/devlog/devlogXX.md",
-  "excerpt": "2-3 sentences capturing the essence of this devlog. Engaging hook. Personal voice. No bullet points."
-}
-```
-
-**Excerpt Writing Rules:**
-- 2-3 sentences maximum
-- First-person perspective
-- Hook the reader's curiosity
-- Match the narrative tone of the content
-- NO bullet points, NO technical lists
-- Focus on the *story* not the features
-
----
-
-## STEP 5: VERIFY MAGAZINE PAGE INTEGRATION
-
-**Check the magazine imports:**
-```tsx
-// src/app/devlog/page.tsx
-import devlog07 from './data/devlogs07.json'
-```
-
-**If adding new devlog:**
-1. Import the new JSON file
-2. Add to `devlogs` array in reverse chronological order
-3. Verify array order: `[newest, ..., oldest]`
-
-**Test the magazine page:**
-```bash
-npm run dev
-# Navigate to /devlog
-# Expand the new entry
-# Verify markdown renders correctly
-# Check metadata displays properly
-```
-
----
-
-## STEP 6: BUILD AND COMMIT
-
-**Always follow this sequence:**
-
-1. **Build:**
-   ```bash
-   npm run build
-   ```
-   - Must succeed with zero errors
-   - All routes must prerender successfully
-
-2. **Verify Changed Files:**
-   ```bash
-   git status -sb
-   ```
-   - Confirm devlogXX.md modified/added
-   - Confirm devlogsXX.json modified/added
-   - Confirm no unexpected changes
-
-3. **Stage Files:**
-   ```bash
-   git add documents/devlog/devlogXX.md src/app/devlog/data/devlogsXX.json
-   ```
-
-4. **Commit:**
-   ```bash
-   git commit -m "Update devlog: [brief description of entries added]"
-   ```
-
-5. **Push:**
-   ```bash
-   git push
-   ```
-
----
-
-## DATE & TIME FORMAT RULES
-
-**CRITICAL: Always use this exact format:**
-
-### Header Format
-```markdown
-### [December 14th, 2025] [11:45 AM MT]
-```
-
-**Date Rules:**
-- Full month name (December, not Dec)
-- Day with ordinal suffix (14th, not 14)
-- Four-digit year (2025)
-- Brackets around date: `[December 14th, 2025]`
-
-**Time Rules:**
-- 12-hour format ONLY (never 24-hour)
-- Include AM/PM designation
-- Include MT timezone abbreviation
-- Brackets around time: `[11:45 AM MT]`
-- No seconds unless specifically logging exact commit time
-
-**Timezone:**
-- ALWAYS Mountain Time (MT)
-- Never use other timezones
-- Convert UTC commit times to MT (UTC-7 or UTC-6 depending on DST)
-
----
-
-## FILE SIZE MANAGEMENT
-
-**Maximum:** 111 lines per devlog file
-
-**When approaching limit:**
-1. Count lines: `(Get-Content documents/devlog/devlogXX.md).Count`
-2. If > 100 lines, consider splitting at next natural break
-3. Create new file (increment number)
-4. Update imports in magazine page
-5. Create corresponding JSON file
-
-**Natural break points:**
-- Major feature completion
-- New project phase
-- Significant time gap (multiple days)
-- Shift in development focus
-
----
-
-## COMMIT MESSAGE CONVENTIONS
-
-**Format:** `Update devlog: [specific change]`
-
-**Examples:**
-- `Update devlog: Add Bank Encounter development entries`
-- `Update devlog: Document markdown rendering fix`
-- `Update devlog: Split devlog06 and create devlog08`
-- `Update devlog: December 14th afternoon session`
-
-**Include in message:**
-- Date range of entries added
-- Major topics covered
-- File numbers affected (if multiple)
-
----
-
-## TROUBLESHOOTING
-
-### Build Fails
-- Check TypeScript errors in devlog page
-- Verify JSON syntax (no trailing commas)
-- Confirm all imports are correct
-- Check for special characters in markdown
-
-### Magazine Not Showing Entry
-- Verify JSON file exists in correct location
-- Check import statement in page.tsx
-- Confirm entry added to devlogs array
-- Verify contentPath is correct
-
-### Markdown Not Rendering
-- Check for HTML tags that need escaping
-- Verify code blocks use proper fencing
-- Ensure no malformed markdown syntax
-- Test with simpler content first
-
-### Wrong Timezone Displayed
-- All times MUST be MT (Mountain Time)
-- Check JSON file timezone field
-- Verify markdown header includes MT
-- Convert UTC timestamps before writing
-
----
-
-## QUICK REFERENCE CHECKLIST
-
-When user says "update devlog":
-
-- [ ] Check git commits for recent changes
-- [ ] Identify target devlog file (check line count)
-- [ ] Write entries in magazine article format
-- [ ] Each entry has bracketed date/time (12-hour MT)
-- [ ] Narrative voice with personality
-- [ ] Update corresponding JSON file
-- [ ] Write engaging 2-3 sentence excerpt
-- [ ] Verify magazine page imports
-- [ ] Run npm run build (must succeed)
-- [ ] Check git status
-- [ ] Stage devlog files
-- [ ] Commit with descriptive message
-- [ ] Push to origin
-
----
-
-**Last Updated:** December 14th, 2025  
-**Version:** 1.0  
-**Maintained By:** J.W.
-
-**Note to Copilot:** These instructions are mandatory for all devlog operations. When the user says "update devlog", treat it as a command to follow this entire workflow. Do not skip steps. Do not deviate from the format. Consistency is critical for the magazine experience.
+Updated October 3, 2026 to reflect the approved Archive revision.

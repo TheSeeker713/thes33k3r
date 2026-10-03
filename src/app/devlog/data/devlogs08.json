@@ -1,0 +1,20 @@
+{
+  "id": "devlog08",
+  "slug": "devlog08",
+  "number": "08",
+  "title": "Finishing the Bank reward card",
+  "subtitle": "Finishing the Bank reward card",
+  "date": "[December 22nd, 2025]",
+  "time": "[7:48 PM MT]",
+  "timezone": "America/Denver",
+  "author": "Jeremy Robards",
+  "authorRole": "CTO of Mycelia Interactive LLC",
+  "startDate": "2025-12-22T19:48:28-07:00",
+  "endDate": "2025-12-27T11:33:12-07:00",
+  "dateRange": "December 22nd, 2025 \u2013 December 27th, 2025",
+  "phase": "Early build",
+  "revisedDate": "2026-10-03",
+  "contentPath": "/devlog/devlog08.md",
+  "excerpt": "I worked on the card revealed at the end of the Bank encounter, including its flip, sound and background. The final fix was making sure the required image and audio files were actually tracked for deployment.",
+  "status": "ARCHIVED"
+}
