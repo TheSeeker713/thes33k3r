@@ -1,48 +1,18 @@
-'use client'
-
-import VideoBackground from '@/components/VideoBackground'
+import Link from 'next/link'
 import MovieScreen from '@/components/MovieScreen'
-import Footer from '@/components/Footer'
-import Navbar from '@/components/Navbar'
-
+import VideoBackground from '@/components/VideoBackground'
+import SiteShell from '@/components/SiteShell'
 export default function Home() {
-  return (
-    <div className="relative min-h-screen flex flex-col bg-[#0d0a08] text-stone-200 overflow-x-hidden">
-      {/* Background Video Layer */}
-      <VideoBackground />
-      
-      {/* Navigation Bar - Fixed */}
-      <Navbar />
-
-      {/* Main Content Container */}
-      <main className="relative z-10 flex flex-col min-h-screen pt-20 md:pt-24 pb-24">
-        {/* Header - Sticky below navbar */}
-        <header className="sticky top-16 md:top-20 z-40 text-center py-4 md:py-6 bg-[#0d0a08]/60 backdrop-blur-sm">
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold font-mono text-amber-500 text-glow tracking-widest">
-            THE S33K3R TRANSMISSION
-          </h1>
-          <div className="w-48 h-1 bg-gradient-to-r from-transparent via-amber-600 to-transparent mx-auto mt-2"></div>
-        </header>
-        
-        {/* Movie Theater Screen - Permanent Display */}
-        <section id="transmissions" className="scroll-mt-24">
-          <MovieScreen />
-        </section>
-
-        {/* Phase II Text */}
-        <section className="scroll-mt-24 mt-8 px-4">
-          <div className="max-w-4xl mx-auto text-center bg-[#11100f]/70 border border-amber-600/40 rounded-lg p-6 md:p-8 shadow-lg backdrop-blur-sm">
-            <p className="text-amber-500 text-lg md:text-xl font-mono leading-relaxed text-glow">
-              PROJECT S33K3R: PHASE II INITIATED. The simulation evolves in 2026. A Full-Motion Video Cinematic Experience is currently in development. You are invited to test the prototype... soon.
-            </p>
-          </div>
-        </section>
-      </main>
-
-      {/* Footer - Fixed */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#0d0a08]/95 backdrop-blur-sm">
-        <Footer />
-      </div>
-    </div>
-  )
+  return <SiteShell>
+    <section className="hero">
+      <img className="hero-image" src="/images/signal-park.webp" alt="An atmospheric amusement park beside a misty canal, with teal railings and amber lanterns" fetchPriority="high" width="1536" height="1024" />
+      <div className="hero-shade" />
+      <div className="hero-copy"><p className="eyebrow"><span className="signal-dot" /> A SIGNAL ACROSS REALITIES</p><h1>THE S33K3R<br /><em>TRANSMISSION</em></h1><p className="hero-subtitle">Eleven fragments. One transmission.</p><p className="hero-description">Their worlds were erased.<br />Their voices are still reaching ours.</p><div className="hero-actions"><a className="button button-light" href="#transmissions">Watch the transmission <span>↗</span></a><Link className="hero-link" href="/collective">Discover the collective →</Link></div></div>
+      <div className="hero-coordinate"><span>11 SURVIVORS / ONE CONSCIOUSNESS</span><span>THE SIGNAL CONTINUES</span></div>
+    </section>
+    <div className="signal-strip"><span>FMV & CINEMA</span><span aria-hidden="true">✳</span><span>INTERACTIVE WORLDS</span><span aria-hidden="true">✳</span><span>MUSIC & MEMORY</span><span aria-hidden="true">✳</span><span>THE S33K3R TRANSMISSION</span></div>
+    <section id="transmissions" className="transmission-section"><VideoBackground /><div className="section-heading"><div><p className="eyebrow">01 / RECEIVE THE SIGNAL</p><h2>A world beyond<br /><em>the screen.</em></h2></div><p>A cinematic transmission from The S33k3r.<br />Step into the story. Follow what remains.</p></div><MovieScreen /></section>
+    <section className="collective-preview content-section"><div className="section-heading"><div><p className="eyebrow">02 / THE COLLECTIVE</p><h2>Eleven lives.<br /><em>Still connected.</em></h2></div><div className="section-intro"><p>S33k3r is a collective consciousness of eleven surviving human fragments. Each carries a distinct personality, memory and connection to a world that no longer exists.</p><Link className="text-link" href="/collective">Meet the collective <span>↗</span></Link></div></div><div className="signal-art" aria-hidden="true">{Array.from({length:11}, (_,i) => <div key={i}><span className={`signal-symbol symbol-${i % 4}`}>{['◯','✳','≋','⌁'][i%4]}</span><span>{String(i+1).padStart(2,'0')}</span></div>)}</div><p className="fine-note">Eleven fragments. Distinct memories. A shared transmission.</p></section>
+    <section className="explore-section content-section"><p className="eyebrow">03 / FOLLOW THE TRANSMISSION</p><div className="experience-grid"><Link href="/games" className="experience-card bank-card"><img src="/rooms/banklobby_room.webp" alt="Sunlight entering the abandoned Bank lobby" loading="lazy" width="1280" height="720" /><div><span className="eyebrow">INTERACTIVE EXPERIENCE</span><h2>The Bank</h2><p>The signal leads here. The vault contains the first truth.</p><span className="text-link">Explore the games <span>↗</span></span></div></Link><Link href="/devlog" className="experience-card archive-card"><span className="archive-number" aria-hidden="true">08</span><div><span className="eyebrow">THE DEVELOPMENT ARCHIVE</span><h2>Behind the signal.</h2><p>Eight chapters tracing the early cinematic experience, its puzzles and the Bank encounter.</p><span className="text-link">Read the archive <span>↗</span></span></div></Link></div></section>
+  </SiteShell>
 }

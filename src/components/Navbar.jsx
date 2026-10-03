@@ -1,139 +1,32 @@
-"use client"
-
-import React, { useState } from 'react'
+'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
-const Navbar = () => {
+export default function Navbar() {
   const pathname = usePathname()
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-
-  const menuItems = [
-    { label: 'HOME', href: '/', type: 'link' },
-    { label: 'TRANSMISSIONS', href: { pathname: '/', hash: 'transmissions' }, type: 'link' },
-  ]
-
-  const isActive = (href) => {
-    const targetPath = typeof href === 'string' ? href : href?.pathname || '/'
-    if (targetPath === '/' && pathname === '/') return true
-    return pathname === targetPath
+  const [open, setOpen] = useState(false)
+  const [dark, setDark] = useState(false)
+  useEffect(() => {
+    let theme = 'light'
+    try { theme = localStorage.getItem('s33k3r-theme') || 'light' } catch { /* Storage may be unavailable in private browsing. */ }
+    document.documentElement.dataset.theme = theme === 'dark' ? 'dark' : 'light'
+    const frame = requestAnimationFrame(() => setDark(theme === 'dark'))
+    return () => cancelAnimationFrame(frame)
+  }, [])
+  function toggleTheme() {
+    const next = !dark
+    setDark(next)
+    document.documentElement.dataset.theme = next ? 'dark' : 'light'
+    try { localStorage.setItem('s33k3r-theme', next ? 'dark' : 'light') } catch { /* Storage may be unavailable in private browsing. */ }
   }
-
-  return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-stone-950/90 backdrop-blur-sm border-b border-amber-900/30">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex justify-between items-center h-12 md:h-14">
-          {/* Logo/Brand */}
-          <div className="flex-shrink-0">
-            <span className="text-amber-500 font-mono text-sm md:text-base tracking-wider">
-              S33K3R
-            </span>
-          </div>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-6">
-            {menuItems.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className={`font-mono text-xs tracking-wider transition-colors duration-200 ${
-                  isActive(item.href)
-                    ? 'text-amber-500'
-                    : 'text-stone-400 hover:text-amber-400'
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
-            
-            {/* Prominent Warning Button */}
-            <Link
-              href="/about"
-              className="font-mono text-xs tracking-wider px-4 py-2 rounded border-2 border-amber-500 text-amber-500 bg-amber-900/20 hover:bg-amber-800/40 hover:border-amber-400 hover:text-amber-400 transition-all duration-300 animate-pulse font-bold shadow-lg shadow-amber-500/30"
-            >
-              ⚠ THE WARNING
-            </Link>
-            
-            {/* Room link to the game */}
-            <Link
-              href="/bank"
-              className="font-mono text-xs tracking-wider px-3 py-1 rounded border border-amber-500 text-amber-400 bg-amber-900/20 hover:bg-amber-800/30 transition-colors"
-            >
-              PLAY THE GAME
-            </Link>
-            
-            {/* Developer Magazine link */}
-            <Link
-              href="/devlog"
-              className="font-mono text-xs tracking-wider px-4 py-2 rounded border border-cyan-500 text-cyan-400 bg-cyan-900/20 hover:bg-cyan-800/30 hover:border-cyan-400 transition-all font-semibold shadow-md shadow-cyan-500/20"
-            >
-              📖 DEV MAGAZINE
-            </Link>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-amber-500 hover:text-amber-400 transition-colors"
-            aria-label="Toggle menu"
-          >
-            <div className="w-6 h-5 flex flex-col justify-between">
-              <span className={`block h-0.5 bg-current transform transition-transform duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-              <span className={`block h-0.5 bg-current transition-opacity duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}></span>
-              <span className={`block h-0.5 bg-current transform transition-transform duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
-            </div>
-          </button>
-        </div>
-
-        {/* Mobile Menu Dropdown */}
-        <div className={`md:hidden overflow-hidden transition-all duration-300 ${isMenuOpen ? 'max-h-96 pb-4' : 'max-h-0'}`}>
-          <div className="flex flex-col space-y-2 pt-2 border-t border-amber-900/20">
-            {menuItems.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                onClick={() => setIsMenuOpen(false)}
-                className={`font-mono text-sm tracking-wider py-2 px-2 transition-colors duration-200 ${
-                  isActive(item.href)
-                    ? 'text-amber-500 bg-amber-900/20'
-                    : 'text-stone-400 hover:text-amber-400 hover:bg-amber-900/10'
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
-            
-            {/* Mobile Warning Button */}
-            <Link
-              href="/about"
-              onClick={() => setIsMenuOpen(false)}
-              className="font-mono text-sm tracking-wider py-3 px-4 rounded border-2 border-amber-500 text-amber-500 bg-amber-900/20 hover:bg-amber-800/40 transition-all duration-300 animate-pulse font-bold text-center shadow-lg shadow-amber-500/30"
-            >
-              ⚠ THE WARNING
-            </Link>
-            
-            {/* Mobile Room link */}
-            <Link
-              href="/bank"
-              onClick={() => setIsMenuOpen(false)}
-              className="font-mono text-sm tracking-wider py-2 px-2 rounded border border-amber-500 text-amber-400 bg-amber-900/20 hover:bg-amber-800/30 transition-colors text-left"
-            >
-              PLAY THE GAME
-            </Link>
-            
-            {/* Mobile Developer Magazine link */}
-            <Link
-              href="/devlog"
-              onClick={() => setIsMenuOpen(false)}
-              className="font-mono text-sm tracking-wider py-3 px-4 rounded border border-cyan-500 text-cyan-400 bg-cyan-900/20 hover:bg-cyan-800/30 transition-all font-semibold text-center shadow-md shadow-cyan-500/20"
-            >
-              📖 DEV MAGAZINE
-            </Link>
-          </div>
-        </div>
-      </div>
+  const links = [['The collective', '/collective'], ['Transmissions', '/#transmissions'], ['Games', '/games'], ['Archive', '/devlog']]
+  return <header className="site-header">
+    <Link href="/" className="wordmark" aria-label="S33k3r home">S33K3R<span className="wordmark-dot">✳</span></Link>
+    <nav aria-label="Main navigation" className={open ? 'main-nav is-open' : 'main-nav'} id="main-navigation">
+      {links.map(([label, href]) => <Link key={href} href={href} aria-current={pathname === href ? 'page' : undefined} onClick={() => setOpen(false)}>{label}</Link>)}
     </nav>
-  );
-};
-
-export default Navbar;
+    <div className="header-controls"><button className="theme-toggle" onClick={toggleTheme} aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'} aria-pressed={dark}><span aria-hidden="true">{dark ? '☾' : '☀'}</span><span className="theme-label">{dark ? 'Dark' : 'Light'}</span></button>
+    <button className="menu-toggle" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="main-navigation">{open ? 'Close' : 'Menu'}</button></div>
+  </header>
+}

@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 
 const CARD_FLIP_SOUND = '/rooms/game_assets/sound_fx/card_flip.mp3'
-const SAFE_OPEN_BG = '/rooms/safe_open.png'
+const SAFE_OPEN_BG = '/rooms/safe_open.webp'
 
 export default function S33k3rCard() {
   const [isFlipped, setIsFlipped] = useState(false)

@@ -1,42 +1,6 @@
-import AboutSeeker from '@/components/AboutSeeker'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
-import VideoBackground from '@/components/VideoBackground'
-
-export const metadata = {
-  title: 'About The S33K3R | The Transmission',
-  description: 'Learn about The S33K3R and the multiversal war against The Null Dominion.',
-}
-
+import SiteShell from '@/components/SiteShell'
+import Link from 'next/link'
+export const metadata = { title: 'The Warning', description: 'The eleven survivors and the multiversal war against the Null Dominion.' }
 export default function AboutPage() {
-  return (
-    <div className="relative min-h-screen flex flex-col bg-[#0d0a08] text-stone-200 overflow-x-hidden">
-      {/* Background Video Layer */}
-      <VideoBackground />
-      
-      {/* Navigation Bar - Fixed */}
-      <Navbar />
-
-      {/* Main Content Container */}
-      <main className="relative z-10 flex flex-col min-h-screen pt-20 md:pt-24 pb-24">
-        {/* Header - Sticky below navbar */}
-        <header className="sticky top-16 md:top-20 z-40 text-center py-4 md:py-6 bg-[#0d0a08]/60 backdrop-blur-sm">
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold font-mono text-amber-500 text-glow tracking-widest">
-            THE S33K3R TRANSMISSION
-          </h1>
-          <div className="w-48 h-1 bg-gradient-to-r from-transparent via-amber-600 to-transparent mx-auto mt-2"></div>
-        </header>
-        
-        {/* About Content */}
-        <section className="scroll-mt-24">
-          <AboutSeeker />
-        </section>
-      </main>
-
-      {/* Footer - Fixed */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#0d0a08]/95 backdrop-blur-sm">
-        <Footer />
-      </div>
-    </div>
-  )
+ return <SiteShell><section className="page-intro"><p className="eyebrow">THE WARNING / TRANSMISSION RECEIVED</p><h1>Recognize<br /><em>the pattern.</em></h1></section><article className="story-body"><p>There is a multiversal war already in progress, and other realities have already been erased by an invisible hive-mind called <strong>THE NULL DOMINION.</strong></p><p>Its next target is our reality, but for now this universe is still poisonous to it. The Null Dominion can only breach in once our collective signal reaches a critical frequency of fear, hatred and despair.</p><blockquote>THE S33K3R is a fused consciousness of eleven survivors from destroyed realities, transmitting warnings into our world.</blockquote><p>Recognize the pattern. Disrupt the negativity signal. Stop the breach before it happens.</p><Link className="button" href="/collective">Discover the eleven fragments ↗</Link></article></SiteShell>
 }

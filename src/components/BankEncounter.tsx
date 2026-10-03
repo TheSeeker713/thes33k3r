@@ -11,7 +11,7 @@ const LOBBY_BG = '/rooms/banklobby_room.webp'
 const GAME_BG = '/rooms/bankvault_room.webp'
 const TRANSITION_VIDEO = '/rooms/banklobby_to_bankvault.webm'
 const REWARD_VIDEO = '/rooms/safe_open.webm'
-const UNLOCKED_BG = '/rooms/safe_open.png'
+const UNLOCKED_BG = '/rooms/safe_open.webp'
 const BG_MUSIC = '/rooms/game_assets/music/Echoes in the Static.mp3' 
 const SOUND_FX = {
   match: '/rooms/game_assets/sound_fx/match.webm',
@@ -30,13 +30,12 @@ function playSound(src: string) {
 
 function hasPlayedBefore(): boolean {
   if (typeof window === 'undefined') return false
-  const hasPlayed = localStorage.getItem('bankGamePlayed')
-  return hasPlayed === 'true'
+  try { return localStorage.getItem('bankGamePlayed') === 'true' } catch { return false }
 }
 
 function markGameAsPlayed() {
   if (typeof window !== 'undefined') {
-    localStorage.setItem('bankGamePlayed', 'true')
+    try { localStorage.setItem('bankGamePlayed', 'true') } catch { /* Continue without saved history. */ }
   }
 }
 
@@ -242,7 +241,7 @@ export default function BankEncounter() {
 
       {/* GAME: Numbers matching */}
       {phase === 'game' && !gameOver && (
-        <div className="absolute inset-0 flex items-center justify-center px-4 gap-4">
+        <div className="absolute inset-0 flex flex-col md:flex-row items-center justify-center px-4 gap-4">
           <div className="w-full max-w-4xl rounded-2xl p-6 bg-zinc-900/90 border border-amber-700/40 shadow-2xl">
             <h2 className="text-center text-xl mb-4">vault access protocol</h2>
             <p className="text-center text-amber-300/90 mb-6">reveal pairs of matching numbers to unseal the vault</p>
@@ -261,7 +260,7 @@ export default function BankEncounter() {
             <img 
               src={`/rooms/game_assets/images/lives/bulletchamber_${lives}.webp`}
               alt={`${lives} lives remaining`}
-              className="h-32 w-auto"
+              className="h-14 md:h-32 w-auto"
             />
           </div>
         </div>
