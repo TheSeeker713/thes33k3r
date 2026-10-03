@@ -192,9 +192,9 @@ h1 em,h2 em { font-weight:400; }
 .text-link { display:inline-flex; gap:25px; font-size:13px; align-items:center; color:var(--teal); padding-bottom:5px; border-bottom:1px solid var(--teal); }
 .transmission-section { padding:85px 6%; position:relative; overflow:hidden; background:var(--surface); }
 .transmission-section > .section-heading,.theater { position:relative; z-index:2; max-width:1230px; margin-left:auto; margin-right:auto; }
-.video-backdrop { position:absolute; inset:0; opacity:.065; pointer-events:none; }
+.video-backdrop { position:absolute; inset:0; opacity:.12; pointer-events:none; }
 .video-backdrop video { width:100%; height:100%; object-fit:cover; }
-html[data-theme='dark'] .video-backdrop { opacity:.14; }
+html[data-theme='dark'] .video-backdrop { opacity:.20; }
 .motion-control { position:absolute; bottom:22px; right:6%; z-index:4; font-size:11px; color:var(--muted); min-height:30px; text-decoration:underline; }
 .theater-topline,.theater-caption { display:flex; justify-content:space-between; gap:20px; font:10px 'Courier New',monospace; letter-spacing:1.5px; padding:17px 0; }
 .theater-topline { border-top:1px solid var(--line); }
