@@ -17,8 +17,8 @@ assert.deepEqual(renderedOrder, entries.map(entry => entry.slug), 'The published
 const sitemap = fs.readFileSync(`${root}/sitemap.xml`, 'utf8')
 for (const entry of entries) {
  assert(Number.isFinite(Date.parse(entry.startDate)) && Date.parse(entry.startDate) <= Date.parse(entry.endDate), `Invalid work dates: ${entry.slug}`)
- const markdown = fs.readFileSync(`public/devlog/${entry.slug}.md`, 'utf8')
- assert.equal(markdown, fs.readFileSync(`documents/devlog/${entry.slug}.md`, 'utf8'), `Reading copies differ: ${entry.slug}`)
+ const markdown = fs.readFileSync(`public/devlog/${entry.slug}.md`, 'utf8').replaceAll('\r\n', '\n')
+ assert.equal(markdown, fs.readFileSync(`documents/devlog/${entry.slug}.md`, 'utf8').replaceAll('\r\n', '\n'), `Reading copies differ: ${entry.slug}`)
  assert.equal(markdown.split('\n')[0], `# ${entry.title}`, `Title differs: ${entry.slug}`)
  assert(markdown.trim().split('\n').length <= 111, `Entry exceeds 111 lines: ${entry.slug}`)
  const sources = markdown.split('\n## Sources\n')

@@ -1,9 +1,10 @@
 'use client'
 
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import S33k3rCard from './S33k3rCard'
+import BankVideo from './BankVideo'
 
 type Phase = 'lobby' | 'transition' | 'game' | 'unlocked' | 'reward-video'
 
@@ -17,7 +18,6 @@ const SOUND_FX = {
   match: '/rooms/game_assets/sound_fx/match.webm',
   lifeLost: '/rooms/game_assets/sound_fx/life_lost.webm',
   gameWon: '/rooms/game_assets/sound_fx/game_won.webm',
-  scary: '/rooms/game_assets/sound_fx/scary.webm',
   gameOver: '/rooms/game_assets/sound_fx/game_over.webm',
 }
 
@@ -28,44 +28,21 @@ function playSound(src: string) {
   })
 }
 
-function hasPlayedBefore(): boolean {
-  if (typeof window === 'undefined') return false
-  try { return localStorage.getItem('bankGamePlayed') === 'true' } catch { return false }
-}
-
-function markGameAsPlayed() {
-  if (typeof window !== 'undefined') {
-    try { localStorage.setItem('bankGamePlayed', 'true') } catch { /* Continue without saved history. */ }
-  }
-}
-
 export default function BankEncounter() {
   const [phase, setPhase] = useState<Phase>('lobby')
-  const [fadeBlack, setFadeBlack] = useState(false)
-  const [hasPlayed, setHasPlayed] = useState(false)
-
-  const videoRef = useRef<HTMLVideoElement | null>(null)
-  const rewardVideoRef = useRef<HTMLVideoElement | null>(null)
-  const musicRef = useRef<HTMLAudioElement | null>(null)
-
   const deck = useMemo(() => buildShuffledDeck(), [])
   const [cards, setCards] = useState(deck)
   const [selection, setSelection] = useState<number[]>([])
   const [lives, setLives] = useState(6)
-  const [gameOver, setGameOver] = useState(false)
-
-  // Check if user has played before (client-side only)
-  useEffect(() => {
-    setHasPlayed(hasPlayedBefore())
-  }, [])
+  const gameOver = lives === 0
 
   useEffect(() => {
     const allMatched = cards.every((c) => c.matched)
-    if (allMatched && phase === 'game' && !gameOver) {
+    if (allMatched && phase === 'game' && lives > 0) {
       playSound(SOUND_FX.gameWon)
       setPhase('reward-video')
     }
-  }, [cards, phase, gameOver])
+  }, [cards, phase, lives])
 
   // Diagnostic: preload unlocked background when transitioning to 'unlocked' so we can see if it fails to load on the live site
   useEffect(() => {
@@ -86,20 +63,41 @@ export default function BankEncounter() {
   }, [phase])
 
   useEffect(() => {
-    if (lives === 0 && phase === 'game') {
-      playSound(SOUND_FX.scary)
-      setTimeout(() => {
-        setGameOver(true)
-      }, 4880) // scary.wav duration
-    }
-  }, [lives, phase])
+    if (gameOver && phase === 'game') playSound(SOUND_FX.gameOver)
+  }, [gameOver, phase])
+
+  // Resolving a pair is cancelled on reset, navigation, or a phase change.
+  useEffect(() => {
+    if (phase !== 'game' || gameOver || selection.length !== 2) return
+    const [firstId, secondId] = selection
+    const first = cards.find(card => card.id === firstId)
+    const second = cards.find(card => card.id === secondId)
+    if (!first || !second) return
+    const matched = first.value === second.value
+    playSound(matched ? SOUND_FX.match : SOUND_FX.lifeLost)
+    const timer = setTimeout(() => {
+      if (matched) {
+        setCards(previous => previous.map(card =>
+          card.id === firstId || card.id === secondId ? { ...card, matched: true } : card,
+        ))
+      } else {
+        setLives(previous => Math.max(0, previous - 1))
+      }
+      setSelection([])
+    }, matched ? 250 : 650)
+    return () => clearTimeout(timer)
+  }, [cards, selection, phase, gameOver])
+
+  function selectCard(id: number) {
+    if (phase !== 'game' || gameOver || cards.find(card => card.id === id)?.matched) return
+    setSelection(previous => previous.length === 2 || previous.includes(id) ? previous : [...previous, id])
+  }
 
   function resetGame() {
     const newDeck = buildShuffledDeck()
     setCards(newDeck)
     setSelection([])
     setLives(6)
-    setGameOver(false)
     setPhase('lobby')
   }
 
@@ -108,27 +106,14 @@ export default function BankEncounter() {
   }
 
   useEffect(() => {
-    // ensure video audio is enabled after user gesture
-    if (videoRef.current) {
-      videoRef.current.muted = false
-      videoRef.current.volume = 0.8
-    }
-  }, [phase])
-
-  useEffect(() => {
-    // Background music control: play only during game phase (not gameOver), stop otherwise
-    if (phase === 'game' && !gameOver) {
-      if (!musicRef.current) {
-        musicRef.current = new Audio(BG_MUSIC)
-        musicRef.current.loop = true
-        musicRef.current.volume = 0.2
-      }
-      musicRef.current.play().catch(() => {})
-    } else {
-      if (musicRef.current) {
-        musicRef.current.pause()
-        musicRef.current.currentTime = 0
-      }
+    if (phase !== 'game' || gameOver) return
+    const music = new Audio(BG_MUSIC)
+    music.loop = true
+    music.volume = 0.2
+    music.play().catch(() => {})
+    return () => {
+      music.pause()
+      music.currentTime = 0
     }
   }, [phase, gameOver])
 
@@ -180,63 +165,13 @@ export default function BankEncounter() {
         </div>
       )}
 
-      {/* TRANSITION video overlay */}
       {phase === 'transition' && (
-        <div className="absolute inset-0 z-50 bg-black flex items-center justify-center">
-          <video
-            ref={videoRef}
-            className="max-w-full max-h-full object-contain"
-            src={TRANSITION_VIDEO}
-            autoPlay
-            playsInline
-            preload="auto"
-            onCanPlay={() => {
-              if (videoRef.current) {
-                videoRef.current.muted = false
-                videoRef.current.volume = 0.8
-              }
-            }}
-            onEnded={() => {
-              markGameAsPlayed()
-              setFadeBlack(true)
-              setTimeout(() => {
-                setFadeBlack(false)
-                setPhase('game')
-              }, 350)
-            }}
-          />
-          
-          {/* Skip button for returning players */}
-          {hasPlayed && (
-            <motion.button
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1 }}
-              onClick={() => {
-                markGameAsPlayed()
-                setFadeBlack(true)
-                setTimeout(() => {
-                  setFadeBlack(false)
-                  setPhase('game')
-                }, 350)
-              }}
-              className="absolute bottom-6 right-6 px-4 py-2 rounded border border-amber-500/60 text-amber-300 hover:bg-amber-500/10 transition-colors text-sm font-mono bg-black/70 backdrop-blur-sm"
-            >
-              skip ⏩
-            </motion.button>
-          )}
-          
-          <AnimatePresence>
-            {fadeBlack && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="absolute inset-0 bg-black"
-              />
-            )}
-          </AnimatePresence>
-        </div>
+        <BankVideo
+          src={TRANSITION_VIDEO}
+          label="Bank entrance cinematic"
+          continueLabel="Continue to the game"
+          onComplete={() => setPhase('game')}
+        />
       )}
 
       {/* GAME: Numbers matching */}
@@ -251,7 +186,7 @@ export default function BankEncounter() {
                   key={card.id}
                   card={card}
                   revealed={card.matched || selection.includes(card.id)}
-                  onClick={() => handleCardClick(card.id, cards, selection, setSelection, setCards, setLives)}
+                  onClick={() => selectCard(card.id)}
                 />
               ))}
             </div>
@@ -273,9 +208,6 @@ export default function BankEncounter() {
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             className="max-w-xl w-[90vw] rounded-xl p-6 bg-black/60 backdrop-blur-md border border-red-600/40 text-center"
-            onAnimationComplete={() => {
-              playSound(SOUND_FX.gameOver)
-            }}
           >
             <div className="text-3xl mb-3 text-red-500">game over</div>
             <p className="text-amber-300/90 mb-6">vault security triggered. access denied.</p>
@@ -297,27 +229,13 @@ export default function BankEncounter() {
         </div>
       )}
 
-      {/* REWARD VIDEO: safe_open.webm */}
       {phase === 'reward-video' && (
-        <div className="absolute inset-0 z-50 bg-black flex items-center justify-center">
-          <video
-            ref={rewardVideoRef}
-            className="max-w-full max-h-full object-contain"
-            src={REWARD_VIDEO}
-            autoPlay
-            playsInline
-            preload="auto"
-            onCanPlay={() => {
-              if (rewardVideoRef.current) {
-                rewardVideoRef.current.muted = false
-                rewardVideoRef.current.volume = 0.8
-              }
-            }}
-            onEnded={() => {
-              setPhase('unlocked')
-            }}
-          />
-        </div>
+        <BankVideo
+          src={REWARD_VIDEO}
+          label="Vault opening cinematic"
+          continueLabel="Continue to your reward"
+          onComplete={() => setPhase('unlocked')}
+        />
       )}
 
       {/* UNLOCKED */}
@@ -387,47 +305,6 @@ function NumberCard({
       {revealed || card.matched ? card.value : '▢'}
     </motion.button>
   )
-}
-
-function handleCardClick(
-  id: number,
-  cards: Card[],
-  selection: number[],
-  setSelection: (ids: number[]) => void,
-  setCards: (updater: (cards: Card[]) => Card[]) => void,
-  setLives: (updater: (lives: number) => number) => void,
-) {
-  if (selection.length === 2 || selection.includes(id)) return
-
-  const updatedSelection = [...selection, id]
-  setSelection(updatedSelection)
-
-  if (updatedSelection.length === 2) {
-    const [firstId, secondId] = updatedSelection
-    const firstCard = cards.find((c) => c.id === firstId)
-    const secondCard = cards.find((c) => c.id === secondId)
-    if (!firstCard || !secondCard) return
-
-    if (firstCard.value === secondCard.value) {
-      // match - play sound and mark as matched
-      playSound(SOUND_FX.match)
-      setTimeout(() => {
-        setCards((prev) =>
-          prev.map((c) =>
-            c.id === firstId || c.id === secondId ? { ...c, matched: true } : c,
-          ),
-        )
-        setSelection([])
-      }, 250)
-    } else {
-      // mismatch - play sound and lose a life
-      playSound(SOUND_FX.lifeLost)
-      setTimeout(() => {
-        setLives((prev) => Math.max(0, prev - 1))
-        setSelection([])
-      }, 650)
-    }
-  }
 }
 
 function buildShuffledDeck() {

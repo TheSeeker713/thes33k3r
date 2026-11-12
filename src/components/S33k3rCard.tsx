@@ -75,16 +75,22 @@ export default function S33k3rCard() {
       void playViaWebAudio(CARD_FLIP_SOUND)
     }
     
-    setIsFlipped(!isFlipped)
+    setIsFlipped(previous => !previous)
   }
 
   return (
     <div className="w-full flex justify-center mb-6">
-      <div 
-        className="perspective-1000 aspect-[2/3] w-full max-w-sm cursor-pointer"
-        onClick={handleClick}
+      <div
+        className="perspective-1000 relative aspect-[2/3] w-full max-w-sm"
         style={{ minHeight: '400px' }}
       >
+        <button
+          type="button"
+          aria-label="Flip the S33k3r reward card"
+          aria-pressed={isFlipped}
+          onClick={handleClick}
+          className="absolute inset-0 z-10 cursor-pointer rounded-lg focus-visible:outline-2 focus-visible:outline-amber-400 focus-visible:outline-offset-4"
+        />
         <div
           className={`transform-style-3d relative w-full h-full transition-transform duration-700 ${
             isFlipped ? 'rotate-y-180' : ''
@@ -92,6 +98,7 @@ export default function S33k3rCard() {
         >
         {/* Front Face */}
         <div 
+          aria-hidden={isFlipped}
           className="backface-hidden absolute inset-0 w-full h-full rounded-lg overflow-hidden border-2 border-amber-600/40"
           style={{
             backgroundImage: `url(${SAFE_OPEN_BG})`,
@@ -111,6 +118,7 @@ export default function S33k3rCard() {
 
         {/* Back Face */}
         <div 
+          aria-hidden={!isFlipped}
           className="backface-hidden absolute inset-0 w-full h-full rounded-lg overflow-hidden border-2 border-amber-600/40 rotate-y-180"
           style={{
             backgroundImage: `url(${SAFE_OPEN_BG})`,

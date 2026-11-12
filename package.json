@@ -6,22 +6,25 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build --webpack && node scripts/security-headers.mjs",
-    "start": "next start",
+    "start": "serve out --listen 3000 --no-clipboard",
     "lint": "eslint src/lib/fragments.js src/app/collective/page.jsx src/app/page.jsx src/app/layout.jsx src/components/Navbar.jsx src/components/Footer.jsx src/components/VideoBackground.jsx src/components/MovieScreen.jsx src/components/SiteShell.jsx scripts",
-    "verify": "node scripts/verify-export.mjs"
+    "verify": "node scripts/verify-export.mjs",
+    "test": "playwright test"
   },
   "dependencies": {
     "framer-motion": "^14.0.0",
-    "next": "^16.3.8",
+    "next": "^16.4.6",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-markdown": "^10.1.0",
     "rehype-raw": "^7.0.0",
     "rehype-sanitize": "^6.0.0",
-    "remark-gfm": "^4.0.1"
+    "remark-gfm": "^4.0.1",
+    "serve": "^14.2.7"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.65.0",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^26.6.4",
     "@types/react": "^19.3.0",
@@ -35,5 +38,16 @@
   },
   "engines": {
     "node": ">=24 <27"
+  },
+  "overrides": {
+    "eslint": {
+      "minimatch": "^11.0.8"
+    },
+    "@eslint/config-array": {
+      "minimatch": "^11.0.8"
+    },
+    "serve": {
+      "compression": "^1.8.2"
+    }
   }
 }
